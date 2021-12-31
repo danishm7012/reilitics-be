@@ -3,7 +3,11 @@ import bcrypt from 'bcryptjs'
 
 const userSchema = mongoose.Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
       type: String,
       required: true,
     },
@@ -12,14 +16,64 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+
     password: {
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      default: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    },
+    phone: {
+      type: String,
+    },
+    city: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
+    date_of_birth: {
+      type: Date,
+    },
+
     isAdmin: {
       type: Boolean,
-      required: true,
+
       default: false,
+    },
+    accountStatus: {
+      type: String,
+      enum: ['pending', 'approved', 'rejected'],
+      default: 'pending',
+    },
+    packageDetails: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
+    social_login: {
+      type: Boolean,
+      default: false,
+    },
+    social_login_ID: {
+      type: String,
+    },
+    social_provider: {
+      type: String,
+      default: null,
+    },
+
+    email_varification: {
+      type: Boolean,
+      default: false,
+    },
+    confirmation_code: {
+      type: String,
     },
   },
   {

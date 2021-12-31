@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
+import nodemailer from 'nodemailer'
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -28,7 +29,20 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body
+  // const confirmation_code = Math.floor(100000 + Math.random() * 900000)
+  // console.log(confirmation_code)
+  const {
+    firstName,
+    lastName,
+    image,
+    email,
+    password,
+    username,
+    phone,
+    city,
+    dob,
+    packageDetails,
+  } = req.body
 
   const userExists = await User.findOne({ email })
 
@@ -36,40 +50,186 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('User already exists')
   }
+  // try {
+  // var transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   auth: {
+  //     user: process.env.ADMIN_EMAIL,
+  //     pass: process.env.ADMIN_PASSWORD,
+  //   },
+  // })
+
+  // var mailOptions = {
+  //   from: process.env.ADMIN_EMAIL,
+  //   to: req.body.email,
+  //   subject: 'Confirmation code',
+  //   text: 'Your Confirmation code is  ' + confirmation_code,
+  // }
+  // transporter.sendMail(mailOptions, function (error, info) {
+  //   if (error) {
+  //     console.log('error: ', error)
+  //     return res.json({
+  //       success: false,
+  //       message: error,
+  //     })
+  //   } else {
+  //     return res.json({
+  //       success: true,
+  //       message: 'kindly Check your email for confirmation code',
+  //     })
+  //   }
+  // })
 
   const user = await User.create({
-    name,
+    firstName,
+    lastName,
+    image,
     email,
     password,
+    username,
+    phone,
+    city,
+    dob,
+    packageDetails,
   })
 
   if (user) {
     res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
       token: generateToken(user._id),
+      user,
     })
   } else {
     res.status(400)
     throw new Error('Invalid user data')
   }
+  // } catch (err) {
+  //   return res.json({
+  //     success: false,
+  //     message: err,
+  //   })
+  // }
 })
+// @desc    Send varification code to the email
+// @route   GET /api/users/code_verification
+// @access  Private
+const codeVerification = async (req, res) => {
+  //console.log(req.user)
+  try {
+    const get_user = await User.findOne({
+      email: req.body.email,
+    })
+    if (get_user == null)
+      return res.json({
+        success: false,
+        error: 'User does not exist',
+      })
+    if (get_user.confirmation_code != req.body.confirmation_code) {
+      return res.json({
+        success: false,
+        error: 'Invalid code',
+      })
+    }
+    if (get_user != null) {
+      const getuser = await User.findOneAndUpdate(
+        { email: req.body.email },
+        {
+          email_varification: true,
+        },
+        { new: true }
+      )
+      return res.json({
+        success: true,
+        data: getuser,
+        message: 'Email verification successfull',
+      })
+    }
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err,
+    })
+  }
+}
+
+// @desc    Resend varification code to the email
+// @route   GET /api/users/resend_code
+// @access  Private
+const resendCode = async (req, res) => {
+  //console.log(req.user)
+  const confirmation_code = Math.floor(100000 + Math.random() * 900000)
+  try {
+    const get_user = await User.findOne({
+      email: req.body.email,
+    })
+    if (get_user == null)
+      return res.json({
+        success: false,
+        error: 'User does not exist',
+      })
+    if (get_user.email_varification == true)
+      return res.json({
+        success: false,
+        error: 'Email is already verified',
+      })
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.ADMIN_EMAIL,
+        pass: process.env.ADMIN_PASSWORD,
+      },
+    })
+
+    var mailOptions
+    let sender = 'BLACK BOOKING ORG'
+    var mailOptions = {
+      from: process.env.ADMIN_EMAIL,
+      to: req.body.email,
+      subject: 'Confirmation code',
+      text: 'Your new  confirmation code is  ' + confirmation_code,
+    }
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        return res.json({
+          success: false,
+          message: error,
+        })
+      } else {
+        return res.json({
+          success: true,
+          message: 'kindly Check your email for confirmation code',
+        })
+      }
+    })
+    if (get_user != null) {
+      const getuser = await User.findOneAndUpdate(
+        { email: req.body.email },
+        {
+          confirmation_code: confirmation_code,
+        },
+        { new: true }
+      )
+      return res.json({
+        success: true,
+        data: getuser,
+        message: 'Code sent successfully',
+      })
+    }
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err,
+    })
+  }
+}
 
 // @desc    Get user profile
 // @route   GET /api/users/profile
 // @access  Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id)
+  const user = await User.findById(req.user._id).select('-password')
 
   if (user) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-    })
+    res.json(user)
   } else {
     res.status(404)
     throw new Error('User not found')
@@ -169,6 +329,8 @@ const updateUser = asyncHandler(async (req, res) => {
 export {
   authUser,
   registerUser,
+  codeVerification,
+  resendCode,
   getUserProfile,
   updateUserProfile,
   getUsers,
