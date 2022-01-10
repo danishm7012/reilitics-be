@@ -66,10 +66,11 @@ const deletePackage = asyncHandler(async (req, res) => {
 
 // @desc    Create a package
 // @route   POST /api/package
-// @access  Private/Admin
+// @access  Private
 const createPackage = asyncHandler(async (req, res) => {
   const { name, price, packageType, options } = req.body;
   const packageData = new Package({
+    user: req.user.id,
     name,
     price,
     packageType,
@@ -89,19 +90,42 @@ const createPackage = asyncHandler(async (req, res) => {
 // @route   PUT /api/package/:id
 // @access  Private/Admin
 const updatePackage = asyncHandler(async (req, res) => {
-  const { name, price, packageType, options } = req.body;
+  const { name, price, packageType, options, status } = req.body;
   const packageFound = await Package.findById(req.params.id);
 
   if (packageFound) {
     packageFound.name = name || packageFound.name;
-    packageFound.price = price || packageFound.name;
-    packageFound.packageType = packageType || packageFound.name;
+    packageFound.price = price || packageFound.price;
+    packageFound.packageType = packageType || packageFound.packageType;
+    packageFound.status = status || packageFound.status;
 
     const updatedPackage = await packageFound.save();
     res.json({
       success: true,
       code: 200,
       message: "Package updated successfully!",
+      updatedPackage,
+    });
+  } else {
+    res.status(404);
+    throw new Error("Package not found");
+  }
+});
+// @desc    Update a package status
+// @route   PUT /api/package/status/:id
+// @access  Private
+const updatePackageStatus = asyncHandler(async (req, res) => {
+  const { status } = req.body;
+  const packageFound = await Package.findById(req.params.id);
+  console.log(packageFound.status);
+  if (packageFound) {
+    packageFound.status = status;
+
+    const updatedPackage = await packageFound.save();
+    res.json({
+      success: true,
+      code: 200,
+      message: "Package status updated successfully!",
       updatedPackage,
     });
   } else {
@@ -116,4 +140,5 @@ export {
   deletePackage,
   createPackage,
   updatePackage,
+  updatePackageStatus,
 };

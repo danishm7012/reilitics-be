@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const packageSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     name: {
       type: String,
       required: true,
@@ -15,6 +20,10 @@ const packageSchema = mongoose.Schema(
       type: Number,
       required: true,
       default: 0,
+    },
+    status: {
+      type: Boolean,
+      default: false,
     },
     options: { type: [String] },
   },
