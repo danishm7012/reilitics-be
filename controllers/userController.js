@@ -29,8 +29,8 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  // const confirmation_code = Math.floor(100000 + Math.random() * 900000)
-  // console.log(confirmation_code)
+  const confirmation_code = Math.floor(100000 + Math.random() * 900000);
+  console.log(confirmation_code);
   const {
     firstName,
     lastName,
@@ -50,35 +50,6 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User already exists");
   }
-  // try {
-  // var transporter = nodemailer.createTransport({
-  //   service: 'gmail',
-  //   auth: {
-  //     user: process.env.ADMIN_EMAIL,
-  //     pass: process.env.ADMIN_PASSWORD,
-  //   },
-  // })
-
-  // var mailOptions = {
-  //   from: process.env.ADMIN_EMAIL,
-  //   to: req.body.email,
-  //   subject: 'Confirmation code',
-  //   text: 'Your Confirmation code is  ' + confirmation_code,
-  // }
-  // transporter.sendMail(mailOptions, function (error, info) {
-  //   if (error) {
-  //     console.log('error: ', error)
-  //     return res.json({
-  //       success: false,
-  //       message: error,
-  //     })
-  //   } else {
-  //     return res.json({
-  //       success: true,
-  //       message: 'kindly Check your email for confirmation code',
-  //     })
-  //   }
-  // })
 
   const user = await User.create({
     firstName,
@@ -94,7 +65,33 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
+    const user = await User.create({
+      firstName,
+      lastName,
+      image,
+      email,
+      password,
+      username,
+      phone,
+      city,
+      dob,
+      packageDetails,
+    });
+
+    if (user) {
+      res.status(201).json({
+        success: true,
+        message: "kindly Check your email for confirmation code",
+        token: generateToken(user._id),
+        user,
+      });
+    } else {
+      res.status(400);
+      throw new Error("Invalid user data");
+    }
     res.status(201).json({
+      success: true,
+      message: "kindly Check your email for confirmation code",
       token: generateToken(user._id),
       user,
     });
@@ -102,13 +99,8 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Invalid user data");
   }
-  // } catch (err) {
-  //   return res.json({
-  //     success: false,
-  //     message: err,
-  //   })
-  // }
 });
+
 // @desc    Send varification code to the email
 // @route   GET /api/users/code_verification
 // @access  Private
