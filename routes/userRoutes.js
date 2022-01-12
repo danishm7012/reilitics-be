@@ -13,6 +13,7 @@ import {
   updateUser,
   checkPassword,
   changePassword,
+  changeAccountStatus,
 } from "../controllers/userController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
@@ -31,5 +32,6 @@ router
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser);
+router.route("/status/:id").put(protect, admin, changeAccountStatus);
 
 export default router;

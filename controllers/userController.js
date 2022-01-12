@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
-import nodemailer from "nodemailer";
+import { sendEmail } from "../config/sendMail.js";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -64,40 +64,18 @@ const registerUser = asyncHandler(async (req, res) => {
     packageDetails,
   });
 
-  if (user) {
-    const user = await User.create({
-      firstName,
-      lastName,
-      image,
-      email,
-      password,
-      username,
-      phone,
-      city,
-      dob,
-      packageDetails,
-    });
-
-    if (user) {
-      res.status(201).json({
-        success: true,
-        message: "kindly Check your email for confirmation code",
-        token: generateToken(user._id),
-        user,
-      });
-    } else {
-      res.status(400);
-      throw new Error("Invalid user data");
-    }
+  if (!user) {
+    res.status(400);
+    throw new Error("Invalid user data");
+  } else {
+    console.log(user);
+    const result = await sendEmail(user);
     res.status(201).json({
       success: true,
       message: "kindly Check your email for confirmation code",
       token: generateToken(user._id),
       user,
     });
-  } else {
-    res.status(400);
-    throw new Error("Invalid user data");
   }
 });
 
@@ -237,6 +215,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
+    user.accountStatus = req.body.accountStatus || user.accountStatus;
+
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -249,6 +229,32 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
       token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+// @desc    Update user profile
+// @route   PUT /api/users/profile/:id
+// @access  Private/Admin
+const changeAccountStatus = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.accountStatus = req.body.accountStatus || user.accountStatus;
+
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      success: true,
+      code: 200,
+      message: `User ${updatedUser.accountStatus} successfully!`,
     });
   } else {
     res.status(404);
@@ -381,4 +387,5 @@ export {
   updateUser,
   checkPassword,
   changePassword,
+  changeAccountStatus,
 };

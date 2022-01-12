@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import bcrypt from 'bcryptjs'
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = mongoose.Schema(
   {
@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema(
     },
     image: {
       type: String,
-      default: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+      default: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
     },
     phone: {
       type: String,
@@ -50,8 +50,8 @@ const userSchema = mongoose.Schema(
     },
     accountStatus: {
       type: String,
-      enum: ['pending', 'approved', 'rejected'],
-      default: 'pending',
+      enum: ["pending", "approved", "rejected"],
+      default: "pending",
     },
     packageDetails: {
       type: mongoose.Schema.Types.ObjectId,
@@ -79,21 +79,21 @@ const userSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-)
+);
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password)
-}
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
-    next()
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
   }
 
-  const salt = await bcrypt.genSalt(10)
-  this.password = await bcrypt.hash(this.password, salt)
-})
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model("User", userSchema);
 
-export default User
+export default User;
