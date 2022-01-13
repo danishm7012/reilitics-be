@@ -5,6 +5,7 @@ import colors from "colors";
 import morgan from "morgan";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
+const cors = require("cors");
 
 import packageRoutes from "./routes/packageRoutes.js";
 import resourceRoutes from "./routes/resourceRoutes.js";
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/package", packageRoutes);
 app.use("/api/resource", resourceRoutes);
