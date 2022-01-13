@@ -3,9 +3,9 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import morgan from "morgan";
+import cors from "cors";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
-const cors = require("cors");
 
 import packageRoutes from "./routes/packageRoutes.js";
 import resourceRoutes from "./routes/resourceRoutes.js";
