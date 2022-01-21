@@ -3,8 +3,7 @@ const router = express.Router();
 import {
   authUser,
   registerUser,
-  resendCode,
-  codeVerification,
+  sendCode,
   getUserProfile,
   updateUserProfile,
   getUsers,
@@ -23,10 +22,8 @@ router.route("/admins").get(protect, admin, getAdmins);
 router.route("/editors").get(protect, admin, getEditors);
 
 router.post("/login", authUser);
-// router.post("/checkpassword", protect, checkPassword);
-router.put("/changepassword", protect, changePassword);
-router.put("/code_verification", codeVerification);
-router.put("/resend_code", resendCode);
+router.put("/changepassword", changePassword);
+router.post("/sendcode", sendCode);
 router
   .route("/profile")
   .get(protect, getUserProfile)

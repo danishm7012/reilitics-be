@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
-import PackageModel from "../models/packageModel.js";
+import Verify from "../models/verify.js";
 import { sendEmail } from "../config/sendMail.js";
 
 // @desc    Auth user & get token
@@ -16,6 +16,7 @@ const authUser = asyncHandler(async (req, res) => {
     res.json({
       success: true,
       code: 200,
+      message: "Logged in successfully!",
       token: generateToken(user._id),
       user,
     });
@@ -83,118 +84,25 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   }
 });
-
-// @desc    Send varification code to the email
-// @route   GET /api/users/code_verification
-// @access  Private
-const codeVerification = async (req, res) => {
-  //console.log(req.user)
-  try {
-    const get_user = await User.findOne({
-      email: req.body.email,
-    });
-    if (get_user == null)
-      return res.json({
-        success: false,
-        error: "User does not exist",
-      });
-    if (get_user.confirmation_code != req.body.confirmation_code) {
-      return res.json({
-        success: false,
-        error: "Invalid code",
-      });
-    }
-    if (get_user != null) {
-      const getuser = await User.findOneAndUpdate(
-        { email: req.body.email },
-        {
-          email_varification: true,
-        },
-        { new: true }
-      );
-      return res.json({
-        success: true,
-        data: getuser,
-        message: "Email verification successfull",
-      });
-    }
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: err,
-    });
-  }
-};
-
 // @desc    Resend varification code to the email
-// @route   GET /api/users/resend_code
+// @route   GET /api/users/sendcode
 // @access  Private
-const resendCode = async (req, res) => {
-  //console.log(req.user)
-  const confirmation_code = Math.floor(100000 + Math.random() * 900000);
-  try {
-    const get_user = await User.findOne({
-      email: req.body.email,
-    });
-    if (get_user == null)
-      return res.json({
-        success: false,
-        error: "User does not exist",
-      });
-    if (get_user.email_varification == true)
-      return res.json({
-        success: false,
-        error: "Email is already verified",
-      });
-    var transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.ADMIN_EMAIL,
-        pass: process.env.ADMIN_PASSWORD,
-      },
-    });
-
-    var mailOptions;
-    let sender = "BLACK BOOKING ORG";
-    var mailOptions = {
-      from: process.env.ADMIN_EMAIL,
-      to: req.body.email,
-      subject: "Confirmation code",
-      text: "Your new  confirmation code is  " + confirmation_code,
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        return res.json({
-          success: false,
-          message: error,
-        });
-      } else {
-        return res.json({
-          success: true,
-          message: "kindly Check your email for confirmation code",
-        });
-      }
-    });
-    if (get_user != null) {
-      const getuser = await User.findOneAndUpdate(
-        { email: req.body.email },
-        {
-          confirmation_code: confirmation_code,
-        },
-        { new: true }
-      );
-      return res.json({
+const sendCode = async (req, res) => {
+  console.log(req.body.email);
+  User.findOne({ email: req.body.email })
+    .then(async (user) => {
+      await sendEmail(user); // sending code on given email
+      res.status(201).json({
         success: true,
-        data: getuser,
-        message: "Code sent successfully",
+        message: "kindly Check your email for code confirmation!",
       });
-    }
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: err,
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Email doesn't exist!",
+      });
     });
-  }
 };
 
 // @desc    Get user profile
@@ -364,9 +272,19 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/changepassword
 // @access  Private/Protected
 const changePassword = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user.id);
-
-  if (user && (await user.matchPassword(req.body.oldPassword))) {
+  const user = await User.findOne({ email: req.body.email });
+  const get_user = await Verify.findOne({
+    user: user._id,
+  });
+  if (get_user == null) {
+    res.status(400);
+    throw new Error("User Does not exist");
+  }
+  console.log(`save: ${get_user.code} body:${req.body.confirmation_code}`);
+  if (get_user.code != req.body.confirmation_code) {
+    res.status(401);
+    throw new Error("Code does not match!");
+  } else {
     user.password = req.body.newPassword || user.password;
     await user.save();
     res.json({
@@ -374,42 +292,12 @@ const changePassword = asyncHandler(async (req, res) => {
       code: "200",
       message: "Password has been changed successfully!",
     });
-  } else {
-    res.json({
-      succes: false,
-      code: "404",
-      message: "Password doesn't matched!",
-    });
   }
 });
-// // @desc    Change password
-// // @route   PUT /api/users/changepassword
-// // @access  Private/Protected
-// const changePassword = asyncHandler(async (req, res) => {
-//   const user = await User.findById(req.user.id);
-
-//   if (user) {
-//     user.password = req.body.newPassword || user.password;
-//     await user.save();
-//     res.json({
-//       succes: true,
-//       code: "200",
-//       message: "Password has been changed successfully!",
-//     });
-//   } else {
-//     res.json({
-//       succes: false,
-//       code: "404",
-//       message: "User not found!",
-//     });
-//   }
-// });
-
 export {
   authUser,
   registerUser,
-  codeVerification,
-  resendCode,
+  sendCode,
   getUserProfile,
   updateUserProfile,
   getUsers,
