@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Package from "../models/packageModel.js";
+import User from "../models/userModel.js";
 
 // @desc    Fetch all packages
 // @route   GET /api/package
@@ -70,7 +71,6 @@ const deletePackage = asyncHandler(async (req, res) => {
 const createPackage = asyncHandler(async (req, res) => {
   const { name, price, packageType, options } = req.body;
   const packageData = new Package({
-    user: req.user.id,
     name,
     price,
     packageType,
@@ -98,6 +98,7 @@ const updatePackage = asyncHandler(async (req, res) => {
     packageFound.price = price || packageFound.price;
     packageFound.packageType = packageType || packageFound.packageType;
     packageFound.status = status || packageFound.status;
+    packageFound.options = options || packageFound.options;
 
     const updatedPackage = await packageFound.save();
     res.json({
@@ -134,6 +135,103 @@ const updatePackageStatus = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get free member
+// @route   GET /api/package/free-members
+// @access  Private/Admin
+const getFreeMembers = asyncHandler(async (req, res) => {
+  try {
+    const foundPackage = await Package.findOne({
+      packageType: "Free Membership",
+    });
+    if (!foundPackage) {
+      res.status(401);
+      throw new Error("Package not found");
+    }
+    console.log("Found" + foundPackage);
+    const users = await User.find({
+      packageID: foundPackage._id,
+    });
+    if (users) {
+      res.json({
+        success: true,
+        code: 200,
+        message: "Free users!",
+        users,
+      });
+    } else {
+      res.status(401);
+      throw new Error("Users not found");
+    }
+  } catch (err) {
+    res.status(501);
+    throw new Error("Server error!");
+  }
+});
+// @desc    Get monthly member
+// @route   GET /api/package/monthly-members
+// @access  Private/Admin
+const getMonthlyMembers = asyncHandler(async (req, res) => {
+  try {
+    const foundPackage = await Package.findOne({
+      packageType: "Monthly Membership",
+    });
+    if (!foundPackage) {
+      res.status(401);
+      throw new Error("Package not found");
+    }
+    console.log("Found" + foundPackage);
+    const users = await User.find({
+      packageID: foundPackage._id,
+    });
+    if (users) {
+      res.json({
+        success: true,
+        code: 200,
+        message: "Monthly users!",
+        users,
+      });
+    } else {
+      res.status(401);
+      throw new Error("Users not found");
+    }
+  } catch (err) {
+    res.status(501);
+    throw new Error("Server error!");
+  }
+});
+// @desc    Get 24Hour member
+// @route   GET /api/package/24Hour-members
+// @access  Private/Admin
+const get24HourMembers = asyncHandler(async (req, res) => {
+  try {
+    const foundPackage = await Package.findOne({
+      packageType: "24 hours Membership",
+    });
+    if (!foundPackage) {
+      res.status(401);
+      throw new Error("Package not found");
+    }
+    console.log("Found" + foundPackage);
+    const users = await User.find({
+      packageID: foundPackage._id,
+    });
+    if (users) {
+      res.json({
+        success: true,
+        code: 200,
+        message: "24 Hours users!",
+        users,
+      });
+    } else {
+      res.status(401);
+      throw new Error("Users not found");
+    }
+  } catch (err) {
+    res.status(501);
+    throw new Error("Server error!");
+  }
+});
+
 export {
   getPackages,
   getPackageById,
@@ -141,4 +239,7 @@ export {
   createPackage,
   updatePackage,
   updatePackageStatus,
+  getFreeMembers,
+  getMonthlyMembers,
+  get24HourMembers,
 };

@@ -17,11 +17,10 @@ const getContacts = asyncHandler(async (req, res) => {
 // @route   POST /api/contacts
 // @access  Public
 const createContact = asyncHandler(async (req, res) => {
-  const { firstName, lastName, phone, email, subject, message } = req.body;
+  const { firstName, lastName, email, subject, message } = req.body;
   const contact = new Contact({
     firstName,
     lastName,
-    phone,
     email,
     subject,
     message,

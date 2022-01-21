@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
+import PackageModel from "../models/packageModel.js";
 import { sendEmail } from "../config/sendMail.js";
 
 // @desc    Auth user & get token
@@ -13,11 +14,10 @@ const authUser = asyncHandler(async (req, res) => {
 
   if (user && (await user.matchPassword(password))) {
     res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
+      success: true,
+      code: 200,
       token: generateToken(user._id),
+      user,
     });
   } else {
     res.status(401);
@@ -30,7 +30,6 @@ const authUser = asyncHandler(async (req, res) => {
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   const confirmation_code = Math.floor(100000 + Math.random() * 900000);
-  console.log(confirmation_code);
   const {
     firstName,
     lastName,
@@ -41,7 +40,8 @@ const registerUser = asyncHandler(async (req, res) => {
     phone,
     city,
     dob,
-    packageDetails,
+    packageID,
+    packageStatus,
   } = req.body;
 
   const emailExists = await User.findOne({ email });
@@ -66,14 +66,14 @@ const registerUser = asyncHandler(async (req, res) => {
     phone,
     city,
     dob,
-    packageDetails,
+    packageID,
+    packageStatus,
   });
 
   if (!user) {
     res.status(400);
     throw new Error("Invalid user data");
   } else {
-    console.log(user);
     const result = await sendEmail(user);
     res.status(201).json({
       success: true,
@@ -274,6 +274,30 @@ const getUsers = asyncHandler(async (req, res) => {
   const users = await User.find({});
   res.json(users);
 });
+// @desc    Get Admins
+// @route   GET /api/users/admins
+// @access  Private/Admin
+const getAdmins = asyncHandler(async (req, res) => {
+  const users = await User.find({ role: "admin" });
+  if (users) {
+    res.json({ success: true, code: 200, admins: users });
+  } else {
+    res.status(401);
+    throw new Error("Users not found");
+  }
+});
+// @desc    Get editors
+// @route   GET /api/users/editors
+// @access  Private/editor
+const getEditors = asyncHandler(async (req, res) => {
+  const users = await User.find({ role: "editor" });
+  if (users) {
+    res.json({ success: true, code: 200, editors: users });
+  } else {
+    res.status(401);
+    throw new Error("Users not found");
+  }
+});
 
 // @desc    Delete user
 // @route   DELETE /api/users/:id
@@ -304,7 +328,7 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update user
+// @desc    Update user by admin
 // @route   PUT /api/users
 // @access  Private/Admin
 const updateUser = asyncHandler(async (req, res) => {
@@ -320,7 +344,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.city = req.body.city || user.city;
     user.state = req.body.state || user.state;
     user.date_of_birth = req.body.date_of_birth || user.date_of_birth;
-    user.isAdmin = req.body.isAdmin || user.isAdmin;
+    user.role = req.body.role || user.role;
     user.accountStatus = req.body.accountStatus || user.accountStatus;
     user.isAdmin = req.body.isAdmin;
 
@@ -336,33 +360,13 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 });
-// @desc    Check password
-// @route   GET /api/users/checkpassword
-// @access  Private/Protected
-const checkPassword = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user.id);
-
-  if (user && (await user.matchPassword(req.body.oldPassword))) {
-    res.json({
-      succes: true,
-      code: "201",
-      message: "Password matched!",
-    });
-  } else {
-    res.json({
-      succes: false,
-      code: "404",
-      message: "Password doesn't matched!",
-    });
-  }
-});
 // @desc    Change password
-// @route   PUT /api/users/changepassword
+// @route   GET /api/users/changepassword
 // @access  Private/Protected
 const changePassword = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id);
 
-  if (user) {
+  if (user && (await user.matchPassword(req.body.oldPassword))) {
     user.password = req.body.newPassword || user.password;
     await user.save();
     res.json({
@@ -374,10 +378,32 @@ const changePassword = asyncHandler(async (req, res) => {
     res.json({
       succes: false,
       code: "404",
-      message: "User not found!",
+      message: "Password doesn't matched!",
     });
   }
 });
+// // @desc    Change password
+// // @route   PUT /api/users/changepassword
+// // @access  Private/Protected
+// const changePassword = asyncHandler(async (req, res) => {
+//   const user = await User.findById(req.user.id);
+
+//   if (user) {
+//     user.password = req.body.newPassword || user.password;
+//     await user.save();
+//     res.json({
+//       succes: true,
+//       code: "200",
+//       message: "Password has been changed successfully!",
+//     });
+//   } else {
+//     res.json({
+//       succes: false,
+//       code: "404",
+//       message: "User not found!",
+//     });
+//   }
+// });
 
 export {
   authUser,
@@ -390,7 +416,9 @@ export {
   deleteUser,
   getUserById,
   updateUser,
-  checkPassword,
+  //checkPassword,
   changePassword,
   changeAccountStatus,
+  getAdmins,
+  getEditors,
 };

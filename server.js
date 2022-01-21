@@ -8,6 +8,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 
 import packageRoutes from "./routes/packageRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 import resourceRoutes from "./routes/resourceRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/package", packageRoutes);
+app.use("/api/category", categoryRoutes);
 app.use("/api/resource", resourceRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/contacts", contactRoutes);

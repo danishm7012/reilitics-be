@@ -43,19 +43,25 @@ const userSchema = mongoose.Schema(
       type: Date,
     },
 
-    isAdmin: {
-      type: Boolean,
-
-      default: false,
+    role: {
+      type: String,
+      default: "user",
     },
     accountStatus: {
       type: String,
       enum: ["pending", "approved", "rejected"],
       default: "pending",
     },
-    packageDetails: {
+
+    packageID: {
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
     },
+    packageStatus: {
+      type: Boolean,
+      default: false,
+    },
+
     social_login: {
       type: Boolean,
       default: false,

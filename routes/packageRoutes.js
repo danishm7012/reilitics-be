@@ -7,10 +7,17 @@ import {
   getPackageById,
   deletePackage,
   updatePackageStatus,
+  getFreeMembers,
+  getMonthlyMembers,
+  get24HourMembers,
 } from "../controllers/packageController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
 router.route("/").get(getPackages).post(protect, createPackage);
+router.route("/free-members").get(protect, admin, getFreeMembers);
+router.route("/monthly-members").get(protect, admin, getMonthlyMembers);
+router.route("/24hour-members").get(protect, admin, get24HourMembers);
+
 router
   .route("/:id")
   .put(protect, admin, updatePackage)

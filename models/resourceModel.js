@@ -15,7 +15,6 @@ const resourceSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-
     resourceUrl: {
       type: String,
     },
