@@ -312,7 +312,7 @@ const verifyCode = asyncHandler(async (req, res) => {
     user.email_varification = true
     await user.save()
     res.json({
-      succes: true,
+      success: true,
       code: '200',
       message: 'Email Verified successfully!',
     })
@@ -338,7 +338,7 @@ const changePassword = asyncHandler(async (req, res) => {
     user.password = req.body.newPassword || user.password
     await user.save()
     res.json({
-      succes: true,
+      success: true,
       code: '200',
       message: 'Password has been changed successfully!',
     })
