@@ -1,32 +1,25 @@
 import mongoose from "mongoose";
 
-const resourceSchema = mongoose.Schema(
+const noteSchema = mongoose.Schema(
   {
-    AddedByAdmin: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User",
-    },
     title: {
       type: String,
       required: true,
     },
-    resourceType: {
+    detail: {
       type: String,
       required: true,
     },
-    resourceUrl: {
+    city: {
       type: String,
     },
-    imageUrl: {
+    state: {
       type: String,
-      default: "/uploads/resource.png",
     },
-    noOfClicks: {
-      type: Number,
-    },
-    noOfDownloads: {
-      type: Number,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
   },
   {
@@ -34,6 +27,6 @@ const resourceSchema = mongoose.Schema(
   }
 );
 
-const Resource = mongoose.model("Resource", resourceSchema);
+const Note = mongoose.model("Note", noteSchema);
 
-export default Resource;
+export default Note;
