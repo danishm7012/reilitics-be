@@ -3,7 +3,7 @@ import Resource from '../models/resourceModel.js'
 import fs from 'fs'
 import https from 'https'
 import path from 'path'
-import CSV from 'csvtojson'
+//import CSV from 'csvtojson'
 
 // @desc    Fetch single resource
 // @route   GET /api/stats/test
