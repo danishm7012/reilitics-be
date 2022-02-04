@@ -17,8 +17,10 @@ import {
   getEditors,
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
+// import { is } from 'bluebird'
 
-router.route('/').post(registerUser).get(protect, admin, getUsers)
+
+router.route('/').post(registerUser).get(protect, admin,getUsers)
 router.route('/admins').get(protect, admin, getAdmins)
 router.route('/editors').get(protect, admin, getEditors)
 

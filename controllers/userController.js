@@ -35,14 +35,8 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { isValid, errors } = await validateRegisterInput(req.body);
-  if (!isValid) {
-    res.status(403).json({
-      success: false,
-      code: 403,
-      message: errors,
-    });
-  }
+   await validateRegisterInput(req.body,res);
+
   const confirmation_code = Math.floor(100000 + Math.random() * 900000);
   const {
     firstName,
