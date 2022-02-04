@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 import Verify from "../models/verify.js";
-import { validateRegisterInput } from "../validation/userValidation.js";
+import { validateRegisterInput, confirmemailusername } from "../validation/userValidation.js";
 import { sendEmail } from "../config/sendMail.js";
 
 // @desc    Auth user & get token
@@ -37,9 +37,9 @@ const authUser = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
   const { isValid, errors } = await validateRegisterInput(req.body);
   if (!isValid) {
-    res.status(401).json({
+    res.status(403).json({
       success: false,
-      code: 401,
+      code: 403,
       message: errors,
     });
   }
@@ -58,8 +58,10 @@ const registerUser = asyncHandler(async (req, res) => {
     packageStatus,
   } = req.body;
 
+
   const emailExists = await User.findOne({ email });
   const usernameExists = await User.findOne({ username });
+
 
   if (emailExists) {
     res.status(400);
@@ -69,6 +71,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Username already exists");
   }
+  
 
   const user = await User.create({
     firstName,
