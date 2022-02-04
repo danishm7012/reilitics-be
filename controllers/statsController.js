@@ -3,13 +3,43 @@ import Resource from '../models/resourceModel.js'
 import fs from 'fs'
 import https from 'https'
 import path from 'path'
+import { rentalJson } from '../data/json/rental.js'
 //import CSV from 'csvtojson'
 
 // @desc    Fetch single resource
 // @route   GET /api/stats/test
 // @access  Public
 const Test = asyncHandler(async (req, res) => {
-  res.json({ success: true, code: 200, message: 'Test succerss' })
+  res.json({ success: true, code: 200, message: 'Test state' })
+})
+
+// @desc    Fetch all resources
+// @route   GET /api/resource
+// @access  Public
+const getRentalJson = asyncHandler(async (req, res) => {
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 1
+  const rentaljson = await rentalJson.map((item) => ({
+    regionName: item.RegionName,
+    2018: ((item['2018-12'] - item['2018-01']) / item['2018-12']) * 100,
+    2019: ((item['2019-12'] - item['2019-01']) / item['2019-12']) * 100,
+    2020: ((item['2020-12'] - item['2020-01']) / item['2020-12']) * 100,
+    2021: ((item['2021-12'] - item['2021-01']) / item['2021-12']) * 100,
+    // 2022: ((item['2022-12'] - item['2022-01']) / item['2022-12']) * 100,
+  }))
+
+  // const count = await Resource.countDocuments();
+  // const rentaljson = await Resource.find({})
+  //   .limit(pageSize)
+  //   .skip(pageSize * (page - 1));
+
+  res.json({
+    success: true,
+    code: 200,
+    rentaljson,
+    // page,
+    // pages: Math.ceil(count / pageSize),
+  })
 })
 // @desc    Fetch single resource
 // @route   GET /api/stats/test
@@ -159,5 +189,6 @@ export {
   deleteResource,
   createResource,
   updateResource,
+  getRentalJson,
   updateResourceStatus,
 }
