@@ -7,7 +7,7 @@ const getContacts = asyncHandler(async (req, res) => {
   const contact = await Contact.find();
 
   if (contact) {
-    res.json(contact);
+    res.json({ success: true, code: 200, contact });
   } else {
     res.status(404);
     throw new Error("contact not found");
@@ -27,7 +27,7 @@ const createContact = asyncHandler(async (req, res) => {
   });
 
   const createdContact = await contact.save();
-  res.status(201).json(createdContact);
+  res.status(201).json({ success: true, code: 200, createdContact });
 });
 
 export { getContacts, createContact };

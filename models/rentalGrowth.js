@@ -8,7 +8,7 @@ const rentalSchema = mongoose.Schema(
     },
     LLfriendly: {
       type: Number,
-      required,
+      default: 2,
     },
     avgGrowth: {
       type: Number,
@@ -16,25 +16,24 @@ const rentalSchema = mongoose.Schema(
     median: {
       type: Number,
     },
-    2018: {
+    y2018: {
       type: Number,
       required: true,
     },
-    2019: {
+    y2019: {
       type: Number,
       required: true,
     },
-    2020: {
+    y2020: {
       type: Number,
       required: true,
     },
-    2021: {
+    y2021: {
       type: Number,
       required: true,
     },
-    2022: {
+    y2022: {
       type: Number,
-      required: true,
     },
   },
   {
