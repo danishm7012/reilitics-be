@@ -3,8 +3,13 @@ import asyncHandler from "express-async-handler";
 import { isEmpty } from "./is-empty.js";
 import User from "../models/userModel.js";
 
+<<<<<<< HEAD
 const validateRegisterInput = (data) => {
 let errors ="";
+=======
+const validateRegisterInput = (data, res, req) => {
+  const errors= ''
+>>>>>>> 2f48fd6dc17b646e09fad0e2a402a0603cfa5a8b
 
   data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
   data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
