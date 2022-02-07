@@ -37,8 +37,6 @@ const authUser = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
    const {isValid, errors} = await validateRegisterInput(req.body);
   
-   console.log("These are errors array", errors)
-    console.log("These are errors array to String", errors.toString())
    if(!isValid){
     return res.status(403).json({
       success: false,

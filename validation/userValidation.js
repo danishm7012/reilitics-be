@@ -57,7 +57,7 @@ let errors ="";
 
   return {
    errors,
-    sValid: isEmpty(errors),
+    isValid: isEmpty(errors),
   };
   
 };
