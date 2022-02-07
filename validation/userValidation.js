@@ -3,21 +3,15 @@ import asyncHandler from "express-async-handler";
 import { isEmpty } from "./is-empty.js";
 import User from "../models/userModel.js";
 
-<<<<<<< HEAD
 const validateRegisterInput = (data) => {
-let errors ="";
-=======
-const validateRegisterInput = (data, res, req) => {
-  const errors= ''
->>>>>>> 2f48fd6dc17b646e09fad0e2a402a0603cfa5a8b
+  let errors = "";
 
   data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
   data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
   data.username = !isEmpty(data.username) ? data.username : "";
-  
- 
+
   if (!Validator.isLength(data.firstName, { min: 2, max: 30 })) {
     errors = "firstName must be between 2 and 30 characters";
   }
@@ -57,14 +51,12 @@ const validateRegisterInput = (data, res, req) => {
     !Validator.isAlphanumeric(data.username)
   ) {
     errors = "Username must be at least 6 characters";
-  } 
-
+  }
 
   return {
-   errors,
+    errors,
     isValid: isEmpty(errors),
   };
-  
 };
 
 const confirmemailusername = asyncHandler( async (emailExists, usernameExists) => {
