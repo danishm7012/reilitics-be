@@ -4,6 +4,7 @@ import { isEmpty } from "./is-empty.js";
 import User from "../models/userModel.js";
 
 const validateRegisterInput = (data, res, req) => {
+  const errors= ''
 
   data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
   data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
