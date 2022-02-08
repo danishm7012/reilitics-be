@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(multipart());
+//  app.use(multipart());
 
 app.use(express.json());
 app.use(cors());

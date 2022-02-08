@@ -46,10 +46,7 @@ const validateRegisterInput = (data) => {
   if (Validator.isEmpty(data.username)) {
     errors = "Username field is required";
   }
-  if (
-    !Validator.isLength(data.username, { min: 6, max: 20 }) &&
-    !Validator.isAlphanumeric(data.username)
-  ) {
+  if (!Validator.isLength(data.username, { min: 6, max: 30 })) {
     errors = "Username must be at least 6 characters";
   }
 
@@ -59,22 +56,22 @@ const validateRegisterInput = (data) => {
   };
 };
 
-const validateLoginInput = (data)=>{
-  let errors=""
-data.email = !isEmpty(data.email) ? data.email : "";
-data.password = !isEmpty(data.password) ? data.password : "";
+const validateLoginInput = (data) => {
+  let errors = "";
+  data.email = !isEmpty(data.email) ? data.email : "";
+  data.password = !isEmpty(data.password) ? data.password : "";
 
-if(Validator.isEmpty(data.email)){
-   errors = "Email field is required"
-}
-if(Validator.isEmpty(data.password)){
-  errors = "Passoword field is required"
-}
+  if (Validator.isEmpty(data.email)) {
+    errors = "Email field is required";
+  }
+  if (Validator.isEmpty(data.password)) {
+    errors = "Passoword field is required";
+  }
 
-return{
-   errors,
-   isValid: isEmpty(errors)
-}
-}
+  return {
+    errors,
+    isValid: isEmpty(errors),
+  };
+};
 
-export { validateRegisterInput,validateLoginInput}
+export { validateRegisterInput, validateLoginInput };
