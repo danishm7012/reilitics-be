@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const appreciationSchema = mongoose.Schema(
   {
@@ -6,11 +6,15 @@ const appreciationSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    LLfriendly: {
+    avgTax: {
       type: Number,
       default: 2,
     },
-    avgGrowth: {
+    population: {
+      type: Number,
+      default: 2,
+    },
+    avgAppreciation: {
       type: Number,
     },
     median: {
@@ -39,8 +43,8 @@ const appreciationSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-)
+);
 
-const Appreciation = mongoose.model('Appreciation', appreciationSchema)
+const Appreciation = mongoose.model("Appreciation", appreciationSchema);
 
-export default Appreciation
+export default Appreciation;
