@@ -2,13 +2,22 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 import Verify from "../models/verify.js";
-import { validateRegisterInput, confirmemailusername } from "../validation/userValidation.js";
+import { validateRegisterInput, validateLoginInput } from "../validation/userValidation.js";
 import { sendEmail } from "../config/sendMail.js";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
 const authUser = asyncHandler(async (req, res) => {
+  const {isValid, errors} = await validateLoginInput(req.body);
+  
+   if(!isValid){
+    return res.status(403).json({
+      success: false,
+      code: 403,
+      message:  errors,
+    });
+   }
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });

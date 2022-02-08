@@ -59,16 +59,22 @@ const validateRegisterInput = (data) => {
   };
 };
 
-const confirmemailusername = asyncHandler( async (emailExists, usernameExists) => {
-  let errors = {};
-  if (emailExists) {
-    errors.emailExists = "Email already exists";
-  }
-  if (usernameExists) {
-    errors.usernameExists = "Username already exists";
-  }
-  return {
-    errors,
-  };
-});
-export { validateRegisterInput, confirmemailusername };
+const validateLoginInput = (data)=>{
+  let errors=""
+data.email = !isEmpty(data.email) ? data.email : "";
+data.password = !isEmpty(data.password) ? data.password : "";
+
+if(Validator.isEmpty(data.email)){
+   errors = "Email field is required"
+}
+if(Validator.isEmpty(data.password)){
+  errors = "Passoword field is required"
+}
+
+return{
+   errors,
+   isValid: isEmpty(errors)
+}
+}
+
+export { validateRegisterInput,validateLoginInput}
