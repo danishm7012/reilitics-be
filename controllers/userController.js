@@ -2,22 +2,26 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 import Verify from "../models/verify.js";
-import { validateRegisterInput, validateLoginInput } from "../validation/userValidation.js";
+import {
+  validateRegisterInput,
+  validateLoginInput,
+} from "../validation/userValidation.js";
 import { sendEmail } from "../config/sendMail.js";
+import { upload } from "../middleware/multer.js";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
 const authUser = asyncHandler(async (req, res) => {
-  const {isValid, errors} = await validateLoginInput(req.body);
-  
-   if(!isValid){
+  const { isValid, errors } = await validateLoginInput(req.body);
+
+  if (!isValid) {
     return res.status(403).json({
       success: false,
       code: 403,
-      message:  errors,
+      message: errors,
     });
-   }
+  }
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
@@ -44,20 +48,35 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-   const {isValid, errors} = await validateRegisterInput(req.body);
   
-   if(!isValid){
+
+  // let file = '';
+  // req.file ? (file = await cloudinary.uploads(req.file.path, 'Images')) : null;
+  const { isValid, errors } = await validateRegisterInput(req.body);
+
+  if (!isValid) {
     return res.status(403).json({
       success: false,
       code: 403,
-      message:  errors,
+      message: errors,
     });
-   }
+  }
+  // const { file, err } = await upload.single("image");
+
+  // if (!file) {
+  //   return res.status(403).json({
+  //     success: false,
+  //     code: 403,
+  //     message: err.me,
+  //   });
+  // } else {
+  //   res.send(`/${file.path}`);
+  // }
   const confirmation_code = Math.floor(100000 + Math.random() * 900000);
   const {
     firstName,
     lastName,
-    image,
+
     email,
     password,
     username,
@@ -68,10 +87,8 @@ const registerUser = asyncHandler(async (req, res) => {
     packageStatus,
   } = req.body;
 
-
   const emailExists = await User.findOne({ email });
   const usernameExists = await User.findOne({ username });
-
 
   if (emailExists) {
     res.status(400);
@@ -81,7 +98,6 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Username already exists");
   }
-  
 
   const user = await User.create({
     firstName,
