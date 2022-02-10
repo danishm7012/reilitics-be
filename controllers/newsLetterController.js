@@ -23,7 +23,12 @@ const createNewsletter = asyncHander(async (req, res) => {
     email,
   });
   const createNewsletter = await news.save();
-  res.status(201).json({ success: true, code: 200, createNewsletter });
+  res.status(201).json({
+    success: true,
+    code: 200,
+    message: "Thank you for subscribing!",
+    createNewsletter,
+  });
 });
 
 const getNewsLetter = asyncHander(async (req, res) => {

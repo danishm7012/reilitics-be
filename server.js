@@ -5,9 +5,10 @@ import colors from "colors";
 import morgan from "morgan";
 import cors from "cors";
 import passport from "passport";
-import bodyParser from 'body-parser'
+import bodyParser from "body-parser";
 import multer from "multer";
-import multipart from 'connect-multiparty'
+import { upload } from "./middleware/multer.js";
+import multipart from "connect-multiparty";
 
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
@@ -22,7 +23,7 @@ import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
-import newsLetterRoutes from "./routes/newLetterRoutes.js"
+import newsLetterRoutes from "./routes/newLetterRoutes.js";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // app.use(multipart());
 
 app.use(express.json());
@@ -53,7 +55,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
-app.use("/api/newsletter", newsLetterRoutes)
+app.use("/api/newsletter", newsLetterRoutes);
 
 app.get("/api/config/paypal", (req, res) =>
   res.json({ success: true, clientID: process.env.PAYPAL_CLIENT_ID })
