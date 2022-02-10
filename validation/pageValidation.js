@@ -7,7 +7,7 @@ const validatePageInput = (data) => {
     let errors = "";
     data.title = !isEmpty(data.title) ? data.title : "";
     data.description = !isEmpty(data.description) ? data.description : "";
-    // data.viewCount = !isEmpty(data.viewCount) ? data.viewCount : 0;
+    // data.viewCount = !isEmpty(data.viewCount) ? data.viewCount : null;
   
     if (Validator.isEmpty(data.title)) {
       errors = "Title field is required";

@@ -6,16 +6,16 @@ const getPage = asyncHandler(async (req, res) => {
   const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
 
-  const count = await Page.countDocuments();
-  const newpage = await Page.find()
+  const count = await Page.countDocuments({});
+  const result = await Page.find({})
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
-  if (newpage) {
+  if (result) {
     res.json({
       success: true,
       code: 200,
-      newpage,
+      result,
       page,
       pages: Math.ceil(count / pageSize),
     });
