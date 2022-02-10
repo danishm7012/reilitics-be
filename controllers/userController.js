@@ -48,9 +48,6 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  
-
-  // let file = '';
   // req.file ? (file = await cloudinary.uploads(req.file.path, 'Images')) : null;
   const { isValid, errors } = await validateRegisterInput(req.body);
 
@@ -61,34 +58,9 @@ const registerUser = asyncHandler(async (req, res) => {
       message: errors,
     });
   }
-  // const { file, err } = await upload.single("image");
 
-  // if (!file) {
-  //   return res.status(403).json({
-  //     success: false,
-  //     code: 403,
-  //     message: err.me,
-  //   });
-  // } else {
-  //   res.send(`/${file.path}`);
-  // }
-  const confirmation_code = Math.floor(100000 + Math.random() * 900000);
-  const {
-    firstName,
-    lastName,
-
-    email,
-    password,
-    username,
-    phone,
-    city,
-    dob,
-    packageID,
-    packageStatus,
-  } = req.body;
-
-  const emailExists = await User.findOne({ email });
-  const usernameExists = await User.findOne({ username });
+  const emailExists = await User.findOne({ email: req.body.email });
+  const usernameExists = await User.findOne({ username: req.body.username });
 
   if (emailExists) {
     res.status(400);
@@ -98,20 +70,21 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Username already exists");
   }
+  const newUser = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    image: `http://reilitics-be.herokuapp.com/${req.file.path}`,
+    email: req.body.email,
+    password: req.body.password,
+    username: req.body.username,
+    phone: req.body.phone,
+    city: req.body.city,
+    dob: req.body.dob,
+    packageID: req.body.packageID,
+    packageStatus: req.body.packageStatus,
+  };
 
-  const user = await User.create({
-    firstName,
-    lastName,
-    image,
-    email,
-    password,
-    username,
-    phone,
-    city,
-    dob,
-    packageID,
-    packageStatus,
-  });
+  const user = await User.create(newUser);
 
   if (!user) {
     res.status(400);
