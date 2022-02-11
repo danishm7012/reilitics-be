@@ -9,7 +9,7 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 import express from "express";
 const router = express.Router();
 
-router.route("/").post(protect, admin, createPage).get(protect, admin,getPage);
+router.route("/").post(protect, admin, createPage).get(protect, admin, getPage);
 router
   .route("/:id")
   .put(protect, admin, updatePage)

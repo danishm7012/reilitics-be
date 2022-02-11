@@ -12,16 +12,15 @@ const pageSchema = new mongoose.Schema(
     },
     viewCount: {
       type: Number,
-      required: true,
       default: 0,
     },
-    keyword:{
-        type: String,
+    keyword: {
+      type: String,
     },
   },
   { timestamps: true }
 );
 
-const Page = mongoose.model("Page", pageSchema)
+const Page = mongoose.model("Page", pageSchema);
 
-export default Page
+export default Page;

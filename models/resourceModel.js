@@ -20,13 +20,15 @@ const resourceSchema = mongoose.Schema(
     },
     imageUrl: {
       type: String,
-      default: "/uploads/resource.png",
+      required: true,
     },
     noOfClicks: {
       type: Number,
+      default: 0,
     },
     noOfDownloads: {
       type: Number,
+      default: 0,
     },
   },
   {

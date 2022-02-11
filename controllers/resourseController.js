@@ -68,12 +68,12 @@ const deleteResource = asyncHandler(async (req, res) => {
 // @route   POST /api/resource
 // @access  Private
 const createResource = asyncHandler(async (req, res) => {
-  const { title, resourceType, resourceUrl, imageUrl } = req.body;
+  const { title, resourceType, resourceUrl } = req.body;
   const resourceData = new Resource({
     AddedByAdmin: req.user.id,
     title,
     resourceType,
-    imageUrl,
+    imageUrl: `http://reilitics-be.herokuapp.com/${req.file.path}`,
     resourceUrl,
   });
 
@@ -90,15 +90,21 @@ const createResource = asyncHandler(async (req, res) => {
 // @route   PUT /api/resource/:id
 // @access  Private/Admin
 const updateResource = asyncHandler(async (req, res) => {
-  const { title, resourceType, resourceUrl, imageUrl } = req.body;
+  const { title, resourceType, resourceUrl } = req.body;
 
   const resourceFound = await Resource.findById(req.params.id);
+  let image;
+  if (req.file) {
+    image = `http://reilitics-be.herokuapp.com/${req.file.path}`;
+  } else {
+    image = resourceFound.imageUrl;
+  }
 
   if (resourceFound) {
     resourceFound.title = title || resourceFound.title;
     resourceFound.resourceType = resourceType || resourceFound.resourceType;
     resourceFound.resourceUrl = resourceUrl || resourceFound.resourceUrl;
-    resourceFound.imageUrl = imageUrl || resourceFound.imageUrl;
+    resourceFound.imageUrl = image;
 
     const updatedResource = await resourceFound.save();
     res.json({

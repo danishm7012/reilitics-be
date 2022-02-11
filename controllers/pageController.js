@@ -33,12 +33,11 @@ const createPage = asyncHandler(async (req, res) => {
             message: errors
         })
     }
-  const { title, description, viewCount } = req.body;
+  const { title, description } = req.body;
 
   const newpage = new Page({
     title,
     description,
-    viewCount,
   });
 
   const createpage = await newpage.save();
