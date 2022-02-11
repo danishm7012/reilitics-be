@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Resource from "../models/resourceModel.js";
+import { resourceInput } from "../validation/resourceValidation.js";
 
 // @desc    Fetch all resources
 // @route   GET /api/resource
@@ -68,7 +69,19 @@ const deleteResource = asyncHandler(async (req, res) => {
 // @route   POST /api/resource
 // @access  Private
 const createResource = asyncHandler(async (req, res) => {
+<<<<<<< HEAD
   const { title, resourceType, resourceUrl } = req.body;
+=======
+  const { isValid, errors} = await resourceInput(req.body)
+  if(!isValid){
+    res.status(403).json({
+      success: false,
+      code: 403,
+      message: errors
+    })
+  }
+  const { title, resourceType, resourceUrl, imageUrl } = req.body;
+>>>>>>> b013d430143e494ba67d4ef02a9941b76859081b
   const resourceData = new Resource({
     AddedByAdmin: req.user.id,
     title,
