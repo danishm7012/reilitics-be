@@ -69,9 +69,6 @@ const deleteResource = asyncHandler(async (req, res) => {
 // @route   POST /api/resource
 // @access  Private
 const createResource = asyncHandler(async (req, res) => {
-<<<<<<< HEAD
-  const { title, resourceType, resourceUrl } = req.body;
-=======
   const { isValid, errors} = await resourceInput(req.body)
   if(!isValid){
     res.status(403).json({
@@ -81,7 +78,6 @@ const createResource = asyncHandler(async (req, res) => {
     })
   }
   const { title, resourceType, resourceUrl, imageUrl } = req.body;
->>>>>>> b013d430143e494ba67d4ef02a9941b76859081b
   const resourceData = new Resource({
     AddedByAdmin: req.user.id,
     title,
