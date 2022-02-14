@@ -6,6 +6,7 @@ import https from "https";
 import path from "path";
 import { rentalJson } from "../data/json/rental.js";
 import { appreciationJson } from "../data/json/appreciation.js";
+import Appreciation from "../models/appreciationModel.js";
 //import CSV from 'csvtojson'
 
 // @desc    Fetch single resource
@@ -57,17 +58,17 @@ const getRentalJson = asyncHandler(async (req, res) => {
   res.json({
     success: true,
     code: 200,
-    rentalResult,
     page,
     pages: Math.ceil(count / pageSize),
+    rentalResult,
   });
 });
 // @desc    calculate market appreciation
 // @route   GET /api/appreciationjson
 // @access  Public
 const getAppreciationJson = asyncHandler(async (req, res) => {
-  // const pageSize = 10;
-  // const page = Number(req.query.pageNumber) || 1;
+  const pageSize = 10;
+  const page = Number(req.query.pageNumber) || 1;
   const appreciationjson = await appreciationJson.map((item) => {
     const result = {};
     Array.prototype.median = function () {
@@ -82,6 +83,9 @@ const getAppreciationJson = asyncHandler(async (req, res) => {
       ((item["2020-12-31"] - item["2020-01-31"]) / item["2020-12-31"]) * 100;
     result.y2021 =
       ((item["2021-12-31"] - item["2021-01-31"]) / item["2021-12-31"]) * 100;
+    if (isNaN(result.y2021)) {
+      result.y2021 = 0;
+    }
     // 2022: ((item['2022-12-31'] - item['2022-01']) / item['2022-12-31']) * 100,
     result.avgGrowth =
       (result.y2018 + result.y2019 + result.y2020 + result.y2021) / 4;
@@ -91,22 +95,46 @@ const getAppreciationJson = asyncHandler(async (req, res) => {
       item["2020-12-31"],
       item["2021-12-31"],
     ].median();
+    //not calculate yet
+    result.population = 136000;
+    result.avgTax = 0.87;
+
     return result;
   });
-  // await Rental.deleteMany();
-  // await Rental.insertMany(rentaljson);
+  await Appreciation.deleteMany();
+  await Appreciation.insertMany(appreciationjson);
 
-  // const count = await Rental.countDocuments();
-  // const rentalResult = await Rental.find({})
-  //   .limit(pageSize)
-  //   .skip(pageSize * (page - 1));
+  const count = await Appreciation.countDocuments();
+  const allRecords = await Appreciation.find({})
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
 
   res.json({
     success: true,
     code: 200,
-    appreciationjson,
-    // page,
-    // pages: Math.ceil(count / pageSize),
+    allRecords,
+    page,
+    pages: Math.ceil(count / pageSize),
+  });
+});
+// @desc    fetch market appreciation
+// @route   GET /api/appreciation
+// @access  Public
+const getAppreciation = asyncHandler(async (req, res) => {
+  const pageSize = 9;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const count = await Appreciation.countDocuments();
+  const allRecords = await Appreciation.find({})
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+
+  res.json({
+    success: true,
+    code: 200,
+    page,
+    pages: Math.ceil(count / pageSize),
+    allRecords,
   });
 });
 // @desc    Fetch single resource
@@ -245,6 +273,7 @@ export {
   Test,
   getRental,
   getAppreciationJson,
+  getAppreciation,
   getResourceById,
   deleteResource,
   createResource,

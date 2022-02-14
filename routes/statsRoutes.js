@@ -5,6 +5,7 @@ import {
   getRentalJson,
   getRental,
   getAppreciationJson,
+  getAppreciation,
 } from "../controllers/statsController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
@@ -15,5 +16,6 @@ router.route("/rentaljson").get(getRentalJson);
 router.route("/appreciationjson").get(getAppreciationJson);
 
 router.route("/rentalGrowth").get(protect, getRental);
+router.route("/appreciation").get(getAppreciation);
 
 export default router;

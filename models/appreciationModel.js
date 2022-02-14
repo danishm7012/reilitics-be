@@ -8,11 +8,11 @@ const appreciationSchema = mongoose.Schema(
     },
     avgTax: {
       type: Number,
-      default: 2,
+      default: 0.87,
     },
     population: {
       type: Number,
-      default: 2,
+      default: 136000,
     },
     avgAppreciation: {
       type: Number,
@@ -34,7 +34,7 @@ const appreciationSchema = mongoose.Schema(
     },
     y2021: {
       type: Number,
-      required: true,
+      default: 0,
     },
     y2022: {
       type: Number,
