@@ -28,12 +28,12 @@ const userSchema = mongoose.Schema(
     },
     image: {
       type: String,
-      // default: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+      default: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
     },
     phone: {
       type: String,
     },
-    city: {
+    country: {
       type: String,
     },
     state: {

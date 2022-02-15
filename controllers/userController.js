@@ -38,6 +38,7 @@ const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
       user,
     });
+    console.log(user)
   } else {
     res.status(401);
     throw new Error("Invalid email or password");
@@ -70,6 +71,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Username already exists");
   }
+
   const newUser = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -78,7 +80,8 @@ const registerUser = asyncHandler(async (req, res) => {
     password: req.body.password,
     username: req.body.username,
     phone: req.body.phone,
-    city: req.body.city,
+    country: req.body.country,
+    state: req.body.state,
     dob: req.body.dob,
     packageID: req.body.packageID,
     packageStatus: req.body.packageStatus,
