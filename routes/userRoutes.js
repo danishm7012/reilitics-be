@@ -1,5 +1,5 @@
-import express from "express";
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 import {
   authUser,
   registerUser,
@@ -15,30 +15,30 @@ import {
   changeAccountStatus,
   getAdmins,
   getEditors,
-} from "../controllers/userController.js";
-import { protect, admin } from "../middleware/authMiddleware.js";
-import { upload } from "../middleware/multer.js";
+} from '../controllers/userController.js'
+import { protect, admin } from '../middleware/authMiddleware.js'
+import { upload } from '../middleware/multer.js'
 
 router
-  .route("/")
-  .post(upload.single("image"), registerUser)
-  .get(protect, admin, getUsers);
-router.route("/admins").get(protect, admin, getAdmins);
-router.route("/editors").get(protect, admin, getEditors);
+  .route('/')
+  .post(upload.single('image'), registerUser)
+  .get(protect, admin, getUsers)
+router.route('/admins').get(protect, admin, getAdmins)
+router.route('/editors').get(protect, admin, getEditors)
 
-router.post("/login", authUser);
-router.post("/sendcode", sendCode);
-router.post("/verifycode", verifyCode);
-router.put("/changepassword", changePassword);
+router.post('/login', authUser)
+router.post('/sendcode', sendCode)
+router.post('/verifycode', verifyCode)
+router.put('/changepassword', changePassword)
 router
-  .route("/profile")
+  .route('/profile')
   .get(protect, getUserProfile)
-  .put(protect, updateUserProfile);
-router.route("/status/:id").put(protect, admin, changeAccountStatus);
+  .put(protect, updateUserProfile)
+router.route('/status/:id').put(protect, admin, changeAccountStatus)
 router
-  .route("/:id")
+  .route('/:id')
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
-  .put(protect, admin, updateUser);
+  .put(protect, admin, updateUser)
 
-export default router;
+export default router
