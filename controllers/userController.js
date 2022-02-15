@@ -25,6 +25,10 @@ const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
+   if(!user){
+     res.status(403);
+     throw new Error("Invalid email or password")
+   }
   if (!user.email_varification) {
     res.status(401);
     throw new Error("Email is not verified!");
