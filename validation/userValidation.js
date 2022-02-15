@@ -43,17 +43,9 @@ const validateRegisterInput = (data) => {
     errors = "Password must be at least 6 characters";
   }
   
-  // if(!Validator.isStrongPassword(data.password)){
-  //   errors = "Password is not strong"
-  // }
-
   if (Validator.isEmpty(data.username)) {
     errors = "Username field is required";
   }
-  if (!Validator.isLength(data.username, { min: 6, max: 30 })) {
-    errors = "Username must be at least 6 characters";
-  }
-
   return {
     errors,
     isValid: isEmpty(errors),
