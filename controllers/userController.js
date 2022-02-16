@@ -144,7 +144,12 @@ const verifySignup = asyncHandler(async (req, res) => {
 // @access  Private
 const sendCode = async (req, res) => {
   console.log(req.body.email);
-  User.findOne({ email: req.body.email })
+  User.findOne({
+    email: {
+      $regex: req.body.email,
+      $options: "i",
+    },
+  })
     .then(async (user) => {
       await sendEmail(user); // sending code on given email
       res.status(201).json({
@@ -347,7 +352,9 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/verifycode
 // @access  Private/Protected
 const verifyCode = asyncHandler(async (req, res) => {
-  const user = await User.findOne({ 'email': {$regex: new RegExp('^' + req.body.email, 'i')} });
+  const user = await User.findOne({
+    email: { $regex: new RegExp("^" + req.body.email, "i") },
+  });
   const get_user = await Verify.findOne({
     user: user._id,
   });
