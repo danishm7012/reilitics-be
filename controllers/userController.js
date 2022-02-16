@@ -115,9 +115,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
 // @desc   Verify User being signed up
 // @route Get /api/users/verifysignup
-// @access Private
+// @access public
 const verifySignup = asyncHandler(async (req, res) => {
- 
   const { isValid, errors } = await verifySignupInput(req.body);
 
   if (!isValid) {
@@ -126,14 +125,13 @@ const verifySignup = asyncHandler(async (req, res) => {
       code: 403,
       message: errors,
     });
-  }else{
+  } else {
     return res.status(201).json({
-      success: false,
+      success: true,
       code: 200,
       message: "User is verified",
     });
   }
-
 });
 // @desc    Resend varification code to the email
 // @route   GET /api/users/sendcode
