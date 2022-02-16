@@ -5,6 +5,7 @@ import Verify from "../models/verify.js";
 import {
   validateRegisterInput,
   validateLoginInput,
+  verifySignupInput,
 } from "../validation/userValidation.js";
 import { sendEmail } from "../config/sendMail.js";
 import { upload } from "../middleware/multer.js";
@@ -116,28 +117,23 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route Get /api/users/verifysignup
 // @access Private
 const verifySignup = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password, username } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (
-      user &&
-      (await (user.firstName == firstName &&
-        user.lastName == lastName &&
-        //user.password == password &&
-        user.username == username))
-    ) {
-      res.status(201).json({
-        success: true,
-        code: 200,
-        message: "The user has been verified",
-        user,
-      });
-    } else {
-      throw new Error("User cannot be verified");
-    }
-  } catch (error) {
-    throw new Error("Invalid details");
+ 
+  const { isValid, errors } = await verifySignupInput(req.body);
+
+  if (!isValid) {
+    return res.status(403).json({
+      success: false,
+      code: 403,
+      message: errors,
+    });
+  }else{
+    return res.status(201).json({
+      success: false,
+      code: 200,
+      message: "User is verified",
+    });
   }
+
 });
 // @desc    Resend varification code to the email
 // @route   GET /api/users/sendcode
