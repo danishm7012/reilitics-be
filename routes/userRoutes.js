@@ -15,6 +15,7 @@ import {
   changeAccountStatus,
   getAdmins,
   getEditors,
+  verifySignup,
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 import { upload } from '../middleware/multer.js'
@@ -25,6 +26,8 @@ router
   .get(protect, admin, getUsers)
 router.route('/admins').get(protect, admin, getAdmins)
 router.route('/editors').get(protect, admin, getEditors)
+
+router.post('/verifysignup',verifySignup)
 
 router.post('/login', authUser)
 router.post('/sendcode', sendCode)
