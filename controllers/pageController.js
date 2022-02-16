@@ -6,8 +6,17 @@ const getPage = asyncHandler(async (req, res) => {
   const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
 
-  const count = await Page.countDocuments({});
-  const result = await Page.find({})
+  const keyword = req.query.keyword
+    ? {
+        title: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+
+  const count = await Page.countDocuments({ ...keyword });
+  const result = await Page.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
@@ -25,14 +34,14 @@ const getPage = asyncHandler(async (req, res) => {
 });
 
 const createPage = asyncHandler(async (req, res) => {
-    const {isValid, errors} = await validatePageInput(req.body);
-    if(!isValid){
-        res.status(403).json({
-            success: false,
-            code: 403,
-            message: errors
-        })
-    }
+  const { isValid, errors } = await validatePageInput(req.body);
+  if (!isValid) {
+    res.status(403).json({
+      success: false,
+      code: 403,
+      message: errors,
+    });
+  }
   const { title, description } = req.body;
 
   const newpage = new Page({
@@ -43,7 +52,6 @@ const createPage = asyncHandler(async (req, res) => {
   const createpage = await newpage.save();
   res.status(201).json({ success: true, code: 200, createpage });
 });
-
 
 const updatePage = asyncHandler(async (req, res) => {
   const { title, description, viewCount } = req.body;
@@ -63,26 +71,28 @@ const updatePage = asyncHandler(async (req, res) => {
   }
 });
 
-const getPageById =asyncHandler(async(req,res)=>{
-    const pageById = await Page.findById(req.params.id);
+const getPageById = asyncHandler(async (req, res) => {
+  const pageById = await Page.findById(req.params.id);
 
-    if(pageById){
-        res.status(201).json({ success: true, code: 200, pageById });
-    } else {
-      res.status(404);
-      throw new Error("Page not found");
-    }
-})
+  if (pageById) {
+    res.status(201).json({ success: true, code: 200, pageById });
+  } else {
+    res.status(404);
+    throw new Error("Page not found");
+  }
+});
 
-const deletePageById = asyncHandler(async(req,res)=>{
-const deletepage = await Page.findById(req.params.id);
-if(deletepage){
+const deletePageById = asyncHandler(async (req, res) => {
+  const deletepage = await Page.findById(req.params.id);
+  if (deletepage) {
     await deletepage.remove();
-    res.status(201).json({ success: true, code: 200, message: "Page has been removed" });
-} else {
-  res.status(404);
-  throw new Error("Page not found");
-}
-})
+    res
+      .status(201)
+      .json({ success: true, code: 200, message: "Page has been removed" });
+  } else {
+    res.status(404);
+    throw new Error("Page not found");
+  }
+});
 
 export { getPage, createPage, updatePage, getPageById, deletePageById };

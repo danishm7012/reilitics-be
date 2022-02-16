@@ -14,7 +14,7 @@ const appreciationSchema = mongoose.Schema(
       type: Number,
       default: 136000,
     },
-    avgAppreciation: {
+    avgGrowth: {
       type: Number,
     },
     median: {
