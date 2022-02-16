@@ -23,27 +23,27 @@ const authUser = asyncHandler(async (req, res) => {
     });
   }
   const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
 
-  const user = await User.findOne({ email });
-   if(!user){
-     res.status(403);
-     throw new Error("Invalid email or password")
-   }
-  if (!user.email_varification) {
-    res.status(401);
-    throw new Error("Email is not verified!");
-  }
+    if (!user.email_varification) {
+      res.status(401);
+      throw new Error("Email is not verified!");
+    }
 
-  if (user && (await user.matchPassword(password))) {
-    res.json({
-      success: true,
-      code: 200,
-      message: "Logged in successfully!",
-      token: generateToken(user._id),
-      user,
-    });
-    console.log(user)
-  } else {
+    if (user && (await user.matchPassword(password))) {
+      res.json({
+        success: true,
+        code: 200,
+        message: "Logged in successfully!",
+        token: generateToken(user._id),
+        user,
+      });
+    } else {
+      res.status(401);
+      throw new Error("Invalid email or password");
+    }
+  } catch (error) {
     res.status(401);
     throw new Error("Invalid email or password");
   }
