@@ -6,6 +6,7 @@ import {
   updateResource,
   getResourceById,
   deleteResource,
+  createData,
 } from "../controllers/resourseController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 import { upload } from "../middleware/multer.js";
@@ -14,6 +15,7 @@ router
   .route("/")
   .get(getResources)
   .post(protect, admin, upload.single("image"), createResource);
+router.get("/addmany", createData);
 router
   .route("/:id")
   .put(protect, admin, upload.single("image"), updateResource)

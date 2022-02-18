@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Resource from "../models/resourceModel.js";
 import { resourceInput } from "../validation/resourceValidation.js";
+import { resourceData } from "../data/json/BooksData.js";
 
 // @desc    Fetch all resources
 // @route   GET /api/resource
@@ -69,13 +70,13 @@ const deleteResource = asyncHandler(async (req, res) => {
 // @route   POST /api/resource
 // @access  Private
 const createResource = asyncHandler(async (req, res) => {
-  const { isValid, errors} = await resourceInput(req.body)
-  if(!isValid){
+  const { isValid, errors } = await resourceInput(req.body);
+  if (!isValid) {
     res.status(403).json({
       success: false,
       code: 403,
-      message: errors
-    })
+      message: errors,
+    });
   }
   const { title, resourceType, resourceUrl, imageUrl } = req.body;
   const resourceData = new Resource({
@@ -150,6 +151,20 @@ const updateResourceStatus = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    add many resource
+// @route   Get /api/resource/add many
+// @access  public
+const createData = asyncHandler(async (req, res) => {
+  await Resource.deleteMany();
+  await Resource.insertMany(resourceData);
+  const ResourceResult = await Resource.find({});
+  res.json({
+    success: true,
+    code: 200,
+    ResourceResult,
+  });
+});
+
 export {
   getResources,
   getResourceById,
@@ -157,4 +172,5 @@ export {
   createResource,
   updateResource,
   updateResourceStatus,
+  createData,
 };
