@@ -8,12 +8,14 @@ import {
   updateArticle,
   createArticleReview,
   getTopArticles,
+  createBlogs,
 } from "../controllers/articleController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
 router.route("/").get(getArticles).post(protect, admin, createArticle);
 router.route("/:id/reviews").post(protect, createArticleReview);
 router.get("/top", getTopArticles);
+router.get("/blogs", createBlogs);
 router
   .route("/:id")
   .get(getArticleById)

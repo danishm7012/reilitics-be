@@ -166,7 +166,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
 
   if (user) {
-    res.json(user);
+    res.json({ success: true, code: 200, user });
   } else {
     res.status(404);
     throw new Error("User not found");
@@ -312,13 +312,18 @@ const getUserById = asyncHandler(async (req, res) => {
 
 // @desc    Update user by admin
 // @route   PUT /api/users
-// @access  Private/Admin
+// @access  Private
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
+  let image = user.image;
+  if (req.file) {
+    image = `https://reilitics-be.herokuapp.com/${req.file.path}`;
+  }
 
   if (user) {
     user.firstName = req.body.firstName || user.firstName;
     user.lastName = req.body.lastName || user.lastName;
+    user.image = image;
     user.email = req.body.email || user.email;
     user.username = req.body.username || user.username;
     user.phone = req.body.phone || user.phone;

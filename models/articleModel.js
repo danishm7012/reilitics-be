@@ -4,10 +4,10 @@ const articleSchema = mongoose.Schema(
   {
     title: {
       type: String,
-      unique: true,
+      // unique: true,
       required: true,
     },
-    imageFile: {
+    image: {
       type: String,
     },
     detail: {
@@ -21,13 +21,9 @@ const articleSchema = mongoose.Schema(
     metaTitle: {
       type: String,
     },
-    metaDescription: {
-      type: String,
-    },
+    metaDescription: {},
     category: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Category",
+      type: String,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

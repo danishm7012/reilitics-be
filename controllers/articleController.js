@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Article from "../models/articleModel.js";
+import { blogdetail } from "../data/json/blogs.js";
 
 // @desc    Fetch all articles
 // @route   GET /api/articles
@@ -90,6 +91,20 @@ const createArticle = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("this title already exist!");
   }
+});
+
+// @desc    add many artical
+// @route   Get /api/blogs
+// @access  public
+const createBlogs = asyncHandler(async (req, res) => {
+  await Article.deleteMany();
+  await Article.insertMany(blogdetail);
+  const ArticleResult = await Article.find({});
+  res.json({
+    success: true,
+    code: 200,
+    ArticleResult,
+  });
 });
 
 // @desc    Update a article
@@ -184,4 +199,5 @@ export {
   updateArticle,
   createArticleReview,
   getTopArticles,
+  createBlogs,
 };
