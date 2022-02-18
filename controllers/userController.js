@@ -323,7 +323,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.username = req.body.username || user.username;
     user.phone = req.body.phone || user.phone;
     user.password = req.body.password || user.password;
-    user.city = req.body.city || user.city;
+    user.country = req.body.country || user.country;
     user.state = req.body.state || user.state;
     user.date_of_birth = req.body.date_of_birth || user.date_of_birth;
     user.role = req.body.role || user.role;
