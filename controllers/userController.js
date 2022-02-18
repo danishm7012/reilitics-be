@@ -67,7 +67,7 @@ const registerUser = asyncHandler(async (req, res) => {
   console.log(req.file);
   let image = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
   if (req.file) {
-    image = `http://reilitics-be.herokuapp.com:5000/${req.file.path}`;
+    image = `https://reilitics-be.herokuapp.com/${req.file.path}`;
   }
 
   const emailExists = await User.findOne({ email: req.body.email });
