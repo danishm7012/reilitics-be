@@ -67,7 +67,7 @@ const registerUser = asyncHandler(async (req, res) => {
   console.log(req.file);
   let image = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
   if (req.file) {
-    image = `http://reilitics-be.herokuapp.com/${req.file.path}`;
+    image = `http://reilitics-be.herokuapp.com:5000/${req.file.path}`;
   }
 
   const emailExists = await User.findOne({ email: req.body.email });
@@ -346,13 +346,12 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/verifycode
 // @access  Private/Protected
 const verifyCode = asyncHandler(async (req, res) => {
-  const user = await 
-  User.findOne({
+  const user = await User.findOne({
     email: {
       $regex: req.body.email,
       $options: "i",
     },
-  })
+  });
   const get_user = await Verify.findOne({
     user: user._id,
   });
