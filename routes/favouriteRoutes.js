@@ -3,11 +3,11 @@ import { addFavourite, deleteFavourite, getFavourites } from '../controllers/fav
 import {protect} from '../middleware/authMiddleware.js'
 const router = express.Router();
 
-router.route('/').post(protect,addFavourite)
+router.route('/').post(addFavourite)
 
-// router.route('/myfavourite').get(getFavourites)
+router.route('/myfavourite').get(getFavourites)
 
-router.route('/:id').delete(deleteFavourite).get(getFavourites)
+router.route('/:id').delete(deleteFavourite)
 
 
 

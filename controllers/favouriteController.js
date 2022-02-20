@@ -5,12 +5,12 @@ import User from '../models/userModel.js';
 
 
 const addFavourite = asyncHandler (async(req,res) =>{
-    const {appreciationID, regionName, userID} = req.body;
+   const {appreciationID,regionName} = req.body
 
     const favourite = await new Favourite({
         appreciationID,
         regionName,
-        userID,
+        user: req.user._id,
     })
 
     const fav = await favourite.save();
@@ -20,11 +20,12 @@ const addFavourite = asyncHandler (async(req,res) =>{
         message: "Added to Favourite",
         fav,
     })
+
 })
 
 const getFavourites = asyncHandler (async(req,res) =>{
     
-        const myfavourite = await Favourite.find({user: req.user_id})
+        const myfavourite = await Favourite.find({user: req.user._id})
         res.json(myfavourite)
     
 })
