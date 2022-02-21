@@ -1,10 +1,12 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const categotySchema = mongoose.Schema(
   {
     name: {
       type: String,
+
       required: true,
+      unique: true,
     },
     slug: {
       type: String,
@@ -12,8 +14,8 @@ const categotySchema = mongoose.Schema(
     },
     categoryStatus: {
       type: String,
-      enum: ["published", "drafted", "trashed"],
-      default: "published",
+      enum: ['published', 'drafted', 'trashed'],
+      default: 'published',
     },
 
     postCount: {
@@ -24,8 +26,8 @@ const categotySchema = mongoose.Schema(
   {
     timestamps: true,
   }
-);
+)
 
-const Categoty = mongoose.model("Categoty", categotySchema);
+const Categoty = mongoose.model('Categoty', categotySchema)
 
-export default Categoty;
+export default Categoty

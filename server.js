@@ -26,6 +26,7 @@ import contactRoutes from "./routes/contactRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import newsLetterRoutes from "./routes/newLetterRoutes.js";
 import pageRoutes from "./routes/pageRoutes.js";
+import favouriteRoutes from "./routes/favouriteRoutes.js";
 
 dotenv.config();
 
@@ -67,6 +68,7 @@ app.get("/api/states/:countryCode", (req, res) => {
   const state = State.getStatesOfCountry(req.params.countryCode);
   res.send({ success: true, state });
 });
+app.use("/api/favourite", favouriteRoutes);
 
 app.get("/api/config/paypal", (req, res) =>
   res.json({ success: true, clientID: process.env.PAYPAL_CLIENT_ID })
@@ -79,7 +81,6 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.get("/api", (req, res) => {
   res.send("API is running....");
 });
-
 
 app.use(notFound);
 app.use(errorHandler);
