@@ -12,6 +12,7 @@ import multipart from "connect-multiparty";
 
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
+import { Country, State, City } from "country-state-city";
 
 import packageRoutes from "./routes/packageRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
@@ -23,8 +24,8 @@ import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
-import newsLetterRoutes from "./routes/newLetterRoutes.js"
-import pageRoutes from './routes/pageRoutes.js'
+import newsLetterRoutes from "./routes/newLetterRoutes.js";
+import pageRoutes from "./routes/pageRoutes.js";
 
 dotenv.config();
 
@@ -56,8 +57,16 @@ app.use("/api/users", userRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
-app.use("/api/newsletter", newsLetterRoutes)
+app.use("/api/newsletter", newsLetterRoutes);
 app.use("/api/page", pageRoutes);
+app.get("/api/countries", (req, res) => {
+  const contry = Country.getAllCountries();
+  res.send({ success: true, contry });
+});
+app.get("/api/states/:countryCode", (req, res) => {
+  const state = State.getStatesOfCountry(req.params.countryCode);
+  res.send({ success: true, state });
+});
 
 app.get("/api/config/paypal", (req, res) =>
   res.json({ success: true, clientID: process.env.PAYPAL_CLIENT_ID })
@@ -70,6 +79,7 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.get("/api", (req, res) => {
   res.send("API is running....");
 });
+
 
 app.use(notFound);
 app.use(errorHandler);

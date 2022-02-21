@@ -12,8 +12,8 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 router.route("/").get(protect, getNotes).post(protect, createNote);
 router
   .route("/:id")
-  .put(protect, admin, updateNote)
+  .put(protect, updateNote)
   .get(getNoteById)
-  .delete(protect, admin, deleteNote);
+  .delete(protect, deleteNote);
 
 export default router;
