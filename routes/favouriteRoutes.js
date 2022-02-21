@@ -7,7 +7,7 @@ router.route('/').post(protect,addFavourite)
 
 router.route('/myfavourite').get(protect,getFavourites)
 
-router.route('/:id').delete(deleteFavourite)
+router.route('/:id').delete(protect,deleteFavourite)
 
 
 
