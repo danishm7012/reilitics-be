@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import Resource from "../models/resourceModel.js";
 import { resourceInput } from "../validation/resourceValidation.js";
 import { resourceData } from "../data/json/BooksData.js";
+import { uploadOnCloud } from "../config/cloudinary.js";
 
 // @desc    Fetch all resources
 // @route   GET /api/resource
@@ -78,12 +79,19 @@ const createResource = asyncHandler(async (req, res) => {
       message: errors,
     });
   }
-  const { title, resourceType, resourceUrl, imageUrl } = req.body;
+  let image = "";
+  if (req.file) {
+    const result = await uploadOnCloud(req.file.path, "Images");
+    image = result.url;
+  }
+
+  const { title, resourceType, resourceUrl } = req.body;
+
   const resourceData = new Resource({
     AddedByAdmin: req.user.id,
     title,
     resourceType,
-    imageUrl: `http://reilitics-be.herokuapp.com/${req.file.path}`,
+    imageUrl: image,
     resourceUrl,
   });
 
@@ -103,11 +111,10 @@ const updateResource = asyncHandler(async (req, res) => {
   const { title, resourceType, resourceUrl } = req.body;
 
   const resourceFound = await Resource.findById(req.params.id);
-  let image;
+  let image = resourceFound.imageUrl;
   if (req.file) {
-    image = `http://reilitics-be.herokuapp.com/${req.file.path}`;
-  } else {
-    image = resourceFound.imageUrl;
+    const result = await uploadOnCloud(req.file.path, "Images");
+    image = result.url;
   }
 
   if (resourceFound) {

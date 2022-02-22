@@ -9,7 +9,7 @@ cloudinary.config({
   api_secret: "f9qsxSfOE2hUnpBKk76w_fSqESU",
 });
 
-uploadOnCloud = (file, folder) => {
+const uploadOnCloud = (file, folder) => {
   return new Promise((resolve) => {
     cloudinary.uploader.upload(
       file,
