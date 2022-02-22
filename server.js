@@ -68,6 +68,10 @@ app.get("/api/states/:countryCode", (req, res) => {
   const state = State.getStatesOfCountry(req.params.countryCode);
   res.send({ success: true, state });
 });
+app.get("/api/cities/:countryCode", (req, res) => {
+  const state = City.getCitiesOfCountry(req.params.countryCode);
+  res.send({ success: true, state });
+});
 app.use("/api/favourite", favouriteRoutes);
 
 app.get("/api/config/paypal", (req, res) =>
