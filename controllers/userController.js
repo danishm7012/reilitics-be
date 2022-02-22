@@ -119,6 +119,18 @@ const registerUser = asyncHandler(async (req, res) => {
 const verifySignup = asyncHandler(async (req, res) => {
   const { isValid, errors } = await verifySignupInput(req.body);
 
+  const emailExists = await User.findOne({ email: req.body.email });
+  const usernameExists = await User.findOne({ username: req.body.username });
+
+  if (emailExists) {
+    res.status(400);
+    throw new Error("Email already exists");
+  }
+  if (usernameExists) {
+    res.status(400);
+    throw new Error("Username already exists");
+  }
+
   if (!isValid) {
     return res.status(403).json({
       success: false,
