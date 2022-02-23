@@ -26,6 +26,7 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 import newsLetterRoutes from "./routes/newLetterRoutes.js"
 import pageRoutes from './routes/pageRoutes.js'
 import favouriteRoutes from './routes/favouriteRoutes.js'
+import notificationRoutes from './routes/notificationRoutes.js'
 
 dotenv.config();
 
@@ -60,6 +61,7 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/newsletter", newsLetterRoutes)
 app.use("/api/page", pageRoutes);
 app.use("/api/favourite", favouriteRoutes)
+app.use("/api/notification", notificationRoutes)
 
 app.get("/api/config/paypal", (req, res) =>
   res.json({ success: true, clientID: process.env.PAYPAL_CLIENT_ID })
