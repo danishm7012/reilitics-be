@@ -9,13 +9,14 @@ import {
   getUsers,
   deleteUser,
   getUserById,
-  updateUser,
+  updateUserbyID,
   verifyCode,
   changePassword,
   changeAccountStatus,
   getAdmins,
   getEditors,
   verifySignup,
+  editProfile,
 } from "../controllers/userController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 import { upload } from "../middleware/multer.js";
@@ -23,7 +24,8 @@ import { upload } from "../middleware/multer.js";
 router
   .route("/")
   .post(upload.single("image"), registerUser)
-  .get(protect, admin, getUsers);
+  .get(protect, admin, getUsers)
+  .put(protect, upload.single("image"), editProfile);
 router.route("/admins").get(protect, admin, getAdmins);
 router.route("/editors").get(protect, admin, getEditors);
 
@@ -40,8 +42,8 @@ router
 router.route("/status/:id").put(protect, admin, changeAccountStatus);
 router
   .route("/:id")
-  .delete(protect, admin, deleteUser)
-  .get(protect, admin, getUserById)
-  .put(protect, admin, upload.single("image"), updateUser);
+  .delete(protect, deleteUser)
+  .get(protect, getUserById)
+  .put(protect, upload.single("image"), updateUserbyID);
 
 export default router;

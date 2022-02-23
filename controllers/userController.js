@@ -2,6 +2,8 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 import Verify from "../models/verify.js";
+import { uploadOnCloud } from "../config/cloudinary.js";
+
 import {
   validateRegisterInput,
   validateLoginInput,
@@ -54,7 +56,13 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  // req.file ? (file = await cloudinary.uploads(req.file.path, 'Images')) : null;
+  let image = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+  if (req.file) {
+    const result = await uploadOnCloud(req.file.path, "Images");
+    image = result.url;
+    console.log(image);
+  }
+
   const { isValid, errors } = await validateRegisterInput(req.body);
 
   if (!isValid) {
@@ -64,11 +72,10 @@ const registerUser = asyncHandler(async (req, res) => {
       message: errors,
     });
   }
-  console.log(req.file);
-  let image = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-  if (req.file) {
-    image = `https://reilitics-be.herokuapp.com/${req.file.path}`;
-  }
+  // let image = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+  // if (req.file) {
+  //   image = `https://reilitics-be.herokuapp.com/${req.file.path}`;
+  // }
 
   const emailExists = await User.findOne({ email: req.body.email });
   const usernameExists = await User.findOne({ username: req.body.username });
@@ -118,6 +125,18 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access public
 const verifySignup = asyncHandler(async (req, res) => {
   const { isValid, errors } = await verifySignupInput(req.body);
+
+  const emailExists = await User.findOne({ email: req.body.email });
+  const usernameExists = await User.findOne({ username: req.body.username });
+
+  if (emailExists) {
+    res.status(400);
+    throw new Error("Email already exists");
+  }
+  if (usernameExists) {
+    res.status(400);
+    throw new Error("Username already exists");
+  }
 
   if (!isValid) {
     return res.status(403).json({
@@ -313,11 +332,52 @@ const getUserById = asyncHandler(async (req, res) => {
 // @desc    Update user by admin
 // @route   PUT /api/users
 // @access  Private
-const updateUser = asyncHandler(async (req, res) => {
+const updateUserbyID = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   let image = user.image;
   if (req.file) {
-    image = `https://reilitics-be.herokuapp.com/${req.file.path}`;
+    const result = await uploadOnCloud(req.file.path, "Images");
+    image = result.url;
+    console.log(image);
+  }
+
+  if (user) {
+    user.firstName = req.body.firstName || user.firstName;
+    user.lastName = req.body.lastName || user.lastName;
+    user.image = image;
+    user.email = req.body.email || user.email;
+    user.username = req.body.username || user.username;
+    user.phone = req.body.phone || user.phone;
+    user.password = req.body.password || user.password;
+    user.country = req.body.country || user.country;
+    user.state = req.body.state || user.state;
+    user.date_of_birth = req.body.date_of_birth || user.date_of_birth;
+    user.role = req.body.role || user.role;
+    user.accountStatus = req.body.accountStatus || user.accountStatus;
+    user.isAdmin = req.body.isAdmin;
+
+    const updatedUser = await user.save();
+
+    res.json({
+      success: true,
+      code: "200",
+      data: updatedUser,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+// @desc    Edit own profile
+// @route   PUT /api/users
+// @access  Private
+const editProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id);
+  let image = user.image;
+  if (req.file) {
+    const result = await uploadOnCloud(req.file.path, "Images");
+    image = result.url;
+    console.log(image);
   }
 
   if (user) {
@@ -409,11 +469,12 @@ export {
   registerUser,
   sendCode,
   getUserProfile,
+  editProfile,
+  updateUserbyID,
   updateUserProfile,
   getUsers,
   deleteUser,
   getUserById,
-  updateUser,
   verifyCode,
   changePassword,
   changeAccountStatus,
