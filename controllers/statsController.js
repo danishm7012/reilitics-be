@@ -7,6 +7,11 @@ import path from "path";
 import { rentalJson } from "../data/json/rental.js";
 import { appreciationJson } from "../data/json/appreciation.js";
 import Appreciation from "../models/appreciationModel.js";
+
+Number.prototype.round = function (p) {
+  p = p || 10;
+  return parseFloat(this.toFixed(p));
+};
 //import CSV from 'csvtojson'
 
 // @desc    Fetch single resource
@@ -28,17 +33,28 @@ const getRentalJson = asyncHandler(async (req, res) => {
       return this.slice().sort((a, b) => a - b)[Math.floor(this.length / 2)];
     };
     result.region = item.RegionName;
-    result.y2018 =
-      ((item["2018-12"] - item["2018-01"]) / item["2018-12"]) * 100;
-    result.y2019 =
-      ((item["2019-12"] - item["2019-01"]) / item["2019-12"]) * 100;
-    result.y2020 =
-      ((item["2020-12"] - item["2020-01"]) / item["2020-12"]) * 100;
-    result.y2021 =
-      ((item["2021-12"] - item["2021-01"]) / item["2021-12"]) * 100;
+    result.y2022 = 0;
+    result.y2018 = (
+      ((item["2018-12"] - item["2018-01"]) / item["2018-12"]) *
+      100
+    ).round(2);
+    result.y2019 = (
+      ((item["2019-12"] - item["2019-01"]) / item["2019-12"]) *
+      100
+    ).round(2);
+    result.y2020 = (
+      ((item["2020-12"] - item["2020-01"]) / item["2020-12"]) *
+      100
+    ).round(2);
+    result.y2021 = (
+      ((item["2021-12"] - item["2021-01"]) / item["2021-12"]) *
+      100
+    ).round(2);
     // 2022: ((item['2022-12'] - item['2022-01']) / item['2022-12']) * 100,
-    result.avgGrowth =
-      (result.y2018 + result.y2019 + result.y2020 + result.y2021) / 4;
+    result.avgGrowth = (
+      (result.y2018 + result.y2019 + result.y2020 + result.y2021) /
+      4
+    ).round(2);
     result.median = [
       item["2018-12"],
       item["2019-12"],
@@ -75,20 +91,31 @@ const getAppreciationJson = asyncHandler(async (req, res) => {
       return this.slice().sort((a, b) => a - b)[Math.floor(this.length / 2)];
     };
     result.region = item.RegionName;
-    result.y2018 =
-      ((item["2018-12-31"] - item["2018-01-31"]) / item["2018-12-31"]) * 100;
-    result.y2019 =
-      ((item["2019-12-31"] - item["2019-01-31"]) / item["2019-12-31"]) * 100;
-    result.y2020 =
-      ((item["2020-12-31"] - item["2020-01-31"]) / item["2020-12-31"]) * 100;
-    result.y2021 =
-      ((item["2021-12-31"] - item["2021-01-31"]) / item["2021-12-31"]) * 100;
+    result.y2022 = 0;
+    result.y2018 = (
+      ((item["2018-12-31"] - item["2018-01-31"]) / item["2018-12-31"]) *
+      100
+    ).round(2);
+    result.y2019 = (
+      ((item["2019-12-31"] - item["2019-01-31"]) / item["2019-12-31"]) *
+      100
+    ).round(2);
+    result.y2020 = (
+      ((item["2020-12-31"] - item["2020-01-31"]) / item["2020-12-31"]) *
+      100
+    ).round(2);
+    result.y2021 = (
+      ((item["2021-12-31"] - item["2021-01-31"]) / item["2021-12-31"]) *
+      100
+    ).round(2);
     if (isNaN(result.y2021)) {
       result.y2021 = 0;
     }
     // 2022: ((item['2022-12-31'] - item['2022-01']) / item['2022-12-31']) * 100,
-    result.avgGrowth =
-      (result.y2018 + result.y2019 + result.y2020 + result.y2021) / 4;
+    result.avgGrowth = (
+      (result.y2018 + result.y2019 + result.y2020 + result.y2021) /
+      4
+    ).round(2);
     result.median = [
       item["2018-12-31"],
       item["2019-12-31"],

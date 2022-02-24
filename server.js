@@ -62,7 +62,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/newsletter", newsLetterRoutes);
 app.use("/api/page", pageRoutes);
-app.use("/api/favourite", favouriteRoutes)
+app.use("/api/favorite", favouriteRoutes)
 app.use("/api/notification", notificationRoutes)
 
 app.get("/api/countries", (req, res) => {
