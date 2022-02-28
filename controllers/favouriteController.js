@@ -8,7 +8,7 @@ const addFavourite = asyncHandler(async (req, res) => {
 
   const user = await Favourite.findOne({ userID: req.user.id });
   let fav;
-  console.log(user)
+ 
   if (!user) {
     const newFavArray = [];
     let newRegion = { regionID, regionName };
@@ -57,7 +57,7 @@ const removeFavourite = asyncHandler(async (req, res) => {
       const removeIndex = user.favoriteRegions
         .map((item) => item.regionID.toString())
         .indexOf(regionID);
-        console.log("Index to be removed: ",removeIndex)
+        
       // Splice out of array
       user.favoriteRegions.splice(removeIndex, 1);
       await user.save();
