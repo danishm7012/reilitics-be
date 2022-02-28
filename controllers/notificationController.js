@@ -23,18 +23,27 @@ const createNotification = asyncHandler(async (req, res) => {
 });
 
 const getNotification = asyncHandler(async (req, res) => {
-  const notification = await Notification.find({ user: req.user._id });
-  const user = await User.find({});
-  Object.keys(notification).forEach(function (key) {
-   if (notification[key].userType === user[key].packageID)
-   {
-        res.json(notification[key])
-    }
-  });
- 
-  console.log("No notification found")
+  const notification = await Notification.find({ userType: req.params._id });
+  const reverseNotification = notification.reverse();
+  if (notification) {
+    res.status(201).json({
+      success: true,
+      code: 200,
+      message: "Done!",
+      reverseNotification,
+    });
+  } else {
+    res.status(404);
+    throw new Error("Notifications not found");
+  }
+  // Object.keys(notification).forEach(function (key) {
+  //  if (notification[key].userType === user[key].packageID)
+  //  {
+  //       res.json(notification[key])
+  //   }
+  // });
+
+  // console.log("No notification found")
 });
-
-
 
 export { createNotification, getNotification };
