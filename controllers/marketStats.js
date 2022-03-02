@@ -14,16 +14,30 @@ const Test = asyncHandler(async (req, res) => {
 // @route   GET /api/stats/median_list_vs_sale_price
 // @access  Private
 const medianListSales = asyncHandler(async (req, res) => {
-  const listPrice = await CSV().fromFile("./data/market/list_price_median.csv");
-  const salePrice = await CSV().fromFile("./data/market/median_sale_price.csv");
+  console.log(req.body.regionID);
+  const year = req.body.year;
+  const listPriceJSON = await CSV().fromFile(
+    "./data/market/list_price_median.csv"
+  );
+  const salePriceJSON = await CSV().fromFile(
+    "./data/market/median_sale_price.csv"
+  );
 
-  if (listPrice && salePrice) {
+  const listPrice = await listPriceJSON.filter((item) => {
+    return item.RegionID == req.body.regionID && item["2020-06"];
+  });
+  const salesPrice = await salePriceJSON.filter(
+    (item) => item.RegionID == req.body.regionID
+  );
+  let finalMerge = [];
+
+  if (listPrice && salesPrice) {
     res.json({
       success: true,
       code: 200,
       message: "median_list_vs_sale_price",
       listPrice,
-      salePrice,
+      salesPrice,
     });
   }
 });
