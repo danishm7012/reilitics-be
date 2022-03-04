@@ -41,5 +41,49 @@ const medianListSales = asyncHandler(async (req, res) => {
     });
   }
 });
+// @desc    Fetch Median inventry
+// @route   GET /api/stats/inventry
+// @access  Private
+const Inventry = asyncHandler(async (req, res) => {
+  const year = req.body.year;
+  const inventryJSON = await CSV().fromFile("./data/market/inventry.csv");
 
-export { Test, medianListSales };
+  const inventry = await inventryJSON.filter((item) => {
+    return item.RegionID == req.body.regionID;
+  });
+
+  if (inventry) {
+    res.json({
+      success: true,
+      code: 200,
+      message: `Invetry of ${req.body.regionID}`,
+      inventry,
+    });
+  }
+});
+// @desc    Fetch Median days of pending
+// @route   GET /api/stats/median_days_to_pending
+// @access  Private
+const medianDaysToPending = asyncHandler(async (req, res) => {
+  const year = req.body.year;
+  const median_days_to_pendingJSON = await CSV().fromFile(
+    "./data/market/median_days_to_pending.csv"
+  );
+
+  const median_days_to_pending = await median_days_to_pendingJSON.filter(
+    (item) => {
+      return item.RegionID == req.body.regionID;
+    }
+  );
+
+  if (median_days_to_pending) {
+    res.json({
+      success: true,
+      code: 200,
+      message: `Median days to pending of ${req.body.regionID}`,
+      median_days_to_pending,
+    });
+  }
+});
+
+export { Test, medianListSales, Inventry, medianDaysToPending };
