@@ -1,6 +1,8 @@
 import asyncHandler from "express-async-handler";
 import CSV from "csvtojson";
 import path from "path";
+import jp from "jsonpath";
+import _ from "lodash";
 
 //import CSV from 'csvtojson'
 
@@ -66,24 +68,122 @@ const Inventry = asyncHandler(async (req, res) => {
 // @access  Private
 const medianDaysToPending = asyncHandler(async (req, res) => {
   const year = req.body.year;
+  let yearData;
   const median_days_to_pendingJSON = await CSV().fromFile(
     "./data/market/median_days_to_pending.csv"
   );
 
-  const median_days_to_pending = await median_days_to_pendingJSON.filter(
+  const median_days_to_pending = await median_days_to_pendingJSON.find(
     (item) => {
       return item.RegionID == req.body.regionID;
     }
   );
+  if (year) {
+    if(year)
+    yearData = _.pick(median_days_to_pending, [
+      `${year}-01-31`,
+      `${year}-02-28`,
+      `${year}-02-29`,
+      `${year}-03-31`,
+      `${year}-04-30`,
+      `${year}-05-31`,
+      `${year}-06-30`,
+      `${year}-07-31`,
+      `${year}-08-31`,
+      `${year}-09-30`,
+      `${year}-10-31`,
+      `${year}-11-30`,
+      `${year}-12-31`,
+    ]);
+    res.json({
+      success: true,
+      code: 200,
+      message: `Median days to pending of ${year}`,
+      yearData,
+      yearData,
+    });
+  }
 
   if (median_days_to_pending) {
     res.json({
       success: true,
       code: 200,
-      message: `Median days to pending of ${req.body.regionID}`,
+      message: `Median days to pending`,
       median_days_to_pending,
     });
   }
 });
+// @desc    Fetch share price cut
+// @route   GET /api/stats/share_price_cut
+// @access  Private
+const sharePriceCut = asyncHandler(async (req, res) => {
+  const year = req.body.year;
+  const share_price_cutJSON = await CSV().fromFile(
+    "./data/market/share_price_cut.csv"
+  );
 
-export { Test, medianListSales, Inventry, medianDaysToPending };
+  const share_price_cut = await share_price_cutJSON.filter((item) => {
+    return item.RegionID == req.body.regionID;
+  });
+
+  if (share_price_cut) {
+    res.json({
+      success: true,
+      code: 200,
+      message: `Share price cut.`,
+      share_price_cut,
+    });
+  }
+});
+// @desc    Fetch median price cut
+// @route   GET /api/stats/median_price_cut
+// @access  Private
+const medianPriceCut = asyncHandler(async (req, res) => {
+  const year = req.body.year;
+  const median_price_cutJSON = await CSV().fromFile(
+    "./data/market/median_price_cut.csv"
+  );
+
+  const median_price_cut = await median_price_cutJSON.filter((item) => {
+    return item.RegionID == req.body.regionID;
+  });
+
+  if (median_price_cut) {
+    res.json({
+      success: true,
+      code: 200,
+      message: `Median price cut.`,
+      median_price_cut,
+    });
+  }
+});
+// @desc    Fetch median rental
+// @route   GET /api/stats/median_rental
+// @access  Private
+const medianRental = asyncHandler(async (req, res) => {
+  const year = req.body.year;
+  const rentalJSON = await CSV().fromFile("./data/rental.csv");
+
+  const rental = await rentalJSON.filter((item) => {
+    return item.RegionID == req.body.regionID;
+  });
+
+  if (rental) {
+    res.json({
+      success: true,
+      code: 200,
+      message: `Median rental.`,
+      rental,
+    });
+  }
+});
+
+export {
+  Test,
+  medianListSales,
+  Inventry,
+  medianDaysToPending,
+  sharePriceCut,
+  medianPriceCut,
+  medianRental,
+};
