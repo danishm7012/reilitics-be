@@ -47,19 +47,18 @@ const medianListSales = asyncHandler(async (req, res) => {
 // @route   GET /api/stats/inventry
 // @access  Private
 const Inventry = asyncHandler(async (req, res) => {
-  const year = req.body.year;
+  const { regionID, year } = req.body;
   let Data;
   const inventryJSON = await CSV().fromFile("./data/market/inventry.csv");
 
   const inventry = await _.omit(
     inventryJSON.find((item) => {
-      return item.RegionID == req.body.regionID;
+      return item.RegionID == regionID;
     }),
     ["RegionID", "SizeRank", "RegionName", "RegionType", "StateName"]
   );
-
-  if (year) {
-    if (year)
+  try {
+    if (year) {
       Data = _.pick(inventry, [
         `${year}-01-31`,
         `${year}-02-28`,
@@ -76,21 +75,22 @@ const Inventry = asyncHandler(async (req, res) => {
         `${year}-12-31`,
       ]);
 
-    res.json({
-      success: true,
-      code: 200,
-      message: `Inventry of ${year}`,
-      Data,
-    });
-  }
-
-  if (inventry) {
-    res.json({
-      success: true,
-      code: 200,
-      message: `Invetry of RegionID: ${req.body.regionID}`,
-      inventry,
-    });
+      res.json({
+        success: true,
+        code: 200,
+        message: `Inventry of ${year}`,
+        Data,
+      });
+    } else {
+      res.json({
+        success: true,
+        code: 200,
+        message: `Invetry of RegionID: ${regionID}`,
+        Data: inventry,
+      });
+    }
+  } catch (err) {
+    throw new Error("Server error");
   }
 });
 // @desc    Fetch Median days of pending
@@ -110,22 +110,21 @@ const medianDaysToPending = asyncHandler(async (req, res) => {
     ["RegionID", "SizeRank", "RegionName", "RegionType", "StateName"]
   );
   if (year) {
-    if (year)
-      Data = _.pick(median_days_to_pending, [
-        `${year}-01-31`,
-        `${year}-02-28`,
-        `${year}-02-29`,
-        `${year}-03-31`,
-        `${year}-04-30`,
-        `${year}-05-31`,
-        `${year}-06-30`,
-        `${year}-07-31`,
-        `${year}-08-31`,
-        `${year}-09-30`,
-        `${year}-10-31`,
-        `${year}-11-30`,
-        `${year}-12-31`,
-      ]);
+    Data = _.pick(median_days_to_pending, [
+      `${year}-01-31`,
+      `${year}-02-28`,
+      `${year}-02-29`,
+      `${year}-03-31`,
+      `${year}-04-30`,
+      `${year}-05-31`,
+      `${year}-06-30`,
+      `${year}-07-31`,
+      `${year}-08-31`,
+      `${year}-09-30`,
+      `${year}-10-31`,
+      `${year}-11-30`,
+      `${year}-12-31`,
+    ]);
 
     res.json({
       success: true,
@@ -133,9 +132,7 @@ const medianDaysToPending = asyncHandler(async (req, res) => {
       message: `Median days to pending of ${year}`,
       Data,
     });
-  }
-
-  if (median_days_to_pending) {
+  } else {
     res.json({
       success: true,
       code: 200,
@@ -149,20 +146,46 @@ const medianDaysToPending = asyncHandler(async (req, res) => {
 // @access  Private
 const sharePriceCut = asyncHandler(async (req, res) => {
   const year = req.body.year;
+  let Data;
   const share_price_cutJSON = await CSV().fromFile(
     "./data/market/share_price_cut.csv"
   );
 
-  const share_price_cut = await share_price_cutJSON.filter((item) => {
-    return item.RegionID == req.body.regionID;
-  });
+  const share_price_cut = await _.omit(
+    share_price_cutJSON.find((item) => {
+      return item.RegionID == req.body.regionID;
+    }),
+    ["RegionID", "SizeRank", "RegionName", "RegionType", "StateName"]
+  );
+  if (year) {
+    Data = _.pick(share_price_cut, [
+      `${year}-01-31`,
+      `${year}-02-28`,
+      `${year}-02-29`,
+      `${year}-03-31`,
+      `${year}-04-30`,
+      `${year}-05-31`,
+      `${year}-06-30`,
+      `${year}-07-31`,
+      `${year}-08-31`,
+      `${year}-09-30`,
+      `${year}-10-31`,
+      `${year}-11-30`,
+      `${year}-12-31`,
+    ]);
 
-  if (share_price_cut) {
+    res.json({
+      success: true,
+      code: 200,
+      message: `Share price cut of ${year}`,
+      Data,
+    });
+  } else {
     res.json({
       success: true,
       code: 200,
       message: `Share price cut.`,
-      share_price_cut,
+      Data: share_price_cut,
     });
   }
 });
@@ -170,21 +193,47 @@ const sharePriceCut = asyncHandler(async (req, res) => {
 // @route   GET /api/stats/median_price_cut
 // @access  Private
 const medianPriceCut = asyncHandler(async (req, res) => {
-  const year = req.body.year;
+  const { regionID, year } = req.body;
+  let Data;
   const median_price_cutJSON = await CSV().fromFile(
     "./data/market/median_price_cut.csv"
   );
 
-  const median_price_cut = await median_price_cutJSON.filter((item) => {
-    return item.RegionID == req.body.regionID;
-  });
+  const median_price_cut = await _.omit(
+    median_price_cutJSON.find((item) => {
+      return item.RegionID == regionID;
+    }),
+    ["RegionID", "SizeRank", "RegionName", "RegionType", "StateName"]
+  );
+  if (year) {
+    Data = _.pick(median_price_cut, [
+      `${year}-01-31`,
+      `${year}-02-28`,
+      `${year}-02-29`,
+      `${year}-03-31`,
+      `${year}-04-30`,
+      `${year}-05-31`,
+      `${year}-06-30`,
+      `${year}-07-31`,
+      `${year}-08-31`,
+      `${year}-09-30`,
+      `${year}-10-31`,
+      `${year}-11-30`,
+      `${year}-12-31`,
+    ]);
 
-  if (median_price_cut) {
+    res.json({
+      success: true,
+      code: 200,
+      message: `Median price cut of ${year}`,
+      Data,
+    });
+  } else {
     res.json({
       success: true,
       code: 200,
       message: `Median price cut.`,
-      median_price_cut,
+      Data: median_price_cut,
     });
   }
 });
