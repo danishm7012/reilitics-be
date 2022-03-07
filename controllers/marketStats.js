@@ -73,33 +73,35 @@ const medianDaysToPending = asyncHandler(async (req, res) => {
     "./data/market/median_days_to_pending.csv"
   );
 
-  const median_days_to_pending = await median_days_to_pendingJSON.find(
-    (item) => {
+  const median_days_to_pending = await _.omit(
+    median_days_to_pendingJSON.find((item) => {
       return item.RegionID == req.body.regionID;
-    }
+    }),
+    ["RegionID", "SizeRank", "RegionName", "RegionType", "StateName"]
   );
   if (year) {
-    if(year)
-    yearData = _.pick(median_days_to_pending, [
-      `${year}-01-31`,
-      `${year}-02-28`,
-      `${year}-02-29`,
-      `${year}-03-31`,
-      `${year}-04-30`,
-      `${year}-05-31`,
-      `${year}-06-30`,
-      `${year}-07-31`,
-      `${year}-08-31`,
-      `${year}-09-30`,
-      `${year}-10-31`,
-      `${year}-11-30`,
-      `${year}-12-31`,
-    ]);
+    if (year)
+      yearData = _.pick(median_days_to_pending, [
+        `${year}-01-31`,
+        `${year}-02-28`,
+        `${year}-02-29`,
+        `${year}-03-31`,
+        `${year}-04-30`,
+        `${year}-05-31`,
+        `${year}-06-30`,
+        `${year}-07-31`,
+        `${year}-08-31`,
+        `${year}-09-30`,
+        `${year}-10-31`,
+        `${year}-11-30`,
+        `${year}-12-31`,
+      ]);
+
     res.json({
       success: true,
       code: 200,
       message: `Median days to pending of ${year}`,
-      yearData,
+
       yearData,
     });
   }
