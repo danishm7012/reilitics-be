@@ -12,6 +12,22 @@ import _ from "lodash";
 const Test = asyncHandler(async (req, res) => {
   res.json({ success: true, code: 200, message: "Test state" });
 });
+// @desc    Fetch all region Name
+// @route   GET /api/market/regionNames
+// @access  Public
+const regionNames = asyncHandler(async (req, res) => {
+  const inventryJSON = await CSV().fromFile("./data/market/inventry.csv");
+
+  const regionName = await inventryJSON.map((item) =>
+    _.pick(item, ["RegionName", "RegionID"])
+  );
+  res.json({
+    success: true,
+    code: 200,
+    message: "All region names with IDs.",
+    Regions: regionName,
+  });
+});
 // @desc    Fetch Median list price vs Sales price
 // @route   GET /api/stats/median_list_vs_sale_price
 // @access  Private
@@ -266,4 +282,5 @@ export {
   sharePriceCut,
   medianPriceCut,
   medianRental,
+  regionNames,
 };
