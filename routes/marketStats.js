@@ -13,10 +13,10 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 
 router.route("/test").get(Test);
 router.route("/median_list_vs_sale_price").get(medianListSales);
-router.route("/inventry").get(Inventry);
-router.route("/median_days_to_pending").get(medianDaysToPending);
-router.route("/share_price_cut").get(sharePriceCut);
-router.route("/median_price_cut").get(medianPriceCut);
+router.route("/inventry").post(Inventry);
+router.route("/median_days_to_pending").post(medianDaysToPending);
+router.route("/share_price_cut").post(sharePriceCut);
+router.route("/median_price_cut").post(medianPriceCut);
 router.route("/median_rental").get(medianRental);
 // //update rental growth data
 // router.route("/rentaljson").get(getRentalJson);
