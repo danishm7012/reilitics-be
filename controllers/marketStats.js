@@ -3,6 +3,8 @@ import CSV from "csvtojson";
 import path from "path";
 import jp from "jsonpath";
 import _ from "lodash";
+import Rental from "../models/rentalGrowth.js";
+import Appreciation from "../models/appreciationModel.js";
 
 //import CSV from 'csvtojson'
 
@@ -11,6 +13,22 @@ import _ from "lodash";
 // @access  Public
 const Test = asyncHandler(async (req, res) => {
   res.json({ success: true, code: 200, message: "Test state" });
+});
+// @desc    Fetch single region Appriciation and rental
+// @route   GET /api/market/rental_appriciation
+// @access  Public
+const rentalAppreciation = asyncHandler(async (req, res) => {
+  const Data = {};
+  Data.appreciation = await Appreciation.findOne({
+    regionID: req.body.regionID,
+  });
+  Data.rental = await Rental.findOne({ regionID: req.body.regionID });
+  res.json({
+    success: true,
+    code: 200,
+    message: `Rental and appreciation of region: ${req.body.regionID}`,
+    Data,
+  });
 });
 // @desc    Fetch all region Name
 // @route   GET /api/market/regionNames
@@ -32,8 +50,8 @@ const regionNames = asyncHandler(async (req, res) => {
 // @route   GET /api/stats/median_list_vs_sale_price
 // @access  Private
 const medianListSales = asyncHandler(async (req, res) => {
-  console.log(req.body.regionID);
-  const year = req.body.year;
+  const { regionID, year } = req.body;
+  let Data = {};
   const listPriceJSON = await CSV().fromFile(
     "./data/market/list_price_median.csv"
   );
@@ -41,22 +59,68 @@ const medianListSales = asyncHandler(async (req, res) => {
     "./data/market/median_sale_price.csv"
   );
 
-  const listPrice = await listPriceJSON.filter((item) => {
-    return item.RegionID == req.body.regionID && item["2020-06"];
-  });
-  const salesPrice = await salePriceJSON.filter(
-    (item) => item.RegionID == req.body.regionID
+  const listPrice = await _.omit(
+    listPriceJSON.find((item) => {
+      return item.RegionID == regionID;
+    }),
+    ["RegionID", "SizeRank", "RegionName", "RegionType", "StateName"]
   );
-  let finalMerge = [];
+  const salesPrice = await _.omit(
+    salePriceJSON.find((item) => item.RegionID == regionID),
+    ["RegionID", "SizeRank", "RegionName", "RegionType", "StateName"]
+  );
 
-  if (listPrice && salesPrice) {
-    res.json({
-      success: true,
-      code: 200,
-      message: "median_list_vs_sale_price",
-      listPrice,
-      salesPrice,
-    });
+  try {
+    if (year) {
+      Data.sales = _.pick(salesPrice, [
+        `${year}-01-31`,
+        `${year}-02-28`,
+        `${year}-02-29`,
+        `${year}-03-31`,
+        `${year}-04-30`,
+        `${year}-05-31`,
+        `${year}-06-30`,
+        `${year}-07-31`,
+        `${year}-08-31`,
+        `${year}-09-30`,
+        `${year}-10-31`,
+        `${year}-11-30`,
+        `${year}-12-31`,
+      ]);
+      Data.listing = _.pick(listPrice, [
+        `${year}-01-31`,
+        `${year}-02-28`,
+        `${year}-02-29`,
+        `${year}-03-31`,
+        `${year}-04-30`,
+        `${year}-05-31`,
+        `${year}-06-30`,
+        `${year}-07-31`,
+        `${year}-08-31`,
+        `${year}-09-30`,
+        `${year}-10-31`,
+        `${year}-11-30`,
+        `${year}-12-31`,
+      ]);
+
+      res.json({
+        success: true,
+        code: 200,
+        message: `Sale price and list price of ${year}`,
+        Data,
+      });
+    } else {
+      Data.sales = salesPrice;
+      Data.listing = listPrice;
+      res.json({
+        success: true,
+        code: 200,
+        message: `Sale price and list price of RegionID: ${regionID}`,
+        Data,
+      });
+    }
+  } catch (err) {
+    throw new Error("Server error");
   }
 });
 // @desc    Fetch Median inventry
@@ -276,6 +340,7 @@ const medianRental = asyncHandler(async (req, res) => {
 
 export {
   Test,
+  rentalAppreciation,
   medianListSales,
   Inventry,
   medianDaysToPending,

@@ -7,6 +7,7 @@ import {
   medianPriceCut,
   medianRental,
   regionNames,
+  rentalAppreciation,
   sharePriceCut,
   Test,
 } from "../controllers/marketStats.js";
@@ -14,7 +15,8 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 
 router.route("/test").get(Test);
 router.route("/region_names").get(regionNames);
-router.route("/median_list_vs_sale_price").get(medianListSales);
+router.route("/rental_appreciation").post(rentalAppreciation);
+router.route("/median_list_vs_sale_price").post(medianListSales);
 router.route("/inventry").post(Inventry);
 router.route("/median_days_to_pending").post(medianDaysToPending);
 router.route("/share_price_cut").post(sharePriceCut);

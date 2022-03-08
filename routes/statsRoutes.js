@@ -15,7 +15,7 @@ router.route("/rentaljson").get(getRentalJson);
 //update rental appreciation data
 router.route("/appreciationjson").get(getAppreciationJson);
 
-router.route("/rentalGrowth").get(protect, getRental);
+router.route("/rentalGrowth").get(getRental);
 router.route("/appreciation").get(getAppreciation);
 
 export default router;
