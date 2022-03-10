@@ -265,7 +265,7 @@ const getUsers = asyncHandler(async (req, res) => {
     : {};
 
   const count = await User.countDocuments({ ...keyword });
-  const users = await User.find({ ...keyword })
+  const users = await User.find({ ...keyword, role: "user" })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   if (!users) {
@@ -308,7 +308,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   if (user) {
     await user.remove();
-    res.json({ message: "User removed" });
+    res.json({ succes: true, code: 200, message: "User removed" });
   } else {
     res.status(404);
     throw new Error("User not found");

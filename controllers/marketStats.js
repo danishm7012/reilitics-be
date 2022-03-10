@@ -321,22 +321,102 @@ const medianPriceCut = asyncHandler(async (req, res) => {
 // @route   GET /api/stats/median_rental
 // @access  Private
 const medianRental = asyncHandler(async (req, res) => {
-  const year = req.body.year;
+  const { regionID, year } = req.body;
+  let Data;
   const rentalJSON = await CSV().fromFile("./data/rental.csv");
 
-  const rental = await rentalJSON.filter((item) => {
-    return item.RegionID == req.body.regionID;
-  });
+  const rental = await _.omit(
+    rentalJSON.find((item) => {
+      return item.RegionID == regionID;
+    }),
+    ["RegionID", "SizeRank", "RegionName"]
+  );
+  try {
+    if (year) {
+      Data = _.pick(rental, [
+        `${year}-01`,
+        `${year}-02`,
+        `${year}-03`,
+        `${year}-04`,
+        `${year}-05`,
+        `${year}-06`,
+        `${year}-07`,
+        `${year}-08`,
+        `${year}-09`,
+        `${year}-10`,
+        `${year}-11`,
+        `${year}-12`,
+      ]);
 
-  if (rental) {
-    res.json({
-      success: true,
-      code: 200,
-      message: `Median rental.`,
-      rental,
-    });
+      res.json({
+        success: true,
+        code: 200,
+        message: `medianRental of ${year}`,
+        Data,
+      });
+    } else {
+      res.json({
+        success: true,
+        code: 200,
+        message: `Median rental of RegionID: ${regionID}`,
+        Data: rental,
+      });
+    }
+  } catch (err) {
+    throw new Error("Server error");
   }
 });
+
+// // @desc    Fetch Median medianRental
+// // @route   GET /api/stats/medianRental
+// // @access  Private
+// const medianofRental = asyncHandler(async (req, res) => {
+//   const { regionID, year } = req.body;
+//   let Data;
+//   const medianRentalJSON = await CSV().fromFile("./data/rental.csv");
+
+//   const medianRental = await _.omit(
+//     medianRentalJSON.find((item) => {
+//       return item.RegionID == regionID;
+//     }),
+//     ["RegionID", "SizeRank", "RegionName", "RegionType", "StateName"]
+//   );
+//   try {
+//     if (year) {
+//       Data = _.pick(medianRental, [
+//         `${year}-01-31`,
+//         `${year}-02-28`,
+//         `${year}-02-29`,
+//         `${year}-03-31`,
+//         `${year}-04-30`,
+//         `${year}-05-31`,
+//         `${year}-06-30`,
+//         `${year}-07-31`,
+//         `${year}-08-31`,
+//         `${year}-09-30`,
+//         `${year}-10-31`,
+//         `${year}-11-30`,
+//         `${year}-12-31`,
+//       ]);
+
+//       res.json({
+//         success: true,
+//         code: 200,
+//         message: `medianRental of ${year}`,
+//         Data,
+//       });
+//     } else {
+//       res.json({
+//         success: true,
+//         code: 200,
+//         message: `Invetry of RegionID: ${regionID}`,
+//         Data: medianRental,
+//       });
+//     }
+//   } catch (err) {
+//     throw new Error("Server error");
+//   }
+// });
 
 export {
   Test,
