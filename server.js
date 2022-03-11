@@ -19,6 +19,8 @@ import packageRoutes from "./routes/packageRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import resourceRoutes from "./routes/resourceRoutes.js";
 import statsRoutes from "./routes/statsRoutes.js";
+import marketStats from "./routes/marketStats.js";
+import demographicStats from "./routes/demographicStats.js";
 import articleRoutes from "./routes/articleRoutes.js";
 import noteRoutes from "./routes/noteRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -67,6 +69,8 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/resource", resourceRoutes);
 app.use("/api/note", noteRoutes);
 app.use("/api/stats", statsRoutes);
+app.use("/api/market", marketStats);
+app.use("/api/demographic", demographicStats);
 app.use("/api/article", articleRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/contacts", contactRoutes);
@@ -74,8 +78,8 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/newsletter", newsLetterRoutes);
 app.use("/api/page", pageRoutes);
-app.use("/api/favorite", favouriteRoutes)
-app.use("/api/notification", notificationRoutes)
+app.use("/api/favorite", favouriteRoutes);
+app.use("/api/notification", notificationRoutes);
 
 app.get("/api/countries", (req, res) => {
   const contry = Country.getAllCountries();
@@ -89,7 +93,6 @@ app.get("/api/cities/:countryCode", (req, res) => {
   const state = City.getCitiesOfCountry(req.params.countryCode);
   res.send({ success: true, state });
 });
-
 
 app.get("/api/config/paypal", (req, res) =>
   res.json({ success: true, clientID: process.env.PAYPAL_CLIENT_ID })

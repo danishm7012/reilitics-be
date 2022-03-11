@@ -6,6 +6,9 @@ const appreciationSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    regionID: {
+      type: Number,
+    },
     avgTax: {
       type: Number,
       default: 0.87,

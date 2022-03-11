@@ -6,6 +6,9 @@ const rentalSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    regionID: {
+      type: Number,
+    },
     LLfriendly: {
       type: Number,
       default: 2,

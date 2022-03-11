@@ -99,7 +99,7 @@ const registerUser = asyncHandler(async (req, res) => {
     phone: req.body.phone,
     country: req.body.country,
     state: req.body.state,
-    dob: req.body.dob,
+    date_of_birth: req.body.dob,
     packageID: req.body.packageID,
     packageStatus: req.body.packageStatus,
   };
@@ -265,7 +265,7 @@ const getUsers = asyncHandler(async (req, res) => {
     : {};
 
   const count = await User.countDocuments({ ...keyword });
-  const users = await User.find({ ...keyword })
+  const users = await User.find({ ...keyword, role: "user" })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   if (!users) {
@@ -308,7 +308,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   if (user) {
     await user.remove();
-    res.json({ message: "User removed" });
+    res.json({ succes: true, code: 200, message: "User removed" });
   } else {
     res.status(404);
     throw new Error("User not found");
@@ -333,7 +333,9 @@ const getUserById = asyncHandler(async (req, res) => {
 // @route   PUT /api/users
 // @access  Private
 const updateUserbyID = asyncHandler(async (req, res) => {
+  console.log(req.params.id);
   const user = await User.findById(req.params.id);
+  console.log(user);
   let image = user.image;
   if (req.file) {
     const result = await uploadOnCloud(req.file.path, "Images");

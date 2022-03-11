@@ -33,6 +33,7 @@ const getRentalJson = asyncHandler(async (req, res) => {
       return this.slice().sort((a, b) => a - b)[Math.floor(this.length / 2)];
     };
     result.region = item.RegionName;
+    result.regionID = item.RegionID;
     result.y2022 = 0;
     result.y2018 = (
       ((item["2018-12"] - item["2018-01"]) / item["2018-12"]) *
@@ -91,6 +92,7 @@ const getAppreciationJson = asyncHandler(async (req, res) => {
       return this.slice().sort((a, b) => a - b)[Math.floor(this.length / 2)];
     };
     result.region = item.RegionName;
+    result.regionID = item.RegionID;
     result.y2022 = 0;
     result.y2018 = (
       ((item["2018-12-31"] - item["2018-01-31"]) / item["2018-12-31"]) *

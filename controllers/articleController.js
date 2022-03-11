@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Article from "../models/articleModel.js";
 import { blogdetail } from "../data/json/blogs.js";
+import { uploadOnCloud } from "../config/cloudinary.js";
 
 // @desc    Fetch all articles
 // @route   GET /api/articles
@@ -65,18 +66,16 @@ const deleteArticle = asyncHandler(async (req, res) => {
 // @route   POST /api/articles
 // @access  Private/Admin
 const createArticle = asyncHandler(async (req, res) => {
-  const {
-    title,
-    imageFile,
-    detail,
-    author,
-    category,
-    metaTitle,
-    metaDescription,
-  } = req.body;
+  let image = "";
+  if (req.file) {
+    const result = await uploadOnCloud(req.file.path, "Images");
+    image = result.url;
+  }
+  const { title, detail, author, category, metaTitle, metaDescription } =
+    req.body;
   const article = new Article({
     title,
-    imageFile,
+    image,
     detail,
     author,
     category,
@@ -111,23 +110,21 @@ const createBlogs = asyncHandler(async (req, res) => {
 // @route   PUT /api/articles/:id
 // @access  Private/Admin
 const updateArticle = asyncHandler(async (req, res) => {
-  const {
-    title,
-    imageFile,
-    detail,
-    author,
-    category,
-    metaTitle,
-    metaDescription,
-  } = req.body;
+  const { title, detail, author, category, metaTitle, metaDescription } =
+    req.body;
 
   const article = await Article.findById(req.params.id);
+  let image = article.image;
+  if (req.file) {
+    const result = await uploadOnCloud(req.file.path, "Images");
+    image = result.url;
+  }
 
   if (article) {
     article.title = title || article.title;
     article.detail = detail || article.detail;
     article.metaDescription = metaDescription || article.metaDescription;
-    article.imageFile = imageFile || article.imageFile;
+    article.image = image;
     article.metaTitle = metaTitle || article.metaTitle;
     article.user = req.user._id || article.user;
     article.category = category || article.category;
