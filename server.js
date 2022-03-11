@@ -9,6 +9,7 @@ import bodyParser from "body-parser";
 import multer from "multer";
 import { upload } from "./middleware/multer.js";
 import multipart from "connect-multiparty";
+import cookieSession from "cookie-session";
 
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
@@ -28,13 +29,23 @@ import newsLetterRoutes from "./routes/newLetterRoutes.js"
 import pageRoutes from './routes/pageRoutes.js'
 import favouriteRoutes from './routes/favouriteRoutes.js'
 import notificationRoutes from './routes/notificationRoutes.js'
+import {googlePassport} from './config/googlePassport.js'
 
 
+
+
+const app = express();
+
+googlePassport(passport)
 dotenv.config();
 
 connectDB();
 
-const app = express();
+// saving cookies in session
+app.use(cookieSession({
+  name: 'tuto-session',
+  keys: ['key1', 'key2']
+}))
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -49,6 +60,7 @@ app.use(express.json());
 app.use(cors());
 // Passport middleware
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/api/package", packageRoutes);
 app.use("/api/category", categoryRoutes);
@@ -82,7 +94,25 @@ app.get("/api/cities/:countryCode", (req, res) => {
 app.get("/api/config/paypal", (req, res) =>
   res.json({ success: true, clientID: process.env.PAYPAL_CLIENT_ID })
 );
+
+//Facebook auth
 app.get("/auth/facebook", passport.authenticate("facebook"));
+
+// Google auth
+
+app.get("/auth/google", passport.authenticate("google",{
+  scope:['profile','email']
+}))
+
+
+app.get("/auth/google/callback",
+ 
+  passport.authenticate("google", { failureRedirect: "http://localhost:3000/" }),
+  (req, res) => {
+    res.redirect("http://localhost:3000/Dashboard");
+  }
+);
+
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

@@ -1,4 +1,5 @@
 import express from "express";
+import passport from "passport";
 const router = express.Router();
 import {
   authUser,
@@ -20,6 +21,8 @@ import {
 } from "../controllers/userController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 import { upload } from "../middleware/multer.js";
+import generateToken from "../utils/generateToken.js";
+
 
 router
   .route("/")
@@ -45,5 +48,43 @@ router
   .delete(protect, deleteUser)
   .get(protect, getUserById)
   .put(protect, upload.single("image"), updateUserbyID);
+
+// router.route('/google').get(
+  
+//   passport.authenticate("google", {
+//     scope: ["profile", "email"],
+//   })
+// );
+
+// router.route("/google/callback").get(
+ 
+//   passport.authenticate("google", { failureRedirect: "/login/failed" }),
+//   (req, res) => {
+//     res.redirect("http://localhost:3000/");
+//   }
+// );
+
+// router.get("/login/success", (req, res) => {
+//   if (req.user) {
+//     res.status(200).json({
+//       success: true,
+//       code: 200,
+//       message: "successful",
+//       user: req.user,
+//       token: generateToken(user._id),
+//     });
+//   }
+// });
+
+// router.get("/login/failed", (req, res) => {
+//   if (req.user) {
+//     res.status(403).json({
+//       success: true,
+//       code: 403,
+//       message: "faliure",
+//     });
+//   }
+// });
+ 
 
 export default router;
