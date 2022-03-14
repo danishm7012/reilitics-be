@@ -27,27 +27,26 @@ import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
-import newsLetterRoutes from "./routes/newLetterRoutes.js"
-import pageRoutes from './routes/pageRoutes.js'
-import favouriteRoutes from './routes/favouriteRoutes.js'
-import notificationRoutes from './routes/notificationRoutes.js'
-import {googlePassport} from './config/googlePassport.js'
-
-
-
+import newsLetterRoutes from "./routes/newLetterRoutes.js";
+import pageRoutes from "./routes/pageRoutes.js";
+import favouriteRoutes from "./routes/favouriteRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
+import { googlePassport } from "./config/googlePassport.js";
 
 const app = express();
 
-googlePassport(passport)
+// googlePassport(passport)
 dotenv.config();
 
 connectDB();
 
 // saving cookies in session
-app.use(cookieSession({
-  name: 'tuto-session',
-  keys: ['key1', 'key2']
-}))
+app.use(
+  cookieSession({
+    name: "tuto-session",
+    keys: ["key1", "key2"],
+  })
+);
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -59,10 +58,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(multipart());
 
 app.use(express.json());
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -103,8 +104,6 @@ app.get("/api/config/paypal", (req, res) =>
 
 //Facebook auth
 app.get("/auth/facebook", passport.authenticate("facebook"));
-
-
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

@@ -16,14 +16,14 @@ const population = asyncHandler(async (req, res) => {
   const { Region } = req.body;
   let Data;
   const populationJson = await CSV().fromFile(
-    "./data/demographic/population.csv"
+    "./data/demographic/populationData.csv"
   );
 
   const population = await _.omit(
     populationJson.find((item) => {
       return item.Region == Region;
     }),
-    ["Region", "Census", "Estimates Base"]
+    ["Region", "Parent code", "Country code"]
   );
   res.json({
     success: true,
@@ -38,7 +38,7 @@ const population = asyncHandler(async (req, res) => {
 // @access  Public
 const demographicRegions = asyncHandler(async (req, res) => {
   const populationJson = await CSV().fromFile(
-    "./data/demographic/population.csv"
+    "./data/demographic/populationData.csv"
   );
   let Data = populationJson.map((item) => item.Region);
 
