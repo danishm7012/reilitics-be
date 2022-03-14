@@ -38,7 +38,7 @@ import {googlePassport} from './config/googlePassport.js'
 
 const app = express();
 
-// googlePassport(passport)
+googlePassport(passport)
 dotenv.config();
 
 connectDB();

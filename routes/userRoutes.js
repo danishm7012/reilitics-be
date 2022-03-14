@@ -31,7 +31,6 @@ router.get("/login/success", (req, res) => {
       message: "successfull",
       user: req.user,
       token: generateToken(req.user._id),
-      cookie: req.cookies
     });
   }
 });
