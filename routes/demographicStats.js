@@ -1,8 +1,13 @@
 import express from "express";
 const router = express.Router();
-import { Test } from "../controllers/demographicStats.js";
+import {
+  demographicRegions,
+  population,
+  Test,
+} from "../controllers/demographicStats.js";
 
 router.route("/test").get(Test);
-// router.route("/region_names").get(regionNames);
+router.route("/population").post(population);
+router.route("/regions").get(demographicRegions);
 
 export default router;
