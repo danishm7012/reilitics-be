@@ -38,7 +38,7 @@ import {googlePassport} from './config/googlePassport.js'
 
 const app = express();
 
-// googlePassport(passport)
+googlePassport(passport)
 dotenv.config();
 
 connectDB();
@@ -59,7 +59,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(multipart());
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -101,20 +104,6 @@ app.get("/api/config/paypal", (req, res) =>
 //Facebook auth
 app.get("/auth/facebook", passport.authenticate("facebook"));
 
-// Google auth
-
-app.get("/auth/google", passport.authenticate("google",{
-  scope:['profile','email']
-}))
-
-
-app.get("/auth/google/callback",
- 
-  passport.authenticate("google", { failureRedirect: "http://localhost:3000/" }),
-  (req, res) => {
-    res.redirect("http://localhost:3000/Dashboard");
-  }
-);
 
 
 const __dirname = path.resolve();

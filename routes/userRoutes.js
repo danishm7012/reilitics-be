@@ -24,6 +24,18 @@ import { upload } from "../middleware/multer.js";
 import generateToken from "../utils/generateToken.js";
 
 
+router.get("/login/success", (req, res) => {
+  if (req.user) {
+    res.status(200).json({
+      success: true,
+      message: "successfull",
+      user: req.user,
+      token: generateToken(req.user._id),
+    });
+  }
+});
+
+
 router
   .route("/")
   .post(upload.single("image"), registerUser)
@@ -43,38 +55,30 @@ router
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
 router.route("/status/:id").put(protect, admin, changeAccountStatus);
+
+ // Google auth
+
+router.get("/google", passport.authenticate("google",{
+  scope:['profile','email']
+}))
+
+router.get("/google/callback",
+ 
+  passport.authenticate("google", { failureRedirect: "http://localhost:3000/" }),
+  (req, res) => {
+    res.redirect("http://localhost:3000/Dashboard");
+  }
+);
+
+
 router
   .route("/:id")
   .delete(protect, deleteUser)
   .get(protect, getUserById)
   .put(protect, upload.single("image"), updateUserbyID);
 
-// router.route('/google').get(
-  
-//   passport.authenticate("google", {
-//     scope: ["profile", "email"],
-//   })
-// );
 
-// router.route("/google/callback").get(
- 
-//   passport.authenticate("google", { failureRedirect: "/login/failed" }),
-//   (req, res) => {
-//     res.redirect("http://localhost:3000/");
-//   }
-// );
 
-// router.get("/login/success", (req, res) => {
-//   if (req.user) {
-//     res.status(200).json({
-//       success: true,
-//       code: 200,
-//       message: "successful",
-//       user: req.user,
-//       token: generateToken(user._id),
-//     });
-//   }
-// });
 
 // router.get("/login/failed", (req, res) => {
 //   if (req.user) {
