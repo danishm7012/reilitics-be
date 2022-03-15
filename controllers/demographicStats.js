@@ -32,6 +32,29 @@ const population = asyncHandler(async (req, res) => {
     Data: population,
   });
 });
+// @desc    Fetch Educational and race data
+// @route   GET /api/demographic/educational_and_race
+// @access  Public
+const EducationalOrRace = asyncHandler(async (req, res) => {
+  const { Region } = req.body;
+  let Data;
+  const educational_race_json = await CSV().fromFile(
+    "./data/demographic/Educational_and_race.csv"
+  );
+
+  // const population = await _.omit(
+  //   populationJson.find((item) => {
+  //     return item.Region == Region;
+  //   }),
+  //   ["Region", "Parent code", "Country code"]
+  // );
+  res.json({
+    success: true,
+    code: 200,
+    message: `Educational_and_race`,
+    Data: educational_race_json,
+  });
+});
 
 // @desc    Fetch regions
 // @route   GET /api/demographic/regions
@@ -50,4 +73,4 @@ const demographicRegions = asyncHandler(async (req, res) => {
   });
 });
 
-export { Test, demographicRegions, population };
+export { Test, demographicRegions, population,EducationalOrRace };
