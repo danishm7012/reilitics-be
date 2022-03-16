@@ -73,4 +73,4 @@ const demographicRegions = asyncHandler(async (req, res) => {
   });
 });
 
-export { Test, demographicRegions, population,EducationalOrRace };
+export { Test, demographicRegions, population, EducationalOrRace };
