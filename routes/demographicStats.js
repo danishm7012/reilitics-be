@@ -1,16 +1,17 @@
-import express from "express";
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 import {
   demographicRegions,
-  EducationalOrRace,
+  educationalAttainment,
   population,
+  populationByRace,
   Test,
-} from "../controllers/demographicStats.js";
+} from '../controllers/demographicStats.js'
 
-router.route("/test").get(Test);
-router.route("/population").post(population);
-router.route("/educational_race_json").post(EducationalOrRace);
-router.route("/regions").get(demographicRegions);
+router.route('/test').get(Test)
+router.route('/population').post(population)
+router.route('/educational_attainment').post(educationalAttainment)
+router.route('/population_by_race').post(populationByRace)
+router.route('/regions').get(demographicRegions)
 
-
-export default router;
+export default router
