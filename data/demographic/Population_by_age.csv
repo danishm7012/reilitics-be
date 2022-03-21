@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 Region,Total,Under5years,5to9years,10to14years,15to19years,20to24years,25to29years,30to34years,35to39years,40to44years,45to49years,50to54years,55to59years,60to64years,65to69years,70to74years,75to79years,80to84years,85yearsandover,Medianage,Sexratio,Agedependencyratio,OldAgedependencyratio,Childdependencyratio,Adults
-=======
-Region,Total,Under5years,5to9years,10to14years,15to19years,20to24years,25to29years,30to34years,35to39years,40to44years,45to49years,50to54years,55to59years,60to64years,65to69years,70to74years,75to79years,80to84years,85yearsandover,Medianage(years),Sexratio(malesper100females),Agedependencyratio,Old-agedependencyratio,Childdependencyratio,        18yearsandover
->>>>>>> b8c48483e70a8692d1226c33e2a57cf5edb8001b
 AlabamaTotal,"4,903,185","286,597","294,475","317,645","326,671","317,739","325,338","312,065","307,138","298,601","305,229","304,162","321,296","331,917","274,325","231,232","156,756","107,315","84,684",39.4,93.5,65.5,28.8,36.6,"3,817,588"
 AlabamaMale,"2,369,611","145,128","148,829","166,244","164,949","158,255","162,250","154,389","156,135","137,487","147,542","145,827","148,502","161,031","126,212","106,285","69,081","43,194","28,271",37.7,,,,,"1,812,854"
 AlabamaPercentMale,1,6.10%,6.30%,7.00%,7.00%,6.70%,6.80%,6.50%,6.60%,5.80%,6.20%,6.20%,6.30%,6.80%,5.30%,4.50%,2.90%,1.80%,1.20%,,,,,,76.50%

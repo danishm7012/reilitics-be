@@ -38,7 +38,7 @@ const population = asyncHandler(async (req, res) => {
 const populationByAge = asyncHandler(async (req, res) => {
   const { Region } = req.body;
   const populationJson = await CSV().fromFile(
-    "./data/demographic/population_by_age.csv"
+    "./data/demographic/Population_by_age.csv"
   );
 
   const Result = await populationJson.filter((item) =>
