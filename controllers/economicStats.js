@@ -44,11 +44,13 @@ const employmentIndustry = asyncHandler(async (req, res) => {
   )
 
   const Data = await _.omit(
-    employmentIndustryJson.find((item) => {
-      return item
+    employmentIndustryJson.filter((item) => {
+      console.log(item)
+      return item.Region == Region
     }),
     ['Region']
   )
+
   res.json({
     success: true,
     code: 200,
