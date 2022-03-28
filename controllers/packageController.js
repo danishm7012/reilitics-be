@@ -141,16 +141,18 @@ const updatePackageStatus = asyncHandler(async (req, res) => {
 const getFreeMembers = asyncHandler(async (req, res) => {
   try {
     const foundPackage = await Package.findOne({
-      packageType: "Free Membership",
+      packageType: "Free",
     });
+    console.log("Found" + foundPackage);
     if (!foundPackage) {
       res.status(401);
       throw new Error("Package not found");
     }
-    console.log("Found" + foundPackage);
+    
     const users = await User.find({
       packageID: foundPackage._id,
     });
+    console.log("Users in package", users)
     if (users) {
       res.json({
         success: true,

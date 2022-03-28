@@ -56,9 +56,11 @@ const populationByAge = asyncHandler(async (req, res) => {
 // @access  Public
 const renterVsOwner = asyncHandler(async (req, res) => {
   const { Region } = req.body;
+  console.log("before")
   const ownerVsRenter = await CSV().fromFile(
     "./data/demographic/ownerVsRenter.csv"
   );
+  console.log("after")
 
   const Result = await ownerVsRenter.filter((item) =>
     item.Region.includes(`${Region}`)

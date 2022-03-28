@@ -33,8 +33,41 @@ import pageRoutes from "./routes/pageRoutes.js";
 import favouriteRoutes from "./routes/favouriteRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import { googlePassport } from "./config/googlePassport.js";
+import swaggerJsDoc from 'swagger-jsdoc'
+import swaggerUi from 'swagger-ui-express'
 
 const app = express();
+
+// Swagger
+// const swaggerOptions ={
+//   swaggerDefinition:{
+//     info:{
+//       title: 'Apis',
+//       descriptption: 'Api Information',
+//       contact:{
+//         name: "Ahmad Hassan"
+//       },
+//       servers: ["http://localhost:5000"]
+//     }
+//   },
+//   apis: ['server.js']
+// }
+
+// const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
+// /**
+//  * @swagger
+//  * /api/packageRoute
+//  *  get:
+//  *    description: This is my fiest api
+//  *    responses:
+//  *       '200':
+//  *         description: A sccessfull response
+//  */
+
+
 
 // googlePassport(passport)
 dotenv.config();
