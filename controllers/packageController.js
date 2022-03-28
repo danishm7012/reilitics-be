@@ -152,7 +152,6 @@ const getFreeMembers = asyncHandler(async (req, res) => {
     const users = await User.find({
       packageID: foundPackage._id,
     });
-    console.log("Users in package", users)
     if (users) {
       res.json({
         success: true,
