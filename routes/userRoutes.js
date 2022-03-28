@@ -1,6 +1,6 @@
-import express from "express";
-import passport from "passport";
-const router = express.Router();
+import express from 'express'
+import passport from 'passport'
+const router = express.Router()
 import {
   authUser,
   registerUser,
@@ -18,67 +18,69 @@ import {
   getEditors,
   verifySignup,
   editProfile,
-} from "../controllers/userController.js";
-import { protect, admin } from "../middleware/authMiddleware.js";
-import { upload } from "../middleware/multer.js";
-import generateToken from "../utils/generateToken.js";
+  getUserProfilebyID,
+} from '../controllers/userController.js'
+import { protect, admin } from '../middleware/authMiddleware.js'
+import { upload } from '../middleware/multer.js'
+import generateToken from '../utils/generateToken.js'
 
-
-router.get("/login/success", (req, res) => {
+router.get('/login/success', (req, res) => {
   if (req.user) {
     res.status(200).json({
       success: true,
-      message: "successfull",
+      message: 'successfull',
       user: req.user,
       token: generateToken(req.user._id),
-    });
+    })
   }
-});
-
+})
 
 router
-  .route("/")
-  .post(upload.single("image"), registerUser)
+  .route('/')
+  .post(upload.single('image'), registerUser)
   .get(protect, admin, getUsers)
-  .put(protect, upload.single("image"), editProfile);
-router.route("/admins").get(protect, admin, getAdmins);
-router.route("/editors").get(protect, admin, getEditors);
+  .put(protect, upload.single('image'), editProfile)
+router.route('/admins').get(protect, admin, getAdmins)
+router.route('/editors').get(protect, admin, getEditors)
 
-router.post("/verifysignup", verifySignup);
+router.post('/verifysignup', verifySignup)
 
-router.post("/login", authUser);
-router.post("/sendcode", sendCode);
-router.post("/verifycode", verifyCode);
-router.put("/changepassword", changePassword);
+router.post('/login', authUser)
+router.post('/sendcode', sendCode)
+router.post('/verifycode', verifyCode)
+router.put('/changepassword', changePassword)
 router
-  .route("/profile")
+  .route('/profile')
   .get(protect, getUserProfile)
-  .put(protect, updateUserProfile);
-router.route("/status/:id").put(protect, admin, changeAccountStatus);
+  .put(protect, updateUserProfile)
+router.route('/profile/:id').get(getUserProfilebyID)
+router.route('/status/:id').put(protect, admin, changeAccountStatus)
 
- // Google auth
+// Google auth
 
-router.get("/google", passport.authenticate("google",{
-  scope:['profile','email']
-}))
+router.get(
+  '/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+  })
+)
 
-router.get("/google/callback",
- 
-  passport.authenticate("google", { failureRedirect: "http://localhost:3000/" }),
+router.get(
+  '/google/callback',
+
+  passport.authenticate('google', {
+    failureRedirect: 'http://localhost:3000/',
+  }),
   (req, res) => {
-    res.redirect("http://localhost:3000/Dashboard");
+    res.redirect('http://localhost:3000/Dashboard')
   }
-);
-
+)
 
 router
-  .route("/:id")
+  .route('/:id')
   .delete(protect, deleteUser)
   .get(protect, getUserById)
-  .put(protect, upload.single("image"), updateUserbyID);
-
-
-
+  .put(protect, upload.single('image'), updateUserbyID)
 
 // router.get("/login/failed", (req, res) => {
 //   if (req.user) {
@@ -89,6 +91,5 @@ router
 //     });
 //   }
 // });
- 
 
-export default router;
+export default router
