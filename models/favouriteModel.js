@@ -1,21 +1,21 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const favouriteSchema = new mongoose.Schema(
   {
     favoriteRegions: [
       {
-        regionID: { type: mongoose.Types.ObjectId, required: true },
+        regionID: { type: Number, required: true },
         regionName: { type: String, required: true },
       },
     ],
     userID: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: 'User',
     },
   },
   { timestamps: true }
-);
+)
 
-const Favourite = mongoose.model("Favourite", favouriteSchema);
-export default Favourite;
+const Favourite = mongoose.model('Favourite', favouriteSchema)
+export default Favourite
