@@ -81,4 +81,5 @@ const getFavourites = asyncHandler(async (req, res) => {
   res.json({ success: true, code: 200, favoriteRegions: data.favoriteRegions });
 });
 
+
 export { addFavourite, getFavourites, removeFavourite };
