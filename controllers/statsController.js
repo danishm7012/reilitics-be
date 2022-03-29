@@ -150,7 +150,7 @@ const getAppreciationJson = asyncHandler(async (req, res) => {
 // @route   GET /api/appreciation
 // @access  Public
 const getAppreciation = asyncHandler(async (req, res) => {
-  const pageSize = 9;
+  const pageSize = 200;
   const page = Number(req.query.pageNumber) || 1;
 
   const count = await Appreciation.countDocuments();
@@ -177,7 +177,7 @@ const test = asyncHandler(async (req, res) => {
 // @route   GET /api/rental
 // @access  private
 const getRental = asyncHandler(async (req, res) => {
-  const pageSize = 9;
+  const pageSize = 200;
   const page = Number(req.query.pageNumber) || 1;
 
   const count = await Rental.countDocuments({});
