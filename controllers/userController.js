@@ -212,8 +212,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
 
   if (user) {
-    user.name = req.body.name || user.name
+    user.firstName = req.body.firstName || user.firstName
+    user.lastName = req.body.lastName || user.lastName
     user.email = req.body.email || user.email
+    user.country = req.body.country || user.country
+    user.state = req.body.state || user.state
     user.accountStatus = req.body.accountStatus || user.accountStatus
 
     if (req.body.password) {
@@ -224,8 +227,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
     res.json({
       _id: updatedUser._id,
-      name: updatedUser.name,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
       email: updatedUser.email,
+      country: updatedUser.country,
+      state: updatedUser.state,
       isAdmin: updatedUser.isAdmin,
       token: generateToken(updatedUser._id),
     })

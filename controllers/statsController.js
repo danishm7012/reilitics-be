@@ -152,11 +152,24 @@ const getAppreciationJson = asyncHandler(async (req, res) => {
 const getAppreciation = asyncHandler(async (req, res) => {
   const pageSize = 200;
   const page = Number(req.query.pageNumber) || 1;
+  // const order = String(req.query.type);
 
   const count = await Appreciation.countDocuments();
   const allRecords = await Appreciation.find({})
     .limit(pageSize)
     .skip(pageSize * (page - 1));
+
+    // if (req.query.type === order) {
+    //   allRecords.sort(function (a, b) {
+    //      if (a.region < b.region) {
+    //        return -1;
+    //      }
+    //      if (a.region > b.region) {
+    //        return 1;
+    //      }
+    //      return 0;
+    //    });
+    //  }
 
   res.json({
     success: true,
