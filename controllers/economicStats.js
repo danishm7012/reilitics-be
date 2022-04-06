@@ -47,7 +47,10 @@ const employmentIndustry = asyncHandler(async (req, res) => {
     employmentIndustryJson.find((item) => {
       return item.Region == Region
     }),
-    ['Region']
+    [
+      'Region',
+      'Full-time, year-round civilian employed population 16 years and over',
+    ]
   )
 
   res.json({

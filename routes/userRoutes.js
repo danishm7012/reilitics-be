@@ -19,6 +19,7 @@ import {
   verifySignup,
   editProfile,
   getUserProfilebyID,
+  AddUserByAdmin,
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 import { upload } from '../middleware/multer.js'
@@ -41,6 +42,9 @@ router
   .get(protect, admin, getUsers)
   .put(protect, upload.single('image'), editProfile)
 router.route('/admins').get(protect, admin, getAdmins)
+router
+  .route('/add')
+  .post(protect, admin, upload.single('image'), AddUserByAdmin)
 router.route('/editors').get(protect, admin, getEditors)
 
 router.post('/verifysignup', verifySignup)

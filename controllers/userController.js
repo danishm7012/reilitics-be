@@ -119,6 +119,69 @@ const registerUser = asyncHandler(async (req, res) => {
     })
   }
 })
+// @desc    Add a new user by admin
+// @route   POST /api/users/add
+// @access  Admin
+const AddUserByAdmin = asyncHandler(async (req, res) => {
+  let image = 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+  if (req.file) {
+    const result = await uploadOnCloud(req.file.path, 'Images')
+    image = result.url
+  }
+
+  const { isValid, errors } = await validateRegisterInput(req.body)
+
+  if (!isValid) {
+    return res.status(403).json({
+      success: false,
+      code: 403,
+      message: errors,
+    })
+  }
+
+  const emailExists = await User.findOne({ email: req.body.email })
+  const usernameExists = await User.findOne({ username: req.body.username })
+
+  if (emailExists) {
+    res.status(400)
+    throw new Error('Email already exists')
+  }
+  if (usernameExists) {
+    res.status(400)
+    throw new Error('Username already exists')
+  }
+
+  const newUser = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    image,
+    packageID: req.body.packageID,
+    packageStatus: req.body.packageStatus,
+    email: req.body.email,
+    password: req.body.password,
+    username: req.body.username,
+    phone: req.body.phone,
+    country: req.body.country,
+    state: req.body.state,
+    date_of_birth: req.body.dob,
+    role: req.body.role,
+  }
+
+  const user = await User.create(newUser)
+
+  if (!user) {
+    res.status(400)
+    throw new Error('Invalid user data')
+  } else {
+    const result = await sendEmail(user)
+    res.status(201).json({
+      success: true,
+      code: 200,
+      message: 'User added successfully!',
+      user,
+    })
+  }
+})
 
 // @desc   Verify User being signed up
 // @route Get /api/users/verifysignup
@@ -503,4 +566,5 @@ export {
   getAdmins,
   getEditors,
   verifySignup,
+  AddUserByAdmin,
 }
