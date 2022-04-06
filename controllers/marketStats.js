@@ -72,7 +72,7 @@ const medianListSales = asyncHandler(async (req, res) => {
 
   try {
     if (year) {
-      Data.sales = _.pick(salesPrice, [
+      Data.sales = await _.pick(salesPrice, [
         `${year}-01-31`,
         `${year}-02-28`,
         `${year}-02-29`,
@@ -87,7 +87,7 @@ const medianListSales = asyncHandler(async (req, res) => {
         `${year}-11-30`,
         `${year}-12-31`,
       ]);
-      Data.listing = _.pick(listPrice, [
+      Data.listing = await _.pick(listPrice, [
         `${year}-01-31`,
         `${year}-02-28`,
         `${year}-02-29`,
@@ -139,21 +139,22 @@ const Inventry = asyncHandler(async (req, res) => {
   );
   try {
     if (year) {
-      Data = _.pick(inventry, [
-        `${year}-01-31`,
-        `${year}-02-28`,
-        `${year}-02-29`,
-        `${year}-03-31`,
-        `${year}-04-30`,
-        `${year}-05-31`,
-        `${year}-06-30`,
-        `${year}-07-31`,
-        `${year}-08-31`,
-        `${year}-09-30`,
-        `${year}-10-31`,
-        `${year}-11-30`,
-        `${year}-12-31`,
+      Data =await _.pick(inventry, [
+        `1/31/${year}`,
+        `2/28/${year}`,
+        `2/29/${year}`,
+        `3/31/${year}`,
+        `4/31/${year}`,
+        `5/31/${year}`,
+        `6/30/${year}`,
+        `7/31/${year}`,
+        `8/31/${year}`,
+        `9/30/${year}`,
+        `10/31/${year}`,
+        `11/30/${year}`,
+        `12/31/${year}`,
       ]);
+      console.log(Data)
 
       res.json({
         success: true,
