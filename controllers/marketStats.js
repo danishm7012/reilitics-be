@@ -139,7 +139,7 @@ const Inventry = asyncHandler(async (req, res) => {
   );
   try {
     if (year) {
-      Data = _.pick(inventry, [
+      Data = await _.pick(inventry, [
         `${year}-01-31`,
         `${year}-02-28`,
         `${year}-02-29`,
