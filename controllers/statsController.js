@@ -171,15 +171,15 @@ const getAppreciation = asyncHandler(async (req, res) => {
 
   const keyword = req.query.keyword
     ? {
-        name: {
+        region: {
           $regex: req.query.keyword,
-          $options: 'i',
+          // $options: 'i',
         },
       }
     : {}
 
-  const count = await Appreciation.countDocuments()
-  const allRecords = await Appreciation.find({})
+  const count = await Appreciation.countDocuments({ ...keyword })
+  const allRecords = await Appreciation.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1))
 
@@ -205,8 +205,17 @@ const getRental = asyncHandler(async (req, res) => {
   const pageSize = 200
   const page = Number(req.query.pageNumber) || 1
 
-  const count = await Rental.countDocuments({})
-  const rentalGrowth = await Rental.find({})
+  const keyword = req.query.keyword
+    ? {
+        region: {
+          $regex: req.query.keyword,
+          // $options: 'i',
+        },
+      }
+    : {}
+
+  const count = await Rental.countDocuments({ ...keyword })
+  const rentalGrowth = await Rental.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1))
 
