@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const rentalSchema = mongoose.Schema(
   {
@@ -11,7 +11,7 @@ const rentalSchema = mongoose.Schema(
     },
     LLfriendly: {
       type: Number,
-      default: 2,
+      default: null,
     },
     avgGrowth: {
       type: Number,
@@ -42,8 +42,8 @@ const rentalSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-);
+)
 
-const Rental = mongoose.model("Rental", rentalSchema);
+const Rental = mongoose.model('Rental', rentalSchema)
 
-export default Rental;
+export default Rental

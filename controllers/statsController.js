@@ -37,12 +37,14 @@ const getStates = asyncHandler(async (req, res) => {
   })
 })
 
-// @desc    Fetch all resources
-// @route   GET /api/resource
+// @desc    Fetch all renatl
+// @route   GET /api/stats/rentalJson
 // @access  Public
 const getRentalJson = asyncHandler(async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
+
+  const rentalJson = await CSV().fromFile('./data/json/rental.csv')
   const rentaljson = await rentalJson.map((item) => {
     const result = {}
     Array.prototype.median = function () {
@@ -67,10 +69,18 @@ const getRentalJson = asyncHandler(async (req, res) => {
       ((item['2021-12'] - item['2021-01']) / item['2021-12']) *
       100
     ).round(2)
+    result.y2022 = (
+      ((item['2021-03'] - item['2021-01']) / item['2021-03']) *
+      100
+    ).round(2)
     // 2022: ((item['2022-12'] - item['2022-01']) / item['2022-12']) * 100,
     result.avgGrowth = (
-      (result.y2018 + result.y2019 + result.y2020 + result.y2021) /
-      4
+      (result.y2018 +
+        result.y2019 +
+        result.y2020 +
+        result.y2021 +
+        result.y2022) /
+      5
     ).round(2)
     result.median = [
       item['2018-12'],
@@ -80,6 +90,18 @@ const getRentalJson = asyncHandler(async (req, res) => {
     ].median()
     return result
   })
+
+  const stateData = await CSV().fromFile('./data/stateData/state.csv')
+
+  //updating Landlord friendly score
+  await stateData.forEach((state) => {
+    rentaljson.forEach((item) => {
+      if (item.region.includes(state.ZILLOWSTATE)) {
+        item.LLfriendly = state.LandLordFriendlyScore
+      }
+    })
+  })
+
   await Rental.deleteMany()
   await Rental.insertMany(rentaljson)
 
@@ -102,6 +124,7 @@ const getRentalJson = asyncHandler(async (req, res) => {
 const getAppreciationJson = asyncHandler(async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
+  const appreciationJson = await CSV().fromFile('./data/json/appreciation.csv')
   const appreciationjson = await appreciationJson.map((item) => {
     const result = {}
     Array.prototype.median = function () {
@@ -114,14 +137,24 @@ const getAppreciationJson = asyncHandler(async (req, res) => {
       ((item['2018-12-31'] - item['2018-01-31']) / item['2018-12-31']) *
       100
     ).round(2)
+    if (isNaN(result.y2018)) {
+      result.y2018 = 0
+    }
     result.y2019 = (
       ((item['2019-12-31'] - item['2019-01-31']) / item['2019-12-31']) *
       100
     ).round(2)
+    if (isNaN(result.y2019)) {
+      result.y2019 = 0
+    }
     result.y2020 = (
       ((item['2020-12-31'] - item['2020-01-31']) / item['2020-12-31']) *
       100
     ).round(2)
+
+    if (isNaN(result.y2020)) {
+      result.y2020 = 0
+    }
     result.y2021 = (
       ((item['2021-12-31'] - item['2021-01-31']) / item['2021-12-31']) *
       100
@@ -129,23 +162,45 @@ const getAppreciationJson = asyncHandler(async (req, res) => {
     if (isNaN(result.y2021)) {
       result.y2021 = 0
     }
+    result.y2022 = (
+      ((item['2022-02-28'] - item['2022-01-31']) / item['2022-02-28']) *
+      100
+    ).round(2)
+    if (isNaN(result.y2022)) {
+      result.y2022 = 0
+    }
     // 2022: ((item['2022-12-31'] - item['2022-01']) / item['2022-12-31']) * 100,
     result.avgGrowth = (
-      (result.y2018 + result.y2019 + result.y2020 + result.y2021) /
-      4
+      (result.y2018 +
+        result.y2019 +
+        result.y2020 +
+        result.y2021 +
+        result.y2022) /
+      5
     ).round(2)
     result.median = [
       item['2018-12-31'],
       item['2019-12-31'],
       item['2020-12-31'],
       item['2021-12-31'],
+      item['2022-02-28'],
     ].median()
     //not calculate yet
     result.population = 136000
-    result.avgTax = 0.87
-
     return result
   })
+
+  const stateData = await CSV().fromFile('./data/stateData/state.csv')
+
+  //updating AVG Property Tax
+  await stateData.forEach((state) => {
+    appreciationjson.forEach((item) => {
+      if (item.region.includes(state.ZILLOWSTATE)) {
+        item.avgTax = state.AVGPropertyTax * 100
+      }
+    })
+  })
+
   await Appreciation.deleteMany()
   await Appreciation.insertMany(appreciationjson)
 

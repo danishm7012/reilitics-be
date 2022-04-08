@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const appreciationSchema = mongoose.Schema(
   {
@@ -11,7 +11,7 @@ const appreciationSchema = mongoose.Schema(
     },
     avgTax: {
       type: Number,
-      default: 0.87,
+      default: null,
     },
     population: {
       type: Number,
@@ -46,8 +46,8 @@ const appreciationSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-);
+)
 
-const Appreciation = mongoose.model("Appreciation", appreciationSchema);
+const Appreciation = mongoose.model('Appreciation', appreciationSchema)
 
-export default Appreciation;
+export default Appreciation
