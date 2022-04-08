@@ -11,7 +11,7 @@ const appreciationSchema = mongoose.Schema(
     },
     avgTax: {
       type: Number,
-      default: null,
+      default: 0,
     },
     population: {
       type: Number,

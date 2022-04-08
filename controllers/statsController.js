@@ -185,8 +185,9 @@ const getAppreciationJson = asyncHandler(async (req, res) => {
       item['2021-12-31'],
       item['2022-02-28'],
     ].median()
+
     //not calculate yet
-    result.population = 136000
+    result.population = Math.floor(Math.random() * 999999)
     return result
   })
 
