@@ -22,6 +22,12 @@ import {
   AddUserByAdmin,
   getUsersbyPeriod,
   deleteBulkUsers,
+  freeMembers,
+  monthlyMembers,
+  yearlyMembers,
+  numberOfMembers,
+  newMembers,
+  cancelMembers,
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 import { upload } from '../middleware/multer.js'
@@ -50,6 +56,12 @@ router
   .route('/add')
   .post(protect, admin, upload.single('image'), AddUserByAdmin)
 router.route('/editors').get(protect, admin, getEditors)
+router.route('/free').get(freeMembers)
+router.route('/monthly').get(monthlyMembers)
+router.route('/yearly').get(yearlyMembers)
+router.route('/new').get(newMembers)
+router.route('/cancel').get(cancelMembers)
+router.route('/count').get(numberOfMembers)
 
 router.post('/verifysignup', verifySignup)
 

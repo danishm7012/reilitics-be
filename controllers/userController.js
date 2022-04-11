@@ -592,6 +592,146 @@ const deleteBulkUsers = asyncHandler(async (req, res) => {
       throw new Error('Users not deleted!')
     })
 })
+// @desc    Get free members
+// @route   GET /api/users/free
+// @access  Admin
+const freeMembers = asyncHandler(async (req, res) => {
+  const users = await User.find({
+    packageID: '62128260efa0835502296bfd',
+  }).select('-password')
+
+  if (!users) {
+    res.status(401)
+    throw new Error('Users not found!')
+  } else {
+    res.json({
+      success: true,
+      code: '200',
+      message: 'Free users.',
+      Data: users,
+    })
+  }
+})
+// @desc    Get monthly members
+// @route   GET /api/users/monthly
+// @access  Admin
+const monthlyMembers = asyncHandler(async (req, res) => {
+  const users = await User.find({
+    packageID: '61e516f81a5bd094548e998e',
+  }).select('-password')
+
+  if (!users) {
+    res.status(401)
+    throw new Error('Users not found!')
+  } else {
+    res.json({
+      success: true,
+      code: '200',
+      message: 'monthly users.',
+      Data: users,
+    })
+  }
+})
+// @desc    Get yearly members
+// @route   GET /api/users/yearly
+// @access  Admin
+const yearlyMembers = asyncHandler(async (req, res) => {
+  const users = await User.find({
+    packageID: '61e517231a5bd094548e9991',
+  }).select('-password')
+
+  if (!users) {
+    res.status(401)
+    throw new Error('Users not found!')
+  } else {
+    res.json({
+      success: true,
+      code: '200',
+      message: 'yearly users.',
+      Data: users,
+    })
+  }
+})
+// @desc    Get cancel members
+// @route   GET /api/users/cancel
+// @access  Admin
+const cancelMembers = asyncHandler(async (req, res) => {
+  const cancelMembers = await User.find({
+    packageStatus: false,
+  })
+
+  if (!cancelMembers) {
+    res.status(401)
+    throw new Error('Users not found!')
+  } else {
+    res.json({
+      success: true,
+      code: '200',
+      message: 'cancel users.',
+      Data: cancelMembers,
+    })
+  }
+})
+// @desc    Get new members
+// @route   GET /api/users/new
+// @access  Admin
+const newMembers = asyncHandler(async (req, res) => {
+  const result = await User.aggregate([
+    {
+      $match: {
+        $expr: {
+          $eq: [{ $month: '$createdAt' }, { $month: new Date() }],
+        },
+      },
+    },
+  ])
+  if (!result) {
+    res.status(401)
+    throw new Error('Users not found!')
+  } else {
+    res.json({
+      success: true,
+      code: '200',
+      message: 'new users.',
+      Data: result,
+    })
+  }
+})
+// @desc    Get No of members
+// @route   GET /api/users/numberOfMembers
+// @access  Admin
+const numberOfMembers = asyncHandler(async (req, res) => {
+  const yearly = await User.countDocuments({
+    packageID: '61e517231a5bd094548e9991',
+  })
+  const monthly = await User.countDocuments({
+    packageID: '61e516f81a5bd094548e998e',
+  })
+  const free = await User.countDocuments({
+    packageID: '62128260efa0835502296bfd',
+  })
+  const cancelMembers = await User.countDocuments({
+    packageStatus: false,
+  })
+
+  const result = await User.aggregate([
+    {
+      $match: {
+        $expr: {
+          $eq: [{ $month: '$createdAt' }, { $month: new Date() }],
+        },
+      },
+    },
+  ])
+  const newMembers = result.length
+
+  res.json({
+    success: true,
+    code: '200',
+    message: 'Number of members.',
+    Data: { yearly, monthly, free, newMembers, cancelMembers },
+  })
+})
 export {
   authUser,
   registerUser,
@@ -613,4 +753,10 @@ export {
   AddUserByAdmin,
   getUsersbyPeriod,
   deleteBulkUsers,
+  freeMembers,
+  monthlyMembers,
+  yearlyMembers,
+  newMembers,
+  cancelMembers,
+  numberOfMembers,
 }
