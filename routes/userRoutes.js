@@ -76,6 +76,8 @@ router
 router.route('/profile/:id').get(getUserProfilebyID)
 router.route('/status/:id').put(protect, admin, changeAccountStatus)
 
+// Get Memebers
+router.route('/getcancelmembers').get(admin, getCancelMembers)
 // Google auth
 
 router.get(
