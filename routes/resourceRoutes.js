@@ -1,5 +1,5 @@
-import express from "express";
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 import {
   createResource,
   getResources,
@@ -7,19 +7,19 @@ import {
   getResourceById,
   deleteResource,
   createData,
-} from "../controllers/resourseController.js";
-import { protect, admin } from "../middleware/authMiddleware.js";
-import { upload } from "../middleware/multer.js";
+} from '../controllers/resourseController.js'
+import { protect, admin } from '../middleware/authMiddleware.js'
+import { upload } from '../middleware/multer.js'
 
 router
-  .route("/")
+  .route('/')
   .get(getResources)
-  .post(protect, admin, upload.single("image"), createResource);
-router.get("/addmany", createData);
+  .post(protect, admin, upload.single('file'), createResource)
+router.get('/addmany', createData)
 router
-  .route("/:id")
-  .put(protect, admin, upload.single("image"), updateResource)
+  .route('/:id')
+  .put(protect, admin, upload.single('file'), updateResource)
   .get(getResourceById)
-  .delete(protect, admin, deleteResource);
+  .delete(protect, admin, deleteResource)
 
-export default router;
+export default router

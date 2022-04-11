@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const resourceSchema = mongoose.Schema(
   {
     AddedByAdmin: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: 'User',
     },
     title: {
       type: String,
@@ -18,7 +18,7 @@ const resourceSchema = mongoose.Schema(
     resourceUrl: {
       type: String,
     },
-    imageUrl: {
+    fileUrl: {
       type: String,
       required: true,
     },
@@ -34,8 +34,8 @@ const resourceSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-);
+)
 
-const Resource = mongoose.model("Resource", resourceSchema);
+const Resource = mongoose.model('Resource', resourceSchema)
 
-export default Resource;
+export default Resource
