@@ -2,6 +2,8 @@ import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
 import Verify from '../models/verify.js'
+import moment from 'moment'
+
 import { uploadOnCloud } from '../config/cloudinary.js'
 
 import {
@@ -330,6 +332,29 @@ const changeAccountStatus = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Get user by time period
+// @route   POST /api/users/byPeriod
+// @access  Private/Admin
+const getUsersbyPeriod = asyncHandler(async (req, res) => {
+  const { startDate, endDate } = req.body
+  console.log('ssss ')
+
+  const users = await User.find({
+    createdAt: {
+      $gte: startDate,
+      $lte: endDate,
+    },
+  })
+
+  res.json({
+    success: true,
+    code: 200,
+    message: `Users from ${moment(startDate).format(
+      'MMMM D, YYYY'
+    )} to ${moment(endDate).format('MMMM D, YYYY')}.`,
+    Data: users,
+  })
+})
 // @desc    Get all users
 // @route   GET /api/users
 // @access  Private/Admin
@@ -339,7 +364,7 @@ const getUsers = asyncHandler(async (req, res) => {
 
   const keyword = req.query.keyword
     ? {
-        name: {
+        username: {
           $regex: req.query.keyword,
           $options: 'i',
         },
@@ -548,6 +573,25 @@ const changePassword = asyncHandler(async (req, res) => {
     })
   }
 })
+// @desc    Delete bulk users
+// @route   GET /api/users/deleteBulk
+// @access  Admin
+const deleteBulkUsers = asyncHandler(async (req, res) => {
+  const { deleteUsers } = req.body
+
+  User.remove({ _id: { $in: deleteUsers } })
+    .then(() => {
+      res.json({
+        success: true,
+        code: '200',
+        message: 'Users deleted successfully!',
+      })
+    })
+    .catch((err) => {
+      res.status(401)
+      throw new Error('Users not deleted!')
+    })
+})
 export {
   authUser,
   registerUser,
@@ -567,4 +611,6 @@ export {
   getEditors,
   verifySignup,
   AddUserByAdmin,
+  getUsersbyPeriod,
+  deleteBulkUsers,
 }

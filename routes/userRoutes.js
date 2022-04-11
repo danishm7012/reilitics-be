@@ -20,6 +20,8 @@ import {
   editProfile,
   getUserProfilebyID,
   AddUserByAdmin,
+  getUsersbyPeriod,
+  deleteBulkUsers,
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 import { upload } from '../middleware/multer.js'
@@ -42,6 +44,8 @@ router
   .get(protect, admin, getUsers)
   .put(protect, upload.single('image'), editProfile)
 router.route('/admins').get(protect, admin, getAdmins)
+router.route('/byPeriod').post(protect, admin, getUsersbyPeriod)
+router.route('/deleteBulk').post(protect, admin, deleteBulkUsers)
 router
   .route('/add')
   .post(protect, admin, upload.single('image'), AddUserByAdmin)
