@@ -7,6 +7,7 @@ import {
   getCategoryById,
   deleteCategory,
   getCategoryByStatus,
+  deleteBulkCategories,
 } from "../controllers/categoryController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
@@ -20,4 +21,5 @@ router
   .get(getCategoryById)
   .delete(protect, admin, deleteCategory);
 
+  router.route('/deleteBulk').post(admin,deleteBulkCategories)
 export default router;

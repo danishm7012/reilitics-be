@@ -592,6 +592,16 @@ const deleteBulkUsers = asyncHandler(async (req, res) => {
       throw new Error('Users not deleted!')
     })
 })
+
+// @desc    Cancel Members
+// @route   GET /api/users/getcancelmemebers
+// @access  Admin
+const getCancelMembers = asyncHandler(async (req, res) => {
+  const users = await User.find({ role: "user", packageStatus: false });
+
+  res.json(users);
+});
+
 export {
   authUser,
   registerUser,
@@ -613,4 +623,5 @@ export {
   AddUserByAdmin,
   getUsersbyPeriod,
   deleteBulkUsers,
+  getCancelMembers
 }

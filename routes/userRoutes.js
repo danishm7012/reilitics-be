@@ -22,6 +22,7 @@ import {
   AddUserByAdmin,
   getUsersbyPeriod,
   deleteBulkUsers,
+  getCancelMembers
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 import { upload } from '../middleware/multer.js'
@@ -64,6 +65,8 @@ router
 router.route('/profile/:id').get(getUserProfilebyID)
 router.route('/status/:id').put(protect, admin, changeAccountStatus)
 
+// Get Memebers
+router.route('/getcancelmembers').get(getCancelMembers)
 // Google auth
 
 router.get(

@@ -138,6 +138,26 @@ const getCategoryByStatus = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Delete bulk categories
+// @route   GET /api/category/deleteBulk
+// @access  Admin
+const deleteBulkCategories = asyncHandler(async (req, res) => {
+  const { deleteCategories } = req.body
+
+  Category.remove({ _id: { $in: deleteCategories } })
+    .then(() => {
+      res.json({
+        success: true,
+        code: '200',
+        message: 'Categories deleted successfully!',
+      })
+    })
+    .catch((err) => {
+      res.status(401)
+      throw new Error('Categories not deleted!')
+    })
+})
+
 export {
   getCategories,
   getCategoryById,
@@ -145,4 +165,5 @@ export {
   createCategory,
   updateCategory,
   getCategoryByStatus,
+  deleteBulkCategories
 }

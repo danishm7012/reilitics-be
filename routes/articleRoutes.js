@@ -9,6 +9,8 @@ import {
   createArticleReview,
   getTopArticles,
   createBlogs,
+  getArticlessbyPeriod,
+  deleteBulkArticles,
 } from "../controllers/articleController.js";
 import { upload } from "../middleware/multer.js";
 
@@ -26,5 +28,9 @@ router
   .get(getArticleById)
   .delete(protect, admin, deleteArticle)
   .put(protect, admin, upload.single("image"), updateArticle);
+
+  router.route('/byPeriod').post(protect,admin, getArticlessbyPeriod)
+
+  router.route('/deleteBulk').post(admin,deleteBulkArticles)
 
 export default router;

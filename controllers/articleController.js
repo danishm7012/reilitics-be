@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import Article from "../models/articleModel.js";
 import { blogdetail } from "../data/json/blogs.js";
 import { uploadOnCloud } from "../config/cloudinary.js";
-
+import moment from "moment";
 // @desc    Fetch all articles
 // @route   GET /api/articles
 // @access  Public
@@ -188,6 +188,49 @@ const getTopArticles = asyncHandler(async (req, res) => {
   res.json(articles);
 });
 
+// @desc    Get contacts by time period
+// @route   POST /api/articles/byPeriod
+// @access  Private/Admin
+const getArticlessbyPeriod = asyncHandler(async (req, res) => {
+  const { startDate, endDate } = req.body
+
+  const articals = await Article.find({
+    createdAt: {
+      $gte: startDate,
+      $lte: endDate,
+    },
+  })
+
+  res.json({
+    success: true,
+    code: 200,
+    message: `Articles from ${moment(startDate).format(
+      'MMMM D, YYYY'
+    )} to ${moment(endDate).format('MMMM D, YYYY')}.`,
+    Data: articals,
+  })
+})
+
+// @desc    Delete bulk articles
+// @route   GET /api/article/deleteBulk
+// @access  Admin
+const deleteBulkArticles = asyncHandler(async (req, res) => {
+  const { deleteArticle } = req.body
+
+  Article.remove({ _id: { $in: deleteArticle } })
+    .then(() => {
+      res.json({
+        success: true,
+        code: '200',
+        message: 'Articles deleted successfully!',
+      })
+    })
+    .catch((err) => {
+      res.status(401)
+      throw new Error('Articles not deleted!')
+    })
+})
+
 export {
   getArticles,
   getArticleById,
@@ -197,4 +240,6 @@ export {
   createArticleReview,
   getTopArticles,
   createBlogs,
+  getArticlessbyPeriod,
+  deleteBulkArticles
 };
