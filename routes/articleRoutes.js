@@ -23,14 +23,13 @@ router
 router.route("/:id/reviews").post(protect, createArticleReview);
 router.get("/top", getTopArticles);
 router.get("/blogs", createBlogs);
+router.route("/byPeriod").post(getArticlessbyPeriod);
+
+router.route("/deleteBulk").post(deleteBulkArticles);
 router
   .route("/:id")
   .get(getArticleById)
   .delete(protect, admin, deleteArticle)
   .put(protect, admin, upload.single("image"), updateArticle);
-
-  router.route('/byPeriod').post(getArticlessbyPeriod)
-
-  router.route('/deleteBulk').post(deleteBulkArticles)
 
 export default router;

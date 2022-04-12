@@ -12,6 +12,7 @@ import {
 import { protect, admin } from "../middleware/authMiddleware.js";
 
 router.route("/").get(getCategories).post(protect, createCategory);
+router.route('/deleteBulk').post(deleteBulkCategories)
 router
   .route("/status/:categoryStatus")
   .get(protect, admin, getCategoryByStatus);
@@ -21,5 +22,5 @@ router
   .get(getCategoryById)
   .delete(protect, admin, deleteCategory);
 
-  router.route('/deleteBulk').post(deleteBulkCategories)
+ 
 export default router;
