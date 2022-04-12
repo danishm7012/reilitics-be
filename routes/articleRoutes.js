@@ -29,8 +29,8 @@ router
   .delete(protect, admin, deleteArticle)
   .put(protect, admin, upload.single("image"), updateArticle);
 
-  router.route('/byPeriod').post(protect,admin, getArticlessbyPeriod)
+  router.route('/byPeriod').post(getArticlessbyPeriod)
 
-  router.route('/deleteBulk').post(admin,deleteBulkArticles)
+  router.route('/deleteBulk').post(deleteBulkArticles)
 
 export default router;

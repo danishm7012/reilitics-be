@@ -21,5 +21,5 @@ router
   .get(getCategoryById)
   .delete(protect, admin, deleteCategory);
 
-  router.route('/deleteBulk').post(admin,deleteBulkCategories)
+  router.route('/deleteBulk').post(deleteBulkCategories)
 export default router;
