@@ -189,7 +189,7 @@ const getTopArticles = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get contacts by time period
-// @route   POST /api/articles/byPeriod
+// @route   POST /api/article/byPeriod
 // @access  Private/Admin
 const getArticlessbyPeriod = asyncHandler(async (req, res) => {
   const { startDate, endDate } = req.body
