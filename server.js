@@ -21,6 +21,7 @@ import resourceRoutes from './routes/resourceRoutes.js'
 import statsRoutes from './routes/statsRoutes.js'
 import marketStats from './routes/marketStats.js'
 import demographicStats from './routes/demographicStats.js'
+import newDemographicStats from './routes/newDemographicRoutes.js'
 import economicStats from './routes/economicStats.js'
 import articleRoutes from './routes/articleRoutes.js'
 import noteRoutes from './routes/noteRoutes.js'
@@ -112,6 +113,7 @@ app.use('/api/note', noteRoutes)
 app.use('/api/stats', statsRoutes)
 app.use('/api/market', marketStats)
 app.use('/api/demographic', demographicStats)
+app.use('/api/newdemographic', newDemographicStats)
 app.use('/api/economic', economicStats)
 app.use('/api/article', articleRoutes)
 app.use('/api/users', userRoutes)
