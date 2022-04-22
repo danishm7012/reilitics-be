@@ -14,23 +14,24 @@ const Test = asyncHandler(async (req, res) => {
 // @route   GET /api/demographic/population
 // @access  Public
 const population = asyncHandler(async (req, res) => {
-  const { Region } = req.body
-  // const query = `https://api.census.gov/data/2019/pep/charagegroups?get=NAME,POP&for=state:*`
-  const query = `https://api.census.gov/data/2018/pep/charagegroups?get=POP,GEONAME,DATE_DESC&DATE_CODE=11&RACE=10&for=county:*&in=state:*`
-  axios
-    .get(query)
-    .then((result) => {
-      console.log(result)
-      res.json({
-        success: true,
-        code: 200,
-        message: 'Population',
-        Data: result.data,
-      })
-    })
-    .catch((error) => {
-      console.error(error)
-    })
+  const { Region } = req.body;
+  let Data;
+  const populationJson = await CSV().fromFile(
+    "./data/demographic/new_demographic/population.csv"
+  );
+
+  const population = await _.omit(
+    populationJson.find((item) => {
+      return item.Region == Region;
+    }),
+    ["Region"]
+  );
+  res.json({
+    success: true,
+    code: 200,
+    message: `Population of ${Region}.`,
+    Data: population,
+  });
 })
 // @desc    Fetch population by age
 // @route   GET /api/demographic/population_by_age
