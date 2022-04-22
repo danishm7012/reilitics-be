@@ -15,10 +15,12 @@ const Test = asyncHandler(async (req, res) => {
 // @access  Public
 const population = asyncHandler(async (req, res) => {
   const { Region } = req.body
-  const query = `https://api.census.gov/data/2019/pep/charagegroups?get=NAME,POP&for=state:*`
+  // const query = `https://api.census.gov/data/2019/pep/charagegroups?get=NAME,POP&for=state:*`
+  const query = `https://api.census.gov/data/2018/pep/charagegroups?get=POP,GEONAME,DATE_DESC&DATE_CODE=11&RACE=10&for=county:*&in=state:*`
   axios
     .get(query)
     .then((result) => {
+      console.log(result)
       res.json({
         success: true,
         code: 200,
