@@ -135,22 +135,14 @@ const educationalAttainment = asyncHandler(async (req, res) => {
 const populationByRace = asyncHandler(async (req, res) => {
   const { Region } = req.body
 
-  const population_by_race = await CSV().fromFile(
-    './data/demographic/population_by_race.csv'
-  )
-
-  const Data = await _.omit(
-    population_by_race.find((item) => {
-      return item.Region == Region
-    }),
-    ['Region']
-  )
-
+  const result=await axios.get("http://api.census.gov/data/2021/pep/natmonthly?get=NAME,POP&for=us:*")
+console.log(result)
+ 
   res.json({
     success: true,
     code: 200,
     message: `Population of ${Region} by race.`,
-    Data,
+    Data:result.data,
   })
 })
 
