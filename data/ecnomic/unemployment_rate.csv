@@ -1,53 +1,992 @@
-Region,Y2015,Y2016,Y2017,Y2018,Y2019
-Alabama,7.20%,6.40%,5.80%,5.60%,4.90%
-Alaska,7.90%,8.00%,7.60%,6.80%,5.80%
-Arizona,6.90%,6.50%,5.80%,5.40%,5.10%
-Arkansas,5.80%,5.10%,5.60%,4.50%,4.80%
-California,7.30%,6.50%,5.90%,5.50%,5.10%
-Colorado,5.20%,4.70%,4.20%,3.90%,3.70%
-Connecticut,6.90%,6.40%,6.10%,5.50%,5.30%
-Delaware,5.80%,5.70%,5.30%,5.70%,4.60%
-District of Columbia,7.30%,6.90%,6.60%,7.50%,6.30%
-Florida,7.00%,6.00%,5.50%,5.20%,4.50%
-Georgia,7.10%,6.00%,5.80%,4.80%,4.80%
-Hawaii,4.90%,4.40%,4.20%,3.80%,3.90%
-Idaho,5.40%,4.70%,4.10%,4.00%,3.30%
-Illinois,6.90%,6.30%,6.10%,5.50%,4.80%
-Indiana,5.80%,5.00%,4.70%,4.40%,4.20%
-Iowa,4.20%,3.90%,3.60%,3.60%,3.70%
-Kansas,4.70%,4.50%,4.20%,3.80%,3.80%
-Kentucky,6.50%,6.00%,5.50%,5.20%,4.80%
-Louisiana,7.10%,7.00%,6.50%,6.40%,5.50%
-Maine,5.40%,4.40%,4.20%,3.50%,3.50%
-Maryland,5.50%,5.40%,5.20%,4.90%,4.50%
-Massachusetts,5.80%,5.30%,4.60%,4.80%,3.90%
-Michigan,7.20%,6.20%,5.90%,5.30%,5.00%
-Minnesota,4.20%,3.80%,3.60%,3.40%,3.20%
-Mississippi,8.90%,7.70%,7.00%,7.10%,6.60%
-Missouri,5.30%,4.90%,4.60%,4.20%,3.80%
-Montana,4.50%,4.80%,3.50%,3.50%,4.10%
-Nebraska,3.20%,3.70%,3.30%,3.50%,3.30%
-Nevada,7.90%,6.70%,5.90%,5.60%,5.10%
-New Hampshire,4.20%,3.60%,3.80%,3.60%,3.00%
-New Jersey,6.60%,6.00%,5.30%,4.90%,4.70%
-New Mexico,7.40%,7.50%,6.60%,6.10%,5.50%
-New York,6.50%,5.90%,5.50%,5.00%,4.40%
-North Carolina,6.90%,6.20%,5.30%,5.00%,4.60%
-North Dakota,2.60%,2.80%,2.90%,2.80%,2.60%
-Ohio,6.40%,5.70%,5.20%,4.90%,4.60%
-Oklahoma,5.50%,6.00%,5.40%,4.40%,4.40%
-Oregon,6.80%,5.70%,5.10%,5.00%,5.00%
-Pennsylvania,6.30%,5.80%,5.30%,4.90%,4.50%
-Rhode Island,6.20%,5.90%,5.70%,5.50%,4.20%
-South Carolina,7.30%,6.30%,5.80%,5.30%,4.70%
-South Dakota,4.00%,3.90%,3.50%,3.00%,3.00%
-Tennessee,6.20%,5.50%,4.90%,5.50%,4.50%
-Texas,5.50%,5.60%,5.10%,4.90%,4.40%
-Utah,4.00%,4.10%,3.60%,3.20%,3.20%
-Vermont,3.80%,3.90%,3.80%,3.80%,3.40%
-Virginia,5.50%,5.00%,4.60%,4.20%,4.00%
-Washington,6.00%,5.40%,4.90%,4.30%,4.60%
-West Virginia,7.30%,7.60%,6.70%,5.80%,6.00%
-Wisconsin,4.30%,4.10%,3.50%,3.20%,3.20%
-Wyoming,4.80%,5.60%,5.20%,3.90%,3.60%
-Puerto Rico,18.90%,16.20%,16.40%,15.10%,14.10%
+Region,Y2016,Y2017,Y2018,Y2019,Y2020
+Alabama,8.3,7.4,6.6,5.9,5.6
+Alaska,7.8,7.7,7.4,7.2,7.2
+Arizona,8,7.1,6.5,5.9,5.8
+Arkansas,6.9,6.3,5.5,5.1,5.2
+California,8.7,7.7,6.7,6.1,6.2
+Colorado,6,5.2,4.7,4.3,4.6
+Connecticut,8,7.2,6.5,6,6
+Delaware,7.1,6.4,5.9,5.5,5.8
+District of Columbia,8.7,8,7.4,6.9,7.1
+Florida,8.4,7.2,6.3,5.6,5.4
+Georgia,8.5,7.5,6.4,5.7,5.6
+Hawaii,5.5,4.9,4.5,4.3,4.6
+Idaho,6.2,5.4,4.7,4.3,4.2
+Illinois,8.2,7.4,6.6,5.9,6
+Indiana,6.9,6.1,5.4,4.8,4.7
+Iowa,4.5,4.1,3.9,3.7,3.9
+Kansas,5.3,4.8,4.4,4.1,4.1
+Kentucky,7.6,6.8,6.1,5.6,5.4
+Louisiana,7.7,7.2,6.9,6.5,6.6
+Maine,6,5.3,4.6,4.1,4
+Maryland,6.7,6.1,5.6,5.1,5.2
+Massachusetts,6.8,6,5.4,4.8,5.1
+Michigan,8.5,7.4,6.5,5.9,6
+Minnesota,4.8,4.3,3.9,3.6,3.8
+Mississippi,9.6,8.8,8.2,7.5,7.1
+Missouri,6.6,5.8,5.1,4.6,4.5
+Montana,5.6,4.8,4.2,4,4.2
+Nebraska,4.2,3.8,3.5,3.3,3.4
+Nevada,9.3,8,6.9,6.2,6.6
+New Hampshire,5.1,4.5,4,3.6,3.8
+New Jersey,7.9,7,6.1,5.5,5.8
+New Mexico,8.5,7.7,7.2,6.7,6.6
+New York,7.5,6.8,6,5.5,5.7
+North Carolina,8.3,7.2,6.3,5.6,5.4
+North Dakota,2.8,2.7,2.8,2.8,3.1
+Ohio,7.2,6.5,5.8,5.3,5.3
+Oklahoma,6,5.7,5.3,5.1,5.1
+Oregon,8.1,6.8,6,5.5,5.5
+Pennsylvania,7.2,6.5,5.8,5.3,5.4
+Rhode Island,7.7,6.8,6.1,5.4,5.5
+South Carolina,8.4,7.2,6.4,5.8,5.5
+South Dakota,4.1,3.7,3.5,3.4,3.5
+Tennessee,7.5,6.6,5.9,5.3,5.3
+Texas,6.4,5.8,5.4,5.1,5.3
+Utah,5.1,4.4,3.9,3.6,3.6
+Vermont,5,4.4,4.1,3.6,3.8
+Virginia,5.9,5.5,5,4.6,4.6
+Washington,6.8,6,5.3,5,4.9
+West Virginia,7.5,7.2,6.7,6.5,6.5
+Wisconsin,5.5,4.7,4,3.6,3.6
+Wyoming,4.9,4.7,4.5,4.5,4.4
+Puerto Rico,17.7,17.5,17,16.1,15.1
+"Aberdeen, SD Micro Area",2.1,1.8,2.2,2.3,2.2
+"Aberdeen, WA Micro Area",12.1,10.1,8.4,7.1,6.4
+"Abilene, TX Metro Area",5.2,4.4,4.2,3.4,3.3
+"Ada, OK Micro Area",6,5.1,5.1,4.4,4.9
+"Adrian, MI Micro Area",35.6,40.9,38.4,4.7,4.8
+"Aguadilla-Isabela, PR Metro Area",7.4,5.9,5.1,18.4,15.8
+"Akron, OH Metro Area",23.8,23.2,21,5.4,5.8
+"Alamogordo, NM Micro Area",7.5,6.6,5.8,7.6,9.1
+"Albany, GA Metro Area",11,9.3,8,10.6,8.5
+"Albany-Lebanon, OR Metro Area",13.3,12.6,11.3,6.6,6.8
+"Albany-Schenectady-Troy, NY Metro Area",9.8,8.8,7.9,4.6,4.7
+"Albemarle, NC Micro Area",6.3,5.6,5,5.7,4.9
+"Albert Lea, MN Micro Area",10.3,8,6.2,3.7,3.9
+"Albertville, AL Micro Area",4.6,4.1,4.4,4.3,3.7
+"Albuquerque, NM Metro Area",7.2,6.5,5.1,6,5.9
+"Alexander City, AL Micro Area",7.8,7,6.6,8.4,9.3
+"Alexandria, LA Metro Area",9.8,9.2,10.4,6.2,5.6
+"Alexandria, MN Micro Area",8.1,7.8,7,2.5,2.4
+"Alice, TX Micro Area",4,3.1,3,6.2,4.8
+"Allentown-Bethlehem-Easton, PA-NJ Metro Area",6.3,5.3,5.2,5.5,5.5
+"Alma, MI Micro Area",7.4,6.7,6.1,5.7,4.8
+"Alpena, MI Micro Area",8,7.4,6.7,6,7.5
+"Altoona, PA Metro Area",7.8,6.4,6,4.3,4.7
+"Altus, OK Micro Area",5.8,5.2,5,5.1,3.9
+"Amarillo, TX Metro Area",5.5,5.2,5.1,3.4,3.4
+"Americus, GA Micro Area",3.9,3.9,3.5,8.7,6.7
+"Ames, IA Metro Area",12.7,11.2,9.8,4.1,5
+"Amsterdam, NY Micro Area",5.2,4.4,4.3,6.6,6
+"Anchorage, AK Metro Area",8.4,7.3,7.7,6.5,6.3
+"Andrews, TX Micro Area",6.9,6.7,6.5,3.7,3.9
+"Angola, IN Micro Area",5.2,4.5,4.7,3.2,5.8
+"Ann Arbor, MI Metro Area",5.9,4.9,3.8,4.2,4.5
+"Anniston-Oxford, AL Metro Area",6.3,5.4,4.7,8.1,7.3
+"Appleton, WI Metro Area",11.7,10.1,8.8,2.6,3
+"Arcadia, FL Micro Area",3.5,2.9,2.7,4.8,8.8
+"Ardmore, OK Micro Area",8.3,6.1,5,5.3,4.8
+"Arecibo, PR Metro Area",6.1,6.4,5.5,13.2,11.7
+"Arkadelphia, AR Micro Area",16.5,15.4,14.2,2,3.6
+"Asheville, NC Metro Area",7.9,4.5,2.7,3.3,3.2
+"Ashland, OH Micro Area",6.2,5.2,4.9,3.5,3.8
+"Ashtabula, OH Micro Area",5.8,4.6,3.9,6.9,7.2
+"Astoria, OR Micro Area",5.7,4.2,4.1,5.3,4.4
+"Atchison, KS Micro Area",8.1,7.4,7.3,2.8,3.8
+"Athens, OH Micro Area",6.9,6.5,6,7.2,5.8
+"Athens, TN Micro Area",6.7,6.3,4.6,6,6.2
+"Athens, TX Micro Area",9.4,8.7,7.7,5,6.3
+"Athens-Clarke County, GA Metro Area",8.6,8.3,7,5.1,5.3
+"Atlanta-Sandy Springs-Alpharetta, GA Metro Area",6.9,6.2,5.1,5.2,5.2
+"Atlantic City-Hammonton, NJ Metro Area",7.5,6.9,6,8.4,8.7
+"Atmore, AL Micro Area",8.2,7,5.9,11,10.1
+"Auburn, IN Micro Area",11.8,10.9,9.6,3.5,3.7
+"Auburn, NY Micro Area",15.2,13.7,13.5,4.5,4.8
+"Auburn-Opelika, AL Metro Area",6.2,4.6,4.6,5.2,4.7
+"Augusta-Richmond County, GA-SC Metro Area",6.9,5.9,5.4,7,7.1
+"Augusta-Waterville, ME Micro Area",6.1,5.7,5.7,4,3.7
+"Austin, MN Micro Area",9.5,8.8,7.8,3.7,3.1
+"Austin-Round Rock-Georgetown, TX Metro Area",7,5.7,4.9,4.2,4.6
+"Bainbridge, GA Micro Area",5.8,5,4.5,5.2,6.5
+"Bakersfield, CA Metro Area",5.4,4.7,4.3,9.8,9.1
+"Baltimore-Columbia-Towson, MD Metro Area",6.7,6.5,5.4,5.1,5
+"Bangor, ME Metro Area",11.9,10.9,10.3,5,4.6
+"Baraboo, WI Micro Area",6.7,6,5.6,2.9,2.3
+"Bardstown, KY Micro Area",7.3,6.5,5.5,4.5,3.3
+"Barnstable Town, MA Metro Area",4.8,3.6,3.2,4.1,4.1
+"Barre, VT Micro Area",7.1,5.9,5.7,3.2,3.2
+"Bartlesville, OK Micro Area",6.3,5.5,4.7,5.2,4.9
+"Batavia, NY Micro Area",4.6,3.9,3.5,4.1,4
+"Batesville, AR Micro Area",4.8,4.7,4.9,4.6,4.5
+"Baton Rouge, LA Metro Area",8.1,6.1,5.4,6.1,6.5
+"Battle Creek, MI Metro Area",5.4,5.1,4.7,6.3,6.4
+"Bay City, MI Metro Area",6.7,6,4.9,6.4,5.9
+"Bay City, TX Micro Area",6.9,6.7,6.2,5.8,6.4
+"Beatrice, NE Micro Area",8.5,7.4,7,3.4,2.1
+"Beaumont-Port Arthur, TX Metro Area",8.2,7.4,6.9,4.7,5.2
+"Beaver Dam, WI Micro Area",6,6.4,7,4,4.1
+"Beckley, WV Metro Area",3.6,3.2,3.4,7.9,7
+"Bedford, IN Micro Area",7.2,6.2,5.5,4.4,4.2
+"Beeville, TX Micro Area",4.8,4.8,4.3,8,8.3
+"Bellefontaine, OH Micro Area",8,7.9,7.6,4.5,4.5
+"Bellingham, WA Metro Area",5.6,5.2,4.9,5.7,5.2
+"Bemidji, MN Micro Area",6.1,6.3,8.9,7.2,6.1
+"Bend, OR Metro Area",5.9,5.8,4.9,5.4,5.6
+"Bennettsville, SC Micro Area",7.7,6.8,6.3,12,10
+"Bennington, VT Micro Area",10.3,8.7,7.7,3.6,4.1
+"Berlin, NH Micro Area",7.1,5.5,5.2,5.5,5
+"Big Rapids, MI Micro Area",15.5,14.6,13,6.8,6.2
+"Big Spring, TX Micro Area",5.4,4.4,4.3,7,6.8
+"Big Stone Gap, VA Micro Area",6.7,5.9,5.5,9.5,9.2
+"Billings, MT Metro Area",10.7,8.7,7,3.3,3.5
+"Binghamton, NY Metro Area",6.5,6.4,6.5,6.2,7.2
+"Birmingham-Hoover, AL Metro Area",9.9,9,8.8,5.7,5.6
+"Bismarck, ND Metro Area",3.7,3.6,3.4,2.1,2.4
+"Blackfoot, ID Micro Area",7.3,7,6.5,4.8,5.5
+"Blacksburg-Christiansburg, VA Metro Area",7.4,6.8,6.4,4.6,4.2
+"Bloomington, IL Metro Area",2.6,2.3,2.5,3.2,3.3
+"Bloomington, IN Metro Area",6.6,5.2,4.3,5.4,6.3
+"Bloomsburg-Berwick, PA Metro Area",5.6,5.2,4.9,4,3.9
+"Bluefield, WV-VA Micro Area",4.9,4.1,3.7,6.9,6.5
+"Bluffton, IN Micro Area",6.6,6.3,6.3,9.2,2.6
+"Blytheville, AR Micro Area",5.3,4.9,4.3,9.8,8.9
+"Bogalusa, LA Micro Area",7.1,6.9,6.7,4.4,9.5
+"Boise City, ID Metro Area",10.9,11.6,9.3,3.8,4
+"Bonham, TX Micro Area",13.1,12.3,11,7.4,4.7
+"Boone, NC Micro Area",6.3,5.2,4.6,6.7,8.7
+"Borger, TX Micro Area",6.4,5.2,4.7,4.5,7
+"Boston-Cambridge-Newton, MA-NH Metro Area",4.3,4.4,3.8,4.2,4.9
+"Boulder, CO Metro Area",8.8,8.1,7.4,4.9,4.5
+"Bowling Green, KY Metro Area",4.9,5.2,6,2.8,5.3
+"Bozeman, MT Micro Area",6.3,5.6,5.1,6,2.4
+"Bradford, PA Micro Area",5.6,5.2,4.8,3.5,6.5
+"Brainerd, MN Micro Area",6.9,6,5.4,4.8,4.6
+"Branson, MO Micro Area",5.3,4.3,3.3,3.2,4.5
+"Breckenridge, CO Micro Area",7.9,7.5,6.8,4.6,3.1
+"Bremerton-Silverdale-Port Orchard, WA Metro Area",4.9,4.1,3.6,5.6,4.4
+"Brenham, TX Micro Area",7.7,6.8,6.1,5.9,4.6
+"Brevard, NC Micro Area",4.3,3.3,3.5,6.6,5.4
+"Bridgeport-Stamford-Norwalk, CT Metro Area",7,5.7,5.2,7.3,6.6
+"Brookhaven, MS Micro Area",4.9,6.2,6,8.3,5.3
+"Brookings, OR Micro Area",6.7,6.8,5.8,3.7,8.7
+"Brookings, SD Micro Area",8.2,7.6,7,6.8,3.9
+"Brownsville, TN Micro Area",8,7.5,7.4,5.8,5.8
+"Brownsville-Harlingen, TX Metro Area",11,9.9,8,4.2,5.6
+"Brownwood, TX Micro Area",3.5,3.3,3.5,5.1,4.3
+"Brunswick, GA Metro Area",7.2,6.8,7.2,5.3,4.7
+"Bucyrus-Galion, OH Micro Area",9.4,8,6.6,4.4,5.5
+"Buffalo-Cheektowaga, NY Metro Area",4.1,4.3,4,3.2,4.9
+"Burley, ID Micro Area",8.2,7.2,5.8,5.2,3.9
+"Burlington, IA-IL Micro Area",7.7,6.4,5.3,5.3,4.5
+"Burlington, NC Metro Area",6.3,5.6,4.9,3.5,5.2
+"Burlington-South Burlington, VT Metro Area",4.7,4.1,3.3,4.6,3.8
+"Butte-Silver Bow, MT Micro Area",6,5.7,5.3,6.3,5.3
+"Cadillac, MI Micro Area",6.9,6,5.7,3.3,6.6
+"Calhoun, GA Micro Area",4.7,4.2,3.9,3.3,3.5
+"California-Lexington Park, MD Metro Area",7,5.9,5,8,3.5
+"Cambridge, MD Micro Area",8.4,7.1,6.1,5.9,7.3
+"Cambridge, OH Micro Area",7.7,5.7,4.6,7.2,5
+"Camden, AR Micro Area",4.4,4.2,3.6,4.8,7.6
+"Campbellsville, KY Micro Area",10.1,8.3,7.9,5.5,5
+"Cañon City, CO Micro Area",9.3,8.5,7,5.4,5.5
+"Canton-Massillon, OH Metro Area",7.7,7.8,7.1,5.3,5.1
+"Cape Coral-Fort Myers, FL Metro Area",8.8,7.6,5.7,4.6,5
+"Cape Girardeau, MO-IL Metro Area",8,6.2,6,6.9,4.7
+"Carbondale-Marion, IL Metro Area",7.8,7.7,6.7,4.5,6.7
+"Carlsbad-Artesia, NM Micro Area",7.5,6.6,5.9,2,4.3
+"Carroll, IA Micro Area",8.5,7.1,5.9,5.1,1.9
+"Carson City, NV Metro Area",6,5.4,5.2,4.3,4.6
+"Casper, WY Metro Area",8.3,7.6,7.6,4.4,4.3
+"Cedar City, UT Micro Area",5.5,5.1,4.5,3.6,4.9
+"Cedar Rapids, IA Metro Area",2.6,2.5,2.1,4.9,3.8
+"Cedartown, GA Micro Area",9.5,7.7,6.2,2.5,5.4
+"Celina, OH Micro Area",4.9,5.1,4.6,6.5,2.5
+"Central City, KY Micro Area",8.1,6.2,5.1,9.5,5
+"Centralia, IL Micro Area",4.2,3.8,3.5,7.1,8.8
+"Centralia, WA Micro Area",8.7,7.2,5.9,4.8,6.6
+"Chambersburg-Waynesboro, PA Metro Area",4.7,3.9,2.6,4.8,3.9
+"Champaign-Urbana, IL Metro Area",8.4,9.6,8.9,6,4.7
+"Charleston, WV Metro Area",9.1,8.7,9.5,5.2,6.1
+"Charleston-Mattoon, IL Micro Area",9.7,8.8,8.2,4.2,6
+"Charleston-North Charleston, SC Metro Area",6.4,5.7,5.3,5.2,4.2
+"Charlotte-Concord-Gastonia, NC-SC Metro Area",5.6,5.2,4.8,3.2,5.1
+"Charlottesville, VA Metro Area",6.8,7,6.5,4.9,3.5
+"Chattanooga, TN-GA Metro Area",7.2,6.9,5.3,5.1,4.7
+"Cheyenne, WY Metro Area",7,5.8,4.9,6.1,4.9
+"Chicago-Naperville-Elgin, IL-IN-WI Metro Area",8.3,7.1,6,8.1,6.2
+"Chico, CA Metro Area",4.4,4.1,3.9,6.1,7.4
+"Chillicothe, OH Micro Area",7,6,5.4,4.5,6
+"Cincinnati, OH-KY-IN Metro Area",5.6,5.3,5.3,6.3,4.6
+"Clarksburg, WV Micro Area",8.5,7.6,6.7,14.8,6.4
+"Clarksdale, MS Micro Area",10.7,9.1,8.7,6.8,12
+"Clarksville, TN-KY Metro Area",9.9,7.6,7.6,8.7,6.4
+"Clearlake, CA Micro Area",6.6,5.8,5.1,8.2,10.5
+"Cleveland, MS Micro Area",4.5,4.1,3.8,5.4,7.4
+"Cleveland, TN Metro Area",7.6,6.9,6.8,6.2,5.5
+"Cleveland-Elyria, OH Metro Area",21.1,19,17.9,7.4,6.1
+"Clewiston, FL Micro Area",8.8,7.7,7.5,4.5,6.9
+"Clinton, IA Micro Area",13.7,11.2,9.8,6.4,4.4
+"Clovis, NM Micro Area",14.4,12.6,10.5,6.1,7.9
+"Coamo, PR Micro Area",9.3,7.1,6.2,5.3,6.9
+"Coco, PR Micro Area",8.2,7.5,6.8,4.1,5.8
+"Coeur d'Alene, ID Metro Area",10.1,8.2,8.3,5,4
+"Coffeyville, KS Micro Area",4.6,4.2,4.4,4.2,5.2
+"Coldwater, MI Micro Area",8.9,7.8,6.8,4.2,5.2
+"College Station-Bryan, TX Metro Area",10.4,8.2,7.4,5.8,4.6
+"Colorado Springs, CO Metro Area",11.4,9.1,8.5,4.2,5.9
+"Columbia, MO Metro Area",7.1,6.1,5.2,5.9,3.6
+"Columbia, SC Metro Area",7.4,5.8,5.5,8.3,5.6
+"Columbus, GA-AL Metro Area",5.5,4.6,4.5,4.2,7.7
+"Columbus, IN Metro Area",5.9,5,4.6,8.1,4.4
+"Columbus, MS Micro Area",7.4,6.8,6.2,3,7.8
+"Columbus, NE Micro Area",4.6,4.4,4.3,4.5,2.3
+"Columbus, OH Metro Area",8,7,6.4,3.6,4.4
+"Concord, NH Micro Area",9.9,9.8,8.8,5,3.5
+"Connersville, IN Micro Area",5.2,5,4.8,5.3,4.4
+"Cookeville, TN Micro Area",11.5,11.4,9.2,7.6,5.6
+"Coos Bay, OR Micro Area",4.6,3.9,3.8,11.6,7
+"Cordele, GA Micro Area",6,5.3,4.8,6.5,12
+"Corinth, MS Micro Area",4.8,4,3.9,3.1,6.2
+"Cornelia, GA Micro Area",9.2,7.5,5,6.3,2.4
+"Corning, NY Micro Area",7.8,6.8,6,5.6,5.7
+"Corpus Christi, TX Metro Area",10.7,9.2,7.7,7.3,5.7
+"Corsicana, TX Micro Area",13.9,14.8,12.2,5.3,4.9
+"Cortland, NY Micro Area",7.7,8.6,8.8,5.4,5.6
+"Corvallis, OR Metro Area",7.2,5.5,4,5.5,6.1
+"Coshocton, OH Micro Area",7.6,7,6.5,4.4,6.1
+"Craig, CO Micro Area",6.1,5.8,5.8,3.8,5
+"Crawfordsville, IN Micro Area",10.4,9.4,8,7.7,3.9
+"Crescent City, CA Micro Area",5.2,4.9,4.5,5.2,6.4
+"Crestview-Fort Walton Beach-Destin, FL Metro Area",7.8,6.7,6.2,5.4,4.4
+"Crossville, TN Micro Area",6.4,6.7,6.2,5.1,6.2
+"Cullman, AL Micro Area",4.5,3.6,4.1,5.5,5
+"Cullowhee, NC Micro Area",5.4,4.4,4.1,6.9,5.9
+"Cumberland, MD-WV Metro Area",10.4,9.5,8.3,4.4,7.4
+"Dallas-Fort Worth-Arlington, TX Metro Area",6.7,6,5.5,5.6,4.6
+"Dalton, GA Metro Area",8.8,7.6,6.8,6.5,6.1
+"Danville, IL Metro Area",6.1,5.8,5.5,5.7,5.8
+"Danville, KY Micro Area",5.1,4.8,4.7,6.8,6.5
+"Danville, VA Micro Area",9,8.4,7.9,4.3,6
+"Daphne-Fairhope-Foley, AL Metro Area",6,5.3,4.8,4.7,3.9
+"Davenport-Moline-Rock Island, IA-IL Metro Area",9.4,7.9,6.7,8.5,4.7
+"Dayton, TN Micro Area",9.7,8.3,7.5,6,8.8
+"Dayton-Kettering, OH Metro Area",7.8,6.6,5.6,5.1,5.7
+"Decatur, AL Metro Area",8.7,8,7.4,7.6,4.6
+"Decatur, IL Metro Area",6.3,5.5,4.4,3.6,7.7
+"Decatur, IN Micro Area",6.1,5.5,5.2,4.3,3
+"Defiance, OH Micro Area",8,7.2,6.5,4.9,4.4
+"Del Rio, TX Micro Area",8,7.9,7.7,4.9,4
+"Deltona-Daytona Beach-Ormond Beach, FL Metro Area",8.8,6.6,5.3,11.8,4.6
+"Deming, NM Micro Area",10.1,9.2,8.2,3.7,9.5
+"Denver-Aurora-Lakewood, CO Metro Area",5.5,5.2,3.6,8.5,4.1
+"DeRidder, LA Micro Area",6.8,5,4.6,3.9,7.9
+"Des Moines-West Des Moines, IA Metro Area",8.4,6.6,5.7,6.5,4.2
+"Detroit-Warren-Dearborn, MI Metro Area",7.8,6.7,5.6,2.6,6.5
+"Dickinson, ND Micro Area",14.1,11.4,12,3.5,2.7
+"Dixon, IL Micro Area",5.4,4.6,4,5.8,3.3
+"Dodge City, KS Micro Area",7,7.4,7.9,6.2,4.7
+"Dothan, AL Metro Area",4.8,4.3,3.9,4.6,5.3
+"Douglas, GA Micro Area",9.2,8.1,7.1,5.4,4.5
+"Dover, DE Metro Area",3.2,3.2,3.3,6.4,6.2
+"Dublin, GA Micro Area",6.4,5.9,4.4,6.4,6.5
+"DuBois, PA Micro Area",7.2,6.3,5.9,3.9,7.4
+"Dubuque, IA Metro Area",8.4,7.7,7.3,4.2,4.1
+"Duluth, MN-WI Metro Area",7.3,5.7,4.6,5,4.7
+"Dumas, TX Micro Area",8,6.7,5.9,6.6,3.7
+"Duncan, OK Micro Area",6.6,6.4,5.7,4.1,6.5
+"Durango, CO Micro Area",8.1,8.2,7.1,5.5,3.9
+"Durant, OK Micro Area",4,3.9,4.1,4.5,5.7
+"Durham-Chapel Hill, NC Metro Area",5.7,5,4.7,6.4,4.6
+"Dyersburg, TN Micro Area",3.9,4.1,4.9,9.2,6.2
+"Eagle Pass, TX Micro Area",6.8,6.8,6.6,3.4,7.7
+"Easton, MD Micro Area",10,9.3,7.9,6.5,2.9
+"East Stroudsburg, PA Metro Area",5.1,4.4,4.1,3.4,6.2
+"Eau Claire, WI Metro Area",7.2,6.4,5.6,1.9,3.4
+"Edwards, CO Micro Area",6.8,6,5.2,2.8,3.9
+"Effingham, IL Micro Area",8.1,7.3,7.7,5.2,2.6
+"El Campo, TX Micro Area",12.4,12.9,11.6,14.2,5.3
+"El Centro, CA Metro Area",6,4.4,3.3,5,13.7
+"El Dorado, AR Micro Area",10.3,9.2,7.9,6.6,3.9
+"Elizabeth City, NC Micro Area",4.6,3.9,3.5,5.7,6.4
+"Elizabethtown-Fort Knox, KY Metro Area",3,2.7,2.2,3.3,6
+"Elk City, OK Micro Area",4.9,4.4,3.9,4.5,4.4
+"Elkhart-Goshen, IN Metro Area",5.7,5.3,5.2,6,4.4
+"Elkins, WV Micro Area",17.1,16,15.3,4.5,7.1
+"Elko, NV Micro Area",9,8.3,7.3,5.6,4.2
+"Ellensburg, WA Micro Area",9.4,7.6,7.2,5.6,6.1
+"Elmira, NY Metro Area",7.9,6.7,6.1,6.1,5.9
+"El Paso, TX Metro Area",3.3,4.6,4.2,5.4,6.2
+"Emporia, KS Micro Area",6.5,5.6,4.7,4.9,4
+"Enid, OK Metro Area",7.4,7.3,6.6,5.7,5.1
+"Enterprise, AL Micro Area",4.9,4.3,4.4,5.4,5.5
+"Erie, PA Metro Area",6.7,5.3,6,5.1,5.4
+"Escanaba, MI Micro Area",5.6,5.3,5,7.9,5.1
+"Española, NM Micro Area",7.9,7,6.6,8.9,7
+"Eufaula, AL-GA Micro Area",6.6,5.8,5.7,6.9,8.2
+"Eugene-Springfield, OR Metro Area",4.9,5.3,5.1,7.8,7.1
+"Eureka-Arcata, CA Micro Area",6.2,6,5.9,6.3,9
+"Evanston, WY Micro Area",7.1,6.5,5.9,4.3,4.5
+"Evansville, IN-KY Metro Area",7.5,6.5,5.3,6.5,4.4
+"Fairbanks, AK Metro Area",9.5,8.9,(X),6.6,7.1
+"Fairfield, IA Micro Area",13.2,12.4,9.7,4,7.3
+"Fairmont, MN Micro Area",8.7,7.6,7.1,6,4.5
+"Fairmont, WV Micro Area",9.5,8.9,8,6,5.7
+"Fallon, NV Micro Area",6.4,6.4,6.1,2.7,5.9
+"Fargo, ND-MN Metro Area",5.5,4.6,4.5,3.8,3.1
+"Faribault-Northfield, MN Micro Area",8.5,8,7,5,5.1
+"Farmington, MO Micro Area",6.6,6.7,6.7,8.7,4.3
+"Farmington, NM Metro Area",3.2,3.1,3.5,8.2,8.2
+"Fayetteville, NC Metro Area",6,5.5,5.9,3.5,7.5
+"Fayetteville-Springdale-Rogers, AR Metro Area",11.7,7.8,7.2,3.1,3.5
+"Fergus Falls, MN Micro Area",3,2.7,2.8,7.4,3.9
+"Fernley, NV Micro Area",4.3,3.6,3.7,3.6,8
+"Findlay, OH Micro Area",7.3,6.5,5.7,5.8,3.7
+"Fitzgerald, GA Micro Area",9.9,9.6,8.9,7.6,6.1
+"Flagstaff, AZ Metro Area",11.4,10.3,9,9.3,8.1
+"Flint, MI Metro Area",4.4,4.1,3.6,7.3,8.9
+"Florence, SC Metro Area",4,3.6,3.4,4.6,5.9
+"Florence-Muscle Shoals, AL Metro Area",11.8,9.8,8.7,3.3,4.4
+"Fond du Lac, WI Metro Area",5.5,4.5,4.3,7.2,3.6
+"Forest City, NC Micro Area",7.8,5.2,4.7,6.2,6.7
+"Forrest City, AR Micro Area",8.2,8.3,7.5,4.7,6
+"Fort Collins, CO Metro Area",12,10.8,9.8,4.1,5.1
+"Fort Dodge, IA Micro Area",12.1,10.6,9,6,3.1
+"Fort Leonard Wood, MO Micro Area",7.6,6.7,5.5,6.1,4.8
+"Fort Madison-Keokuk, IA-IL-MO Micro Area",4.6,4,3.7,4.1,5.1
+"Fort Morgan, CO Micro Area",10.1,8.7,8.4,4,4.2
+"Fort Payne, AL Micro Area",11,10,8,8.6,4.5
+"Fort Polk South, LA Micro Area",6,5.3,5,5,7.5
+"Fort Smith, AR-OK Metro Area",6.6,5.7,4.5,4.8,5.1
+"Fort Wayne, IN Metro Area",10.8,8.8,8.8,3.9,5
+"Frankfort, IN Micro Area",7.2,6.9,6.5,4.9,3.6
+"Frankfort, KY Micro Area",5.5,4.5,4.4,4.3,5.2
+"Fredericksburg, TX Micro Area",6.3,5.1,4.5,7,4.3
+"Freeport, IL Micro Area",8.2,8.7,9,4.5,6.8
+"Fremont, NE Micro Area",6.7,6.4,5.5,4.6,4.5
+"Fremont, OH Micro Area",6.7,5.9,5.2,8.7,4.5
+"Fresno, CA Metro Area",6,5.2,4.8,5.5,8.9
+"Gadsden, AL Metro Area",7.6,6.9,6.3,6,5.7
+"Gaffney, SC Micro Area",5.9,5,4.3,5.3,6.5
+"Gainesville, FL Metro Area",8.5,8,7.1,3.6,5.1
+"Gainesville, GA Metro Area",4.3,4.4,4.6,4.5,3.5
+"Gainesville, TX Micro Area",6.3,5.4,5,5.1,4
+"Galesburg, IL Micro Area",11.9,10.4,9.4,14,5.2
+"Gallup, NM Micro Area",8.5,7.6,6.5,3.8,12.4
+"Garden City, KS Micro Area",8.7,7.8,5.9,4.2,4
+"Gardnerville Ranchos, NV Micro Area",7.2,6.7,6.1,7.2,4.1
+"Georgetown, SC Micro Area",5.7,4.6,3.7,3.8,6.9
+"Gettysburg, PA Metro Area",6.5,5.2,5,3.5,3.9
+"Gillette, WY Micro Area",6.8,6.3,5.7,6.3,3.7
+"Glasgow, KY Micro Area",15.7,16.1,15.7,4.4,6.1
+"Glens Falls, NY Metro Area",4.6,4.6,4.6,4.1,4.8
+"Glenwood Springs, CO Micro Area",7.5,6.2,5.2,5.1,3.8
+"Gloversville, NY Micro Area",9.5,9.6,8.5,6.6,4
+"Goldsboro, NC Metro Area",5.5,4.9,4.5,3.8,5.4
+"Granbury, TX Micro Area",4.7,4.6,4.6,3.7,6
+"Grand Forks, ND-MN Metro Area",7.5,7.3,6.9,3.7,3.7
+"Grand Island, NE Metro Area",7,5.6,5,6.7,3.7
+"Grand Junction, CO Metro Area",6,5.1,4.3,5.1,6.9
+"Grand Rapids, MN Micro Area",8,7.6,6.1,4.1,5.8
+"Grand Rapids-Kentwood, MI Metro Area",11.8,9.7,7.8,13.7,4.4
+"Grants, NM Micro Area",3.6,3.7,3.7,8.6,11.6
+"Grants Pass, OR Metro Area",4.8,4.7,4,3.9,7.5
+"Great Bend, KS Micro Area",8.7,8,7.8,3.9,3.4
+"Great Falls, MT Metro Area",6,5.7,5.2,4.1,3.7
+"Greeley, CO Metro Area",6.2,5.3,4.6,2.9,5.1
+"Green Bay, WI Metro Area",16.3,16,15.4,4.8,2.7
+"Greeneville, TN Micro Area",10.8,9,8.2,5.5,5
+"Greensboro-High Point, NC Metro Area",5.5,4.2,3.9,3.8,5.7
+"Greensburg, IN Micro Area",5,4.6,4.1,13.2,4
+"Greenville, MS Micro Area",6,5.3,4.5,8.1,10.1
+"Greenville, NC Metro Area",5.3,4.4,3.5,3.3,8.1
+"Greenville, OH Micro Area",8,7.2,6.5,4.8,2.7
+"Greenville-Anderson, SC Metro Area",6.1,5.8,5.2,7.8,4.6
+"Greenwood, MS Micro Area",7.7,6.6,5.9,6.9,10.4
+"Greenwood, SC Micro Area",5.3,4.8,4.4,6.5,6.1
+"Grenada, MS Micro Area",19.7,16.8,15.1,11.8,5.3
+"Guayama, PR Metro Area",11.5,10.1,9.2,8.5,12.2
+"Gulfport-Biloxi, MS Metro Area",6.1,5.1,4.7,2.7,8.6
+"Guymon, OK Micro Area",7.2,6.1,5.4,5.8,2.7
+"Hagerstown-Martinsburg, MD-WV Metro Area",11.9,10.6,10.9,2,5.7
+"Hailey, ID Micro Area",10.9,9.6,8.1,7.2,1.9
+"Hammond, LA Metro Area",9.6,10.4,6.9,7.6,7.1
+"Hanford-Corcoran, CA Metro Area",19.2,12.7,11.6,4.6,8.4
+"Hannibal, MO Micro Area",9.2,8.9,8.9,4,4.3
+"Harrisburg-Carlisle, PA Metro Area",2.9,3.1,2.9,4.4,3.9
+"Harrison, AR Micro Area",8.1,7.5,6.7,3.8,4.6
+"Harrisonburg, VA Metro Area",3.9,3.6,2.2,5.6,3.8
+"Hartford-East Hartford-Middletown, CT Metro Area",9.8,8.9,8.6,2.5,5.5
+"Hastings, NE Micro Area",11.7,9.7,8.4,9,2.4
+"Hattiesburg, MS Metro Area",6.1,6,5,2.8,7.8
+"Hays, KS Micro Area",5.6,4.9,4.4,1.7,3.4
+"Heber, UT Micro Area",7.9,5.7,4,3.2,2
+"Helena, MT Micro Area",5.5,4.9,4,10.6,3.5
+"Helena-West Helena, AR Micro Area",7.6,6.8,6.1,8.4,14.4
+"Henderson, NC Micro Area",5.4,4.2,3.3,3.8,8
+"Hereford, TX Micro Area",10.7,10.6,9.7,6.9,3.3
+"Hermiston-Pendleton, OR Micro Area",3.4,2.8,2.4,6.5,6.5
+"Hickory-Lenoir-Morganton, NC Metro Area",3.7,2.4,1.1,4.3,6.2
+"Hillsdale, MI Micro Area",4.4,3.5,3.4,6.2,4.1
+"Hilo, HI Micro Area",17.6,15.7,10.5,5.3,6.3
+"Hilton Head Island-Bluffton, SC Metro Area",11.1,11,9.3,10.4,5
+"Hinesville, GA Metro Area",4.9,5,4.6,6.3,10
+"Hobbs, NM Micro Area",8.7,7.9,7.5,2.8,6.9
+"Holland, MI Micro Area",9.2,7.9,7.3,8,3.4
+"Homosassa Springs, FL Metro Area",7.6,6.1,5,3.6,7.9
+"Hood River, OR Micro Area",7.4,6.8,5.9,4.9,5
+"Hope, AR Micro Area",7.1,6.9,6.3,5.5,5.7
+"Hot Springs, AR Metro Area",13.7,13.1,12.2,5.5,6.3
+"Houghton, MI Micro Area",6.6,6.2,6.4,6.3,5.9
+"Houma-Thibodaux, LA Metro Area",4.7,3.6,3.2,5.6,6.7
+"Houston-The Woodlands-Sugar Land, TX Metro Area",11.6,9.9,8.6,4.9,5.9
+"Hudson, NY Micro Area",4.8,5.1,4.2,5.6,5.7
+"Huntingdon, PA Micro Area",8,6,5.5,2.8,5.4
+"Huntington, IN Micro Area",9.1,9,7.1,5.7,2.4
+"Huntington-Ashland, WV-KY-OH Metro Area",7.4,6.7,6.5,5.2,5.4
+"Huntsville, AL Metro Area",6.3,6.5,6.7,3.3,4.6
+"Huntsville, TX Micro Area",6.6,6.1,5.8,1.4,3.4
+"Huron, SD Micro Area",5.5,5,4.9,4.5,2.1
+"Hutchinson, KS Micro Area",7.3,6.7,6.3,2.9,4.4
+"Hutchinson, MN Micro Area",5.2,3.9,3.4,3.7,2.7
+"Idaho Falls, ID Metro Area",7,6.6,6.2,6.6,3.8
+"Indiana, PA Micro Area",7.4,6.6,6,4.8,7.2
+"Indianapolis-Carmel-Anderson, IN Metro Area",5.3,4.6,4.3,13.7,4.5
+"Indianola, MS Micro Area",2.9,2.1,1.7,3.4,11
+"Iowa City, IA Metro Area",5.2,5,4.5,4.7,3.6
+"Iron Mountain, MI-WI Micro Area",3.8,3,2.6,3.8,4.1
+"Ithaca, NY Metro Area",4.8,4,4,5.8,4.1
+"Jackson, MI Metro Area",7.7,7.8,7.3,7.3,6.3
+"Jackson, MS Metro Area",6.9,6.1,5.4,7.9,7.2
+"Jackson, OH Micro Area",19.7,17.6,16,5.4,6.9
+"Jackson, TN Metro Area",8.2,6.2,5.2,2.4,6.3
+"Jackson, WY-ID Micro Area",3.3,3.3,3.4,5.5,2.9
+"Jacksonville, FL Metro Area",7,6.1,4.6,5.6,5.3
+"Jacksonville, IL Micro Area",5.4,4.8,4.6,8.7,5.3
+"Jacksonville, NC Metro Area",8.9,7.6,6.8,6.2,8
+"Jacksonville, TX Micro Area",8.5,7.8,7.3,3.2,6.5
+"Jamestown, ND Micro Area",11.2,10.8,10.5,6.1,4.5
+"Jamestown-Dunkirk-Fredonia, NY Micro Area",7.7,6.7,5.7,5.1,5.5
+"Janesville-Beloit, WI Metro Area",3.2,2.7,2.8,8.4,4.5
+"Jasper, AL Micro Area",8.2,7.1,6.3,2.3,7.3
+"Jasper, IN Micro Area",7.6,6.5,6.1,15.1,2.4
+"Jayuya, PR Micro Area",11.8,10.6,9.6,4.1,14.5
+"Jefferson, GA Micro Area",6,6.1,5.4,3.4,3.9
+"Jefferson City, MO Metro Area",2.6,1.5,3.3,8.1,4.2
+"Jennings, LA Micro Area",7.9,7.7,6.9,6.1,7.4
+"Jesup, GA Micro Area",7.4,6.4,5.6,4.7,5.4
+"Johnson City, TN Metro Area",3.1,3.1,2.1,5.8,5.2
+"Johnstown, PA Metro Area",28.1,27.1,22.2,6.1,5.2
+"Jonesboro, AR Metro Area",6.8,6.5,4.8,4.8,5.7
+"Joplin, MO Metro Area",4.9,4.4,3.8,4.6,4.9
+"Juneau, AK Micro Area",8.5,9.1,9,4,4.4
+"Kahului-Wailuku-Lahaina, HI Metro Area",12.8,9.5,7.6,5.5,5.1
+"Kalamazoo-Portage, MI Metro Area",6.5,6,5.3,3.5,6.2
+"Kalispell, MT Micro Area",8.3,7.5,6.6,5.2,4
+"Kankakee, IL Metro Area",6.4,5.9,5.9,3.9,5.4
+"Kansas City, MO-KS Metro Area",6,5.4,4.9,3.8,4.2
+"Kapaa, HI Micro Area",9.2,8,6.6,2.7,3.5
+"Kearney, NE Micro Area",4.9,4.8,5.8,3.4,2.7
+"Keene, NH Micro Area",6,4.9,4.4,3.9,3.9
+"Kendallville, IN Micro Area",7.4,6.6,6,6.8,4
+"Kennett, MO Micro Area",6.5,4,3.7,5.4,7.5
+"Kennewick-Richland, WA Metro Area",8.4,7.5,6,5.2,5.4
+"Kerrville, TX Micro Area",5.7,4.9,4.4,5.9,4.3
+"Ketchikan, AK Micro Area",5.1,4.4,4,2.9,5.6
+"Key West, FL Micro Area",3.3,3.1,3,4.4,3.4
+"Kill Devil Hills, NC Micro Area",5,4.5,3.8,7.6,5.6
+"Killeen-Temple, TX Metro Area",7,5.7,4.6,6,7.3
+"Kingsport-Bristol, TN-VA Metro Area",7.9,6.9,7.6,5.1,6.1
+"Kingston, NY Metro Area",6.6,5.9,5.3,8.4,5.4
+"Kingsville, TX Micro Area",8.2,6,5.3,11.4,6
+"Kinston, NC Micro Area",7.6,7,6.6,5.4,8.9
+"Kirksville, MO Micro Area",4.9,3.7,2.9,8.1,5.1
+"Klamath Falls, OR Micro Area",6.5,5.5,5.3,4.9,7.5
+"Knoxville, TN Metro Area",8.8,8.5,7.9,5.1,4.8
+"Kokomo, IN Metro Area",7.7,6.8,6.2,3.9,5.3
+"Laconia, NH Micro Area",8.5,7.1,6.2,3.3,3.8
+"La Crosse-Onalaska, WI-MN Metro Area",10.4,9.6,9,6.5,3.3
+"Lafayette, LA Metro Area",12.5,11.6,12.3,4,6.6
+"Lafayette-West Lafayette, IN Metro Area",6.4,5.6,6.1,5.9,3.8
+"La Grande, OR Micro Area",11.3,9.1,8.7,5.6,5.4
+"LaGrange, GA-AL Micro Area",6.8,6.1,5.4,5.6,5.1
+"Lake Charles, LA Metro Area",7.6,6.5,5.9,8.6,5.7
+"Lake City, FL Micro Area",5.1,4.9,4.7,8,8.8
+"Lake Havasu City-Kingman, AZ Metro Area",4.7,4.4,3.7,5.9,7.6
+"Lakeland-Winter Haven, FL Metro Area",7,6.8,6.7,5.8,5.4
+"Lamesa, TX Micro Area",6.2,5.2,4.7,3.7,7.3
+"Lancaster, PA Metro Area",6.6,6.5,6.4,5.6,3.6
+"Lansing-East Lansing, MI Metro Area",10.7,8.9,7.9,4.5,5.5
+"Laramie, WY Micro Area",7.3,6.5,5.6,4.9,4.1
+"Laredo, TX Metro Area",11.7,9.5,9.5,7.7,5.7
+"Las Cruces, NM Metro Area",11.7,10.1,8.9,8.4,7.7
+"Las Vegas, NM Micro Area",9.6,7.7,6.9,6.4,6.1
+"Las Vegas-Henderson-Paradise, NV Metro Area",7.4,6.7,5.5,5.3,7
+"Laurel, MS Micro Area",5.5,4.7,4,11.8,4.7
+"Laurinburg, NC Micro Area",7.8,7,6.2,4.2,11.7
+"Lawrence, KS Metro Area",4.6,4.8,4.3,8.1,4.3
+"Lawrenceburg, TN Micro Area",5.9,5.7,5.2,7.5,8.2
+"Lawton, OK Metro Area",10.6,9.3,8.3,6.4,6.7
+"Lebanon, MO Micro Area",4.9,5.3,6.4,3.3,6.4
+"Lebanon, NH-VT Micro Area",9.6,8.3,7.2,4.4,3.2
+"Lebanon, PA Metro Area",7.3,7.4,6.3,7.5,4.9
+"Levelland, TX Micro Area",13.4,12.7,12.5,3.7,6.6
+"Lewisburg, PA Micro Area",5.3,4.7,4.4,6,2.9
+"Lewisburg, TN Micro Area",8.8,8.8,8.7,4.8,6.4
+"Lewiston, ID-WA Metro Area",9,8.8,7.4,3.9,4.2
+"Lewiston-Auburn, ME Metro Area",8.4,7.7,6.9,3.5,4.5
+"Lewistown, PA Micro Area",6.5,5.8,5.3,3.4,3.5
+"Lexington, NE Micro Area",7.2,7.4,7,5,3.5
+"Lexington-Fayette, KY Metro Area",4.9,3.4,3.7,5,4.9
+"Liberal, KS Micro Area",8.4,6.5,6.2,5.4,3.6
+"Lima, OH Metro Area",6.7,5.1,5.4,5.6,5.6
+"Lincoln, IL Micro Area",5.8,5.2,4.6,3.2,5.7
+"Lincoln, NE Metro Area",5.2,4.2,3.6,4.2,3.3
+"Little Rock-North Little Rock-Conway, AR Metro Area",4.7,4.2,3.7,5.6,4.5
+"Lock Haven, PA Micro Area",6.4,6,5.3,2.5,5.8
+"Logan, UT-ID Metro Area",8.5,7.3,5.3,4.6,2.7
+"Logansport, IN Micro Area",7.6,7.2,6,6.9,4.4
+"London, KY Micro Area",7.1,5.6,5.6,5.4,6.1
+"Longview, TX Metro Area",4.3,3.8,3.3,6.6,5.4
+"Longview, WA Metro Area",6,5.4,4.8,3.4,6.5
+"Los Alamos, NM Micro Area",6.6,5.9,5.6,5.7,3.5
+"Los Angeles-Long Beach-Anaheim, CA Metro Area",4.5,3.5,2.7,5,6.1
+"Louisville/Jefferson County, KY-IN Metro Area",12.3,12.8,13.2,3.9,4.9
+"Lubbock, TX Metro Area",7.6,6.4,6,4.4,4.3
+"Ludington, MI Micro Area",10.6,9.9,8,6.6,4.5
+"Lufkin, TX Micro Area",6.1,5.6,5.6,6.7,6.7
+"Lumberton, NC Micro Area",9.7,8.4,7.8,4.5,7.4
+"Lynchburg, VA Metro Area",2.6,3.7,3.5,7.4,4.5
+"Macomb, IL Micro Area",8.4,7.3,6.4,7,9.1
+"Macon-Bibb County, GA Metro Area",6.9,6,5.5,8.7,6.5
+"Madera, CA Metro Area",5.5,4.9,4.3,4.2,9.6
+"Madison, IN Micro Area",9.8,7.6,6.1,2.6,3.4
+"Madison, WI Metro Area",8.3,7.6,7.9,5.5,2.5
+"Madisonville, KY Micro Area",10.8,9.6,8.1,10.9,6.4
+"Magnolia, AR Micro Area",5.5,5.2,4.8,7,6.5
+"Malone, NY Micro Area",9.3,8.6,7.6,6,7
+"Malvern, AR Micro Area",10.4,10,8.5,4,5.6
+"Manchester-Nashua, NH Metro Area",8.2,8.3,8.3,5,4
+"Manhattan, KS Metro Area",7.4,6.9,6,2.6,4.3
+"Manitowoc, WI Micro Area",4.3,3.7,3.1,3.6,2.4
+"Mankato, MN Metro Area",6.4,5.9,5.7,5.3,3.4
+"Mansfield, OH Metro Area",9.3,9.5,10.2,4,5.7
+"Marietta, OH Micro Area",8.5,8.2,7.1,4.4,4.6
+"Marinette, WI-MI Micro Area",6.8,6.2,7.5,7.2,4.8
+"Marion, IN Micro Area",5.2,4.8,4.3,5.7,7.3
+"Marion, NC Micro Area",5.4,5.2,5.2,6.6,5.7
+"Marion, OH Micro Area",4.8,3.7,3,5.7,6.1
+"Marquette, MI Micro Area",4.4,4.2,3.8,3.3,5.8
+"Marshall, MN Micro Area",8.3,7.5,6.5,3.4,3.1
+"Marshall, MO Micro Area",4.7,4.2,4,5,2.9
+"Marshalltown, IA Micro Area",6.8,5.8,4.6,5.6,5.2
+"Martin, TN Micro Area",8.1,7.6,7.3,7.4,4.7
+"Martinsville, VA Micro Area",9.8,7.4,5.8,2.9,5.8
+"Maryville, MO Micro Area",8,7.9,6.7,4.1,2.6
+"Mason City, IA Micro Area",7.2,6.3,6.1,24.3,3.3
+"Mayagüez, PR Metro Area",4.3,3.6,3.4,6.1,23.5
+"Mayfield, KY Micro Area",4.8,4.6,3.9,5,5.2
+"Maysville, KY Micro Area",8.3,7.2,5.6,6.4,4.2
+"McAlester, OK Micro Area",5.9,5.3,5.1,6.9,6.6
+"McAllen-Edinburg-Mission, TX Metro Area",10,8.3,6,4.9,7.3
+"McComb, MS Micro Area",9.5,8.6,8.2,5.1,7.1
+"McMinnville, TN Micro Area",5.4,4.7,3.9,1.9,3.8
+"McPherson, KS Micro Area",4.4,4.4,4.2,5.3,1.3
+"Meadville, PA Micro Area",23.4,25.4,26.1,5.9,5.8
+"Medford, OR Metro Area",8.4,7.7,7.7,6.8,5.1
+"Memphis, TN-MS-AR Metro Area",6.6,5.8,5.4,3.4,6.9
+"Menomonie, WI Micro Area",5.8,6.3,6.5,11.9,3.4
+"Merced, CA Metro Area",9,8.1,7.4,6,10.7
+"Meridian, MS Micro Area",9.7,8.5,7.6,4.6,6.2
+"Mexico, MO Micro Area",7.8,6.8,6.1,5.7,5
+"Miami, OK Micro Area",2.4,2.5,2.3,5.7,4.9
+"Miami-Fort Lauderdale-Pompano Beach, FL Metro Area",6.8,6,5.9,6.1,5.6
+"Michigan City-La Porte, IN Metro Area",8.9,7.5,6.5,10,5.5
+"Middlesborough, KY Micro Area",9,8.2,7.5,5.2,9.6
+"Midland, MI Metro Area",5.5,4.7,3.6,3.3,4.5
+"Midland, TX Metro Area",15.7,14.6,12.7,7.7,3.4
+"Milledgeville, GA Micro Area",9.2,7.5,7,4.3,6.8
+"Milwaukee-Waukesha, WI Metro Area",4.9,4,3.9,5.2,4.2
+"Minden, LA Micro Area",7.9,7.4,7.1,7.4,4.9
+"Mineral Wells, TX Micro Area",8.1,7.2,6.6,3.6,5.8
+"Minneapolis-St. Paul-Bloomington, MN-WI Metro Area",8.5,7.5,6.4,2.8,3.7
+"Minot, ND Micro Area",8.8,8,7.8,4.4,3.9
+"Missoula, MT Metro Area",10.6,9,9,2,4.9
+"Mitchell, SD Micro Area",7.6,7,6,5.4,2.2
+"Moberly, MO Micro Area",3.6,3.5,3.3,5.9,4.4
+"Mobile, AL Metro Area",8.5,8.4,8.9,9.1,5.7
+"Modesto, CA Metro Area",6.3,5.5,4.8,6,8.8
+"Monroe, LA Metro Area",6.7,7.9,7.6,4.8,5.3
+"Monroe, MI Metro Area",4.9,4.3,3.9,5.8,5
+"Montgomery, AL Metro Area",2.3,2.6,2.8,6,5.5
+"Montrose, CO Micro Area",7,6,4.3,5.7,5.2
+"Morehead City, NC Micro Area",3.4,3.5,2.8,8.7,5.3
+"Morgan City, LA Micro Area",7.5,6.1,5.7,6.8,6.7
+"Morgantown, WV Metro Area",8.7,7.5,6.2,6.2,7.1
+"Morristown, TN Metro Area",13.8,11.8,10.5,4.2,6.7
+"Moscow, ID Micro Area",7.7,6.9,6.7,6.2,5.3
+"Moses Lake, WA Micro Area",7,5.9,4.9,7.8,5.8
+"Moultrie, GA Micro Area",7.9,7.3,6.9,4.6,7.6
+"Mountain Home, AR Micro Area",8.6,8,7,7.1,5.4
+"Mountain Home, ID Micro Area",9.2,8,6.6,4,6.5
+"Mount Airy, NC Micro Area",10.9,8.5,9,14.4,4.6
+"Mount Gay-Shamrock, WV Micro Area",6.4,6.6,7,7.1,14.1
+"Mount Pleasant, MI Micro Area",8.3,7,7,5.5,7.3
+"Mount Pleasant, TX Micro Area",7.7,7.2,5,5.3,5.4
+"Mount Sterling, KY Micro Area",9.1,6.9,5.6,7.2,4.8
+"Mount Vernon, IL Micro Area",7.7,7.2,6.8,4.4,6.2
+"Mount Vernon, OH Micro Area",6.2,5.8,4.3,5.5,4.2
+"Mount Vernon-Anacortes, WA Metro Area",7.5,7.3,7,6.6,5.1
+"Muncie, IN Metro Area",6.1,5.1,4.4,4.3,6.4
+"Murray, KY Micro Area",9.9,8.4,7.6,3,4.3
+"Muscatine, IA Micro Area",6.6,6.1,6.1,6.5,3.3
+"Muskegon, MI Metro Area",9.3,7.5,6.6,6.3,7.2
+"Muskogee, OK Micro Area",9.4,8.5,7.4,5.9,6.4
+"Myrtle Beach-Conway-North Myrtle Beach, SC-NC Metro Area",6.1,5.8,5.3,8.7,6
+"Nacogdoches, TX Micro Area",7.2,6.4,5.8,4.5,7.7
+"Napa, CA Metro Area",9.4,7.9,6.7,3.9,4.5
+"Naples-Marco Island, FL Metro Area",6.9,5.7,5,3.9,4.4
+"Nashville-Davidson--Murfreesboro--Franklin, TN Metro Area",4.5,3.5,2.4,8.2,4
+"Natchez, MS-LA Micro Area",10.4,8.9,7.4,13.8,9.2
+"Natchitoches, LA Micro Area",7.6,6.9,6.3,7.1,13.1
+"New Bern, NC Metro Area",8.4,7.3,6.4,6.3,6.2
+"Newberry, SC Micro Area",8.8,8.6,8.5,5.5,5
+"New Castle, IN Micro Area",6.6,5.4,5,6.3,4.2
+"New Castle, PA Micro Area",6.4,5.3,4.6,6.4,6.4
+"New Haven-Milford, CT Metro Area",5.9,5,4.5,6.3,6.4
+"New Orleans-Metairie, LA Metro Area",9.9,10.3,8.6,4.2,6.6
+"New Philadelphia-Dover, OH Micro Area",12.1,13.6,13.9,6.1,5.5
+"Newport, OR Micro Area",10,8.4,8.1,8.6,7.1
+"Newport, TN Micro Area",8.6,8.1,7.2,1.6,8.6
+"New Ulm, MN Micro Area",8.4,7,6.1,5.5,2.3
+"New York-Newark-Jersey City, NY-NJ-PA Metro Area",6.5,6.5,6.2,5.9,5.9
+"Niles, MI Metro Area",8.5,7.7,7,7.7,6.2
+"Nogales, AZ Micro Area",7.9,7.1,6.8,2.8,8.3
+"Norfolk, NE Micro Area",5.7,4.9,4.1,3.1,3.1
+"North Platte, NE Micro Area",6.6,6.5,6,5.1,3.2
+"North Port-Sarasota-Bradenton, FL Metro Area",10,9.6,10,3.1,4.8
+"North Vernon, IN Micro Area",4.9,4.6,4.9,5.5,3.2
+"North Wilkesboro, NC Micro Area",2.7,2.3,2,4.3,5.3
+"Norwalk, OH Micro Area",7.7,6.9,6.1,5.9,4.7
+"Norwich-New London, CT Metro Area",7.8,7.3,6.4,5.6,5.3
+"Oak Harbor, WA Micro Area",9.7,8.7,8.3,8.3,5.8
+"Ocala, FL Metro Area",3.2,3.2,2.9,6.8,6.9
+"Ocean City, NJ Metro Area",3,2.6,2.6,6.1,6.7
+"Odessa, TX Metro Area",7.3,6.1,5.3,3.2,6.6
+"Ogden-Clearfield, UT Metro Area",6.7,6,4.1,7.4,2.9
+"Ogdensburg-Massena, NY Micro Area",9.7,7.5,5.8,6.8,6.8
+"Oil City, PA Micro Area",6.7,5.8,4.9,6.7,6.6
+"Okeechobee, FL Micro Area",7.7,7,6.2,4.3,5.3
+"Oklahoma City, OK Metro Area",7.7,6.7,6.1,5.5,4.5
+"Olean, NY Micro Area",10.1,9,8.8,6.4,5.6
+"Olympia-Lacey-Tumwater, WA Metro Area",9.2,8.4,7.7,3.6,6.1
+"Omaha-Council Bluffs, NE-IA Metro Area",6.4,6.9,6.7,5.8,3.8
+"Oneonta, NY Micro Area",4.5,4.1,3.7,6,5.7
+"Ontario, OR-ID Micro Area",10,8.8,7.4,5.9,5.5
+"Opelousas, LA Micro Area",8,7.6,6.8,9.2,5.2
+"Orangeburg, SC Micro Area",11.2,9,7.1,5.2,9.9
+"Orlando-Kissimmee-Sanford, FL Metro Area",5.2,5,4.6,3.1,5.4
+"Oshkosh-Neenah, WI Metro Area",7.5,7,6.3,3.9,3
+"Oskaloosa, IA Micro Area",8.4,7.7,6.9,6.7,3.2
+"Othello, WA Micro Area",4.5,4,3.8,5.5,6.3
+"Ottawa, IL Micro Area",6.9,6.7,6.4,3.7,5.6
+"Ottawa, KS Micro Area",9,7.4,6.7,5.9,3.1
+"Ottumwa, IA Micro Area",5.8,5.5,6.2,3.7,5.1
+"Owatonna, MN Micro Area",11.3,9.7,9.3,5.3,3.7
+"Owensboro, KY Metro Area",8.1,6.8,6,5.7,4.5
+"Oxford, MS Micro Area",4.4,3.6,3.3,5.1,4.1
+"Oxnard-Thousand Oaks-Ventura, CA Metro Area",6.3,5.6,5.3,8,5.1
+"Ozark, AL Micro Area",6.1,5.9,6.3,4.3,9
+"Paducah, KY-IL Micro Area",6,5.4,4.5,9.5,4.2
+"Pahrump, NV Micro Area",8.8,7.6,6.3,8.7,8.7
+"Palatka, FL Micro Area",6.4,5.8,5.7,3.2,8.5
+"Palestine, TX Micro Area",4.3,4.5,4.1,5.2,3.4
+"Palm Bay-Melbourne-Titusville, FL Metro Area",6.6,6.1,5.6,5.4,5.1
+"Pampa, TX Micro Area",8.8,7.1,5,5.1,5
+"Panama City, FL Metro Area",7.3,5.7,6.8,7.6,4.4
+"Paragould, AR Micro Area",6.9,6.6,6.1,4.7,7.5
+"Paris, TN Micro Area",7.5,6.6,5.9,4.8,4.7
+"Paris, TX Micro Area",10.4,10.4,8.8,4.6,3.9
+"Parkersburg-Vienna, WV Metro Area",5.5,5.4,4.6,3.3,5
+"Parsons, KS Micro Area",14.1,11.4,9.4,8.8,2.9
+"Payson, AZ Micro Area",11.4,10.3,10.5,6.7,6.3
+"Pearsall, TX Micro Area",4.3,4.3,3.3,8.9,7.5
+"Pecos, TX Micro Area",9.3,7.6,6.2,2.2,11
+"Pella, IA Micro Area",5.3,4.9,6.1,5.9,2.5
+"Pensacola-Ferry Pass-Brent, FL Metro Area",7.6,6.3,6.1,5.9,6.1
+"Peoria, IL Metro Area",8.2,7,7,4.9,5.8
+"Peru, IN Micro Area",7.9,6.7,6.7,6.1,4.9
+"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD Metro Area",7,5.6,5.6,5.2,6.1
+"Phoenix-Mesa-Chandler, AZ Metro Area",7.5,6.1,5.2,8.3,5.2
+"Picayune, MS Micro Area",5.3,4.7,4,2.6,5.9
+"Pierre, SD Micro Area",12.1,11.7,10.2,8.2,1.5
+"Pine Bluff, AR Metro Area",7.7,8,7.2,4.8,7.4
+"Pinehurst-Southern Pines, NC Micro Area",3.9,3.6,3,5.1,4.6
+"Pittsburg, KS Micro Area",7.9,6.9,6.2,4.8,5.2
+"Pittsburgh, PA Metro Area",6.7,6.6,6.1,4.8,5
+"Pittsfield, MA Metro Area",8.9,7.8,6.6,4.8,5.1
+"Plainview, TX Micro Area",8.3,7.4,6.7,2.7,4.2
+"Platteville, WI Micro Area",7,6.2,5.7,4.4,3
+"Plattsburgh, NY Micro Area",11.3,10,8.4,4.9,4.5
+"Plymouth, IN Micro Area",2,1.8,2,5.6,3.4
+"Pocatello, ID Metro Area",9.8,9.5,8.9,4,5.5
+"Point Pleasant, WV-OH Micro Area",7.3,6.3,5.3,6.7,3.8
+"Ponca City, OK Micro Area",5.8,5.4,4.5,17.4,6.6
+"Ponce, PR Metro Area",6.2,5.7,5.2,5.1,16.3
+"Pontiac, IL Micro Area",8.2,6.8,6,7.4,4.9
+"Poplar Bluff, MO Micro Area",6.5,6.4,6.7,8.7,6.5
+"Portales, NM Micro Area",4.3,3.5,3.1,7.7,8.6
+"Port Angeles, WA Micro Area",6.6,5.8,4.8,3.3,6.6
+"Portland-South Portland, ME Metro Area",7.7,6.8,5.7,4.7,3.4
+"Portland-Vancouver-Hillsboro, OR-WA Metro Area",7.1,6.3,6.2,5.5,4.8
+"Port Lavaca, TX Micro Area",8.6,6.6,5.5,5.3,4.3
+"Port St. Lucie, FL Metro Area",7.4,6.9,7,7.7,5.1
+"Portsmouth, OH Micro Area",20.4,20.1,19,5.8,6.9
+"Pottsville, PA Micro Area",6.1,5.5,5.4,4.6,5.2
+"Poughkeepsie-Newburgh-Middletown, NY Metro Area",9.6,9.2,9.3,5.7,4.9
+"Prescott Valley-Prescott, AZ Metro Area",11.1,10.7,9.1,7,5.8
+"Price, UT Micro Area",9.3,8.8,7.7,6.9,6.7
+"Prineville, OR Micro Area",5.3,4.9,4.7,5.4,5
+"Providence-Warwick, RI-MA Metro Area",4.8,4.3,3.6,3.6,5.5
+"Provo-Orem, UT Metro Area",7.2,6.2,5.3,7.5,3.7
+"Pueblo, CO Metro Area",6.3,6.3,7.2,8.1,6.9
+"Pullman, WA Micro Area",9.4,7.2,6.1,5.9,8.2
+"Punta Gorda, FL Metro Area",9,7.9,7.9,4.2,5.8
+"Quincy, IL-MO Micro Area",8,6.9,6.2,4.3,4.2
+"Racine, WI Metro Area",8.5,7.3,6.7,4.2,4
+"Raleigh-Cary, NC Metro Area",7.6,5.4,5.5,3.9,4.3
+"Rapid City, SD Metro Area",11.3,8.3,8.5,13.8,3.7
+"Raymondville, TX Micro Area",7.9,6.9,6,5.9,10.4
+"Reading, PA Metro Area",4.9,4.3,3.8,8.6,5.6
+"Red Bluff, CA Micro Area",9.7,9.3,8.4,5.5,8.9
+"Redding, CA Metro Area",8.9,8.5,9,3.4,5.9
+"Red Wing, MN Micro Area",10.1,8.9,7.3,5.3,3.6
+"Reno, NV Metro Area",6.2,5.2,4.5,6.5,5.2
+"Rexburg, ID Micro Area",7.5,5.8,4.8,5.2,7.2
+"Richmond, IN Micro Area",6,5.2,4.5,5,4.5
+"Richmond, VA Metro Area",4.2,3.7,3.3,6.3,4.9
+"Richmond-Berea, KY Micro Area",13.4,14.5,15.5,14.6,6.9
+"Rio Grande City-Roma, TX Micro Area",8.2,7.3,6.7,7.6,13.1
+"Riverside-San Bernardino-Ontario, CA Metro Area",12.6,10.1,9.3,5.9,7.3
+"Riverton, WY Micro Area",8.7,6.8,6.2,4.5,7.4
+"Roanoke, VA Metro Area",4.7,4.2,3.7,7.3,4.7
+"Roanoke Rapids, NC Micro Area",8,6.8,5.6,5.8,6.9
+"Rochelle, IL Micro Area",8.5,8.4,6.6,3,6.2
+"Rochester, MN Metro Area",7.3,6.5,5.8,5.1,3.3
+"Rochester, NY Metro Area",6.9,6.3,5.6,7.8,4.9
+"Rockford, IL Metro Area",8.2,7.3,6.8,8.7,7.7
+"Rockingham, NC Micro Area",14.2,15,14.3,7.5,8.2
+"Rockport, TX Micro Area",11.2,9.9,8.7,6.1,9.3
+"Rock Springs, WY Micro Area",7.3,6,6,7.1,6.2
+"Rocky Mount, NC Metro Area",5.8,5.4,5,5.2,7.8
+"Rolla, MO Micro Area",11.9,9.7,8.2,5.4,4.5
+"Rome, GA Metro Area",6.5,6.5,5.9,6.6,5.6
+"Roseburg, OR Micro Area",3.9,3.9,3.5,5.1,5.9
+"Roswell, NM Micro Area",7,6.3,5.6,4.4,5.2
+"Ruidoso, NM Micro Area",10.2,9.7,8.7,5.8,5.1
+"Russellville, AR Micro Area",11.6,10,9.6,4.6,5.2
+"Ruston, LA Micro Area",5.1,5.2,5.2,3.1,4.7
+"Rutland, VT Micro Area",10.5,8.7,6.8,6,3.5
+"Sacramento-Roseville-Folsom, CA Metro Area",6.2,6.3,6.1,8.3,5.8
+"Safford, AZ Micro Area",9.3,7.5,6.3,6.9,6.9
+"Saginaw, MI Metro Area",10.9,8.9,8.1,4.3,6.5
+"St. Cloud, MN Metro Area",7.1,6.3,5.9,3.5,4.6
+"St. George, UT Metro Area",6.7,5.2,4.3,4.1,3.4
+"St. Joseph, MO-KS Metro Area",7,7.1,6.1,5,4.4
+"St. Louis, MO-IL Metro Area",10.4,8.8,7.1,7,4.6
+"St. Marys, GA Micro Area",5.5,4.7,3.8,4.5,6.6
+"St. Marys, PA Micro Area",9.4,8.1,6.8,6.6,6
+"Salem, OH Micro Area",14.4,12.2,9.4,5.7,6
+"Salem, OR Metro Area",9.5,8.2,7.5,3.2,5.4
+"Salina, KS Micro Area",4.8,4.5,4.5,4.9,3.8
+"Salinas, CA Metro Area",6.3,5.2,4.4,5.5,5.1
+"Salisbury, MD-DE Metro Area",6.1,5.3,4.6,3.6,6
+"Salt Lake City, UT Metro Area",7.1,6.3,5.5,3.9,3.8
+"San Angelo, TX Metro Area",9.3,8.2,7.3,5.1,4
+"San Antonio-New Braunfels, TX Metro Area",5.1,4.8,3.8,6,5.5
+"San Diego-Chula Vista-Carlsbad, CA Metro Area",8.4,7.5,6.7,3.4,6.2
+"Sandpoint, ID Micro Area",9.2,7.1,6.3,5,4
+"Sandusky, OH Micro Area",4.5,4.1,3.7,7,5.7
+"Sanford, NC Micro Area",6.9,6,5.4,4.5,5.6
+"San Francisco-Oakland-Berkeley, CA Metro Area",7.4,6.9,5.9,14.8,4.8
+"San Germán, PR Metro Area",5.2,4.4,3.9,4.4,14.1
+"San Jose-Sunnyvale-Santa Clara, CA Metro Area",3.9,3.8,4,15.9,4.3
+"San Juan-Bayamón-Caguas, PR Metro Area",6.5,5.9,5.5,4,15
+"San Luis Obispo-Paso Robles, CA Metro Area",7.8,7.1,6.4,5.7,4.5
+"Santa Cruz-Watsonville, CA Metro Area",5.7,4.4,3.7,4.1,6.1
+"Santa Fe, NM Metro Area",7.7,6.5,5.4,7.1,4.9
+"Santa Isabel, PR Micro Area",9.4,7.4,7.9,5.8,6.5
+"Santa Maria-Santa Barbara, CA Metro Area",6.7,5.8,5,4.4,5.7
+"Santa Rosa-Petaluma, CA Metro Area",13.2,14.1,14.3,8.9,4.6
+"Sault Ste. Marie, MI Micro Area",6.7,5.8,4.9,6.9,9
+"Savannah, GA Metro Area",16.8,16.7,16.5,4.6,7.1
+"Sayre, PA Micro Area",5.5,4.8,4.6,4.9,4.7
+"Scottsbluff, NE Micro Area",7.3,6.7,6.3,5.1,4.4
+"Scottsboro, AL Micro Area",6.7,5.5,4.5,5,5.2
+"Scottsburg, IN Micro Area",10.9,9.7,8.4,5.2,4.4
+"Scranton--Wilkes-Barre, PA Metro Area",7.2,6.6,6.1,5.7,5.3
+"Searcy, AR Micro Area",7,5.9,5.1,4.4,4.9
+"Seattle-Tacoma-Bellevue, WA Metro Area",10.1,9,9.3,6.5,4.4
+"Sebastian-Vero Beach, FL Metro Area",8.8,8.1,7.4,9.5,6.3
+"Sebring-Avon Park, FL Metro Area",5.4,5.6,4.8,6,8.4
+"Sedalia, MO Micro Area",5.1,5,4.9,2.6,4.8
+"Selinsgrove, PA Micro Area",8.6,7.7,5.9,11,2.5
+"Selma, AL Micro Area",7.1,6.4,5.7,5.5,10.4
+"Seneca, SC Micro Area",6.3,6.2,5.8,3.6,6.1
+"Seneca Falls, NY Micro Area",6.1,5.5,4.8,4.7,3.8
+"Sevierville, TN Micro Area",10.3,8.2,7.1,4.3,4.8
+"Seymour, IN Micro Area",12.3,11.5,10.8,3.4,3.3
+"Shawano, WI Micro Area",6.5,5.8,5.9,6,3.7
+"Shawnee, OK Micro Area",4.4,3.6,2.7,3.1,6.3
+"Sheboygan, WI Metro Area",14.9,13.7,11.8,8.3,3.3
+"Shelby, NC Micro Area",8.6,6.6,6.4,4.3,7.4
+"Shelbyville, TN Micro Area",5.3,4.9,3.5,6.9,4.4
+"Shelton, WA Micro Area",6.4,6.2,5.7,3.1,6.4
+"Sheridan, WY Micro Area",5.6,6.2,4.6,4.6,3.6
+"Sherman-Denison, TX Metro Area",5,4.2,2.8,12.7,4.4
+"Show Low, AZ Micro Area",7.1,6.7,6.2,6.4,11
+"Shreveport-Bossier City, LA Metro Area",5.1,4.4,3.6,4.5,6.5
+"Sidney, OH Micro Area",12.2,10.3,9.2,6.3,5.2
+"Sierra Vista-Douglas, AZ Metro Area",6.1,5.6,5.1,4.4,6.8
+"Sikeston, MO Micro Area",10.8,8.3,7.5,7.1,3.9
+"Silver City, NM Micro Area",3.8,3.1,2.7,3.9,8
+"Sioux City, IA-NE-SD Metro Area",7.5,6.5,5.4,2.7,4.2
+"Sioux Falls, SD Metro Area",18.5,16.3,14.8,4,2.6
+"Snyder, TX Micro Area",6.9,6.8,6.8,7.1,3.5
+"Somerset, KY Micro Area",5.8,5.3,4.5,5.1,6
+"Somerset, PA Micro Area",8.6,7.6,7.2,5.2,4.8
+"Sonora, CA Micro Area",6.4,6,5.2,4.8,7.3
+"South Bend-Mishawaka, IN-MI Metro Area",9.3,8.1,7.6,5.5,5
+"Spartanburg, SC Metro Area",4.7,4.5,4.1,2.6,5.4
+"Spearfish, SD Micro Area",3.3,3.1,3,4.2,2.7
+"Spencer, IA Micro Area",4.3,4.6,4.2,1.9,4.6
+"Spirit Lake, IA Micro Area",9.2,8.6,8.4,5.6,1.9
+"Spokane-Spokane Valley, WA Metro Area",6.7,6.1,5.4,5.8,5.5
+"Springfield, IL Metro Area",11.6,7.9,6.8,5.6,5
+"Springfield, MA Metro Area",7.8,6.6,5.5,3.8,6
+"Springfield, MO Metro Area",7.8,6.3,5.9,6.7,3.9
+"Springfield, OH Metro Area",3.3,3.1,2.6,7.8,6.8
+"Starkville, MS Micro Area",3.3,3.4,3.6,4.1,8.1
+"State College, PA Metro Area",3.4,3,2.8,8,4.1
+"Statesboro, GA Micro Area",7.4,6.3,5.7,3.8,9
+"Staunton, VA Metro Area",7.4,6.7,6.2,3.1,3.4
+"Steamboat Springs, CO Micro Area",8.4,7.5,6.6,3.6,3.9
+"Stephenville, TX Micro Area",6.2,5.2,4.5,3.3,5
+"Sterling, CO Micro Area",8.9,7.7,7.3,4.5,5.2
+"Sterling, IL Micro Area",11,9.5,9.9,3.3,3.7
+"Stevens Point, WI Micro Area",4.9,4.6,4.3,4.1,3.3
+"Stillwater, OK Micro Area",9.7,9.3,8.6,7.8,3.9
+"Stockton, CA Metro Area",5,4.1,3.7,5.1,7.2
+"Storm Lake, IA Micro Area",4.1,3.1,3,4.4,5.9
+"Sturgis, MI Micro Area",4.1,4.3,3.4,4.2,4.2
+"Sulphur Springs, TX Micro Area",6.9,6.2,4.1,5.6,4.4
+"Summerville, GA Micro Area",6.8,6,5.3,9.8,4.9
+"Sumter, SC Metro Area",6.2,4.6,3.7,4.7,9.2
+"Sunbury, PA Micro Area",5.8,4.5,4.9,6.5,4.2
+"Susanville, CA Micro Area",11.9,10.1,8.7,6.8,6.1
+"Sweetwater, TX Micro Area",4.5,4.9,5.3,5.4,7.9
+"Syracuse, NY Metro Area",6.6,5.3,5.2,7.6,5.7
+"Tahlequah, OK Micro Area",6,5.9,4.6,8.5,7.7
+"Talladega-Sylacauga, AL Micro Area",10.1,9.5,8.2,7,7.1
+"Tallahassee, FL Metro Area",3.2,2.3,1.8,5.5,5.9
+"Tampa-St. Petersburg-Clearwater, FL Metro Area",12.5,11.4,10.6,8.7,5.4
+"Taos, NM Micro Area",6.8,5.1,4.5,3.3,8.2
+"Taylorville, IL Micro Area",9.4,7.5,6.1,6.3,3.4
+"Terre Haute, IN Metro Area",6.3,7.1,7.2,6.4,5.6
+"Texarkana, TX-AR Metro Area",7,6.6,6.2,4.5,6
+"The Dalles, OR Micro Area",7.6,7.9,7.4,3.7,6.6
+"The Villages, FL Metro Area",12.1,10.2,8.5,5.8,4.7
+"Thomaston, GA Micro Area",9.4,8.6,7.6,7.4,4.3
+"Thomasville, GA Micro Area",7.9,6.8,6.1,4.4,6.2
+"Tiffin, OH Micro Area",9.7,9.7,8.4,2.7,4.2
+"Tifton, GA Micro Area",5,4.6,3.4,8.3,2.8
+"Toccoa, GA Micro Area",7.4,6.9,7.1,6.2,6.4
+"Toledo, OH Metro Area",8.3,7.7,7.4,4.1,6.3
+"Topeka, KS Metro Area",7.2,6.5,4.4,5,4
+"Torrington, CT Micro Area",7.9,6.6,4.7,4.7,5.8
+"Traverse City, MI Micro Area",12.5,11.2,8.2,6.1,4.2
+"Trenton-Princeton, NJ Metro Area",9.8,9.3,8.1,6.1,6
+"Troy, AL Micro Area",6.8,5.9,4.9,4.6,4.9
+"Truckee-Grass Valley, CA Micro Area",5.1,3.9,2.9,7,4
+"Tucson, AZ Metro Area",10.5,11.7,9.1,4.3,6.8
+"Tullahoma-Manchester, TN Micro Area",8.6,7.6,6.7,5.4,4.2
+"Tulsa, OK Metro Area",6.1,5.5,4.7,5.6,5.3
+"Tupelo, MS Micro Area",6.7,6,5.2,6.5,4.5
+"Tuscaloosa, AL Metro Area",6.5,6,5.3,3.4,6.4
+"Twin Falls, ID Metro Area",8.6,7.5,6.8,5.4,3.4
+"Tyler, TX Metro Area",9.7,8.7,8,8.7,5.5
+"Ukiah, CA Micro Area",8.8,7.3,6.4,6.8,8.6
+"Union, SC Micro Area",9.2,8.4,7.6,5.5,7.7
+"Union City, TN Micro Area",7.5,6.2,5.1,5,6.2
+"Urbana, OH Micro Area",6.2,5.9,5.5,4,5.8
+"Urban Honolulu, HI Metro Area",7,6.3,6.3,4.9,4.2
+"Utica-Rome, NY Metro Area",7.6,7.4,6.9,5.3,4.8
+"Uvalde, TX Micro Area",4.6,4.4,3.6,6.5,4.9
+"Valdosta, GA Metro Area",6.6,6.5,6.2,6,5.7
+"Vallejo, CA Metro Area",11,10.4,9.2,3.9,5.9
+"Van Wert, OH Micro Area",10.8,8.2,6.4,5.2,5.1
+"Vermillion, SD Micro Area",7.2,7.3,6,8.1,8.5
+"Vernal, UT Micro Area",5.1,4.5,4.3,5.6,6.9
+"Vernon, TX Micro Area",7.3,6.5,5.9,6.4,6.9
+"Vicksburg, MS Micro Area",6.4,5.9,5.6,5.6,6.7
+"Victoria, TX Metro Area",11.8,9.6,7.9,8.7,5.1
+"Vidalia, GA Micro Area",10,8.5,7,4.1,7.4
+"Vincennes, IN Micro Area",7.5,6.4,5,7.3,3.6
+"Vineland-Bridgeton, NJ Metro Area",5.8,5.3,4.4,3.4,8
+"Vineyard Haven, MA Micro Area",6.2,6.4,5.8,5.6,5.1
+"Virginia Beach-Norfolk-Newport News, VA-NC Metro Area",5.5,6.7,6.9,9.5,5.5
+"Visalia, CA Metro Area",6.1,5.8,3.9,4.6,9.9
+"Wabash, IN Micro Area",8.9,9.1,8.3,4.2,4.3
+"Waco, TX Metro Area",5.8,5.2,5.5,2.9,4.7
+"Wahpeton, ND-MN Micro Area",9.6,9.4,9.6,4.7,3.4
+"Walla Walla, WA Metro Area",5.3,5.4,5.1,3,5.5
+"Wapakoneta, OH Micro Area",9.9,9,7.3,6.8,3.3
+"Warner Robins, GA Metro Area",4.3,3,3.2,4.5,6.1
+"Warren, PA Micro Area",7.3,6.6,6.1,4.8,4.4
+"Warrensburg, MO Micro Area",10.6,10,9.4,3.7,4.6
+"Warsaw, IN Micro Area",5.9,5.5,4.3,3.6,3.6
+"Washington, IN Micro Area",5.6,5.2,4.5,7.1,3.5
+"Washington, NC Micro Area",2.6,2.2,2.6,4.7,6.9
+"Washington-Arlington-Alexandria, DC-VA-MD-WV Metro Area",6.6,6.1,5.1,5.8,4.9
+"Washington Court House, OH Micro Area",4,3.4,3.5,3.9,4.9
+"Waterloo-Cedar Falls, IA Metro Area",8.9,7.8,7.2,2.2,4.8
+"Watertown, SD Micro Area",5.8,5.7,5.2,3.2,2.6
+"Watertown-Fort Atkinson, WI Micro Area",7.3,6.9,5.1,6.2,3.3
+"Watertown-Fort Drum, NY Metro Area",5.3,4.6,4,6.1,5.8
+"Wauchula, FL Micro Area",5.5,5.4,4.1,2.9,8.1
+"Wausau-Weston, WI Metro Area",9.9,9,8.9,5.7,3.1
+"Waycross, GA Micro Area",5.9,5.5,5.1,3.2,4.5
+"Weatherford, OK Micro Area",6.9,6.3,6,6,2.8
+"Weirton-Steubenville, WV-OH Metro Area",5.7,4.9,4.1,4,5.9
+"Wenatchee, WA Metro Area",2.8,2.5,2.6,4.1,3.9
+"West Plains, MO Micro Area",4.7,4.3,3.7,10.3,4.4
+"West Point, MS Micro Area",9.4,8,6.5,5.3,8.7
+"Wheeling, WV-OH Metro Area",11.3,9.1,6,3.8,5.3
+"Whitewater, WI Micro Area",4.8,3.8,3.4,4.8,3.4
+"Wichita, KS Metro Area",6.6,5.2,4.3,4.8,5
+"Wichita Falls, TX Metro Area",3.5,3.6,3.3,5,4.4
+"Williamsport, PA Metro Area",7,6.9,6.8,2.2,5.1
+"Williston, ND Micro Area",6.2,5.1,4.8,3.2,3.4
+"Willmar, MN Micro Area",6.8,5,4.5,5.5,3.7
+"Wilmington, NC Metro Area",13.8,11.3,11.3,5.6,5.6
+"Wilmington, OH Micro Area",6.7,6.1,5.5,7.9,5.6
+"Wilson, NC Micro Area",6.4,5.6,4.2,3.5,8.6
+"Winchester, VA-WV Metro Area",5.8,5.3,5,4.8,4.3
+"Winfield, KS Micro Area",5.2,4.8,5.3,3.4,5.1
+"Winnemucca, NV Micro Area",7.3,6.2,5.2,3.6,3.8
+"Winona, MN Micro Area",2,2,2.3,5.5,3.3
+"Winston-Salem, NC Metro Area",3.8,3,3,3.8,5
+"Wisconsin Rapids-Marshfield, WI Micro Area",8.1,7.2,6.4,5.1,4
+"Woodward, OK Micro Area",6.6,6.6,6.1,3.5,4.5
+"Wooster, OH Micro Area",8.4,8.1,8,5.1,3.3
+"Worcester, MA-CT Metro Area",5.4,4.4,3.9,3.3,5.1
+"Worthington, MN Micro Area",7.7,7.3,5.3,6.4,2.4
+"Yakima, WA Metro Area",5.7,5.1,3.8,3.4,6.4
+"Yankton, SD Micro Area",8.5,7.2,6.5,22.5,2.2
+"Yauco, PR Metro Area",5.7,4.8,3.8,4.4,21.9
+"York-Hanover, PA Metro Area",4.3,5.6,5.2,6.2,4.6
+"Youngstown-Warren-Boardman, OH-PA Metro Area",4.3,4,3.9,7.8,6.4
+"Yuba City, CA Metro Area",7,6.3,5.6,10,7.4
+"Yuma, AZ Metro Area",7,6.5,5.1,6.1,8.6
+"Zanesville, OH Micro Area",8.3,7.5,6.6,10.4,5.3
+"Zapata, TX Micro Area",2.9,2.8,3.1,,8.3
