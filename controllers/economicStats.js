@@ -67,13 +67,15 @@ const economicRegions = asyncHandler(async (req, res) => {
   const unemployment_rateJson = await CSV().fromFile(
     './data/ecnomic/unemployment_rate.csv'
   )
-  let Data = unemployment_rateJson.map((item) => item.Region)
+  let result = unemployment_rateJson.map((item) => item.Region)
+  let areas = _.drop(result, 53)
+  let states = _.dropRight(result, 938)
 
   res.json({
     success: true,
     code: 200,
-    message: `Economic regions.`,
-    Data,
+    message: `Economic States and Areas.`,
+    Data: { states, areas },
   })
 })
 
